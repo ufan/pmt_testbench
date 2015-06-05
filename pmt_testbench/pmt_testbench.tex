@@ -1,0 +1,202 @@
+\documentclass[preprint,5p,times]{elsarticle}
+
+%%%%%%%%%%%%%%   Preample  %%%%%%%%%%%%%%%%%%
+%% for comment (texts in between \begin{comment} and \end{comment} will be ignored)
+\usepackage{comment} 
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+\linenumbers
+
+%% package for subfigure environment
+\usepackage{subcaption}
+
+%% package for type Greek letters without entering into math-mode
+\usepackage{textgreek}
+%% only jpg pdf eps are allowed,tiff format are not allowed in latex
+%% eps in principle can't be compiled by pdflatex,pdf not compiled by latex,but Kile can do some intermedate conversion to allow this happen.
+\DeclareGraphicsExtensions{.pdf,.eps,.jpg}
+%%opening
+\journal{NIMA}
+
+\begin{document}
+
+%%%%%%%%%%%%%% Front Matter %%%%%%%%%%%%%%%%%%
+\begin{frontmatter}
+
+\title{A versatile PMT test facility and the measurements of 500 Hamamastu R4443-Mod2 phototubes for DAMPE-PSD detector}
+%%\title{Title with footnote\tnoteref{t1}}
+%%\tnotetext[t1]{FootNote for title}
+
+\author[imp,ucas,lzu]{Yong Zhou}
+%\ead{yong@impcas.ac.cn}
+
+\author[imp]{Yuhong Yu}
+%%\ead{yuyuhong@impcas.ac.cn}
+
+\author[imp]{Zhiyu Sun\corref{corresponding_author}}
+\cortext[corresponding_author]{Corresponding author}
+\ead{sunzhy@impcas.ac.cn}
+
+%% Additional Author information %%
+%%\author[ano]{Anonymous\fnref{fn1}}
+%%\ead{anonymous@anonymous.cn}
+%%\fntext[fn1]{FootNote for Anonymous author}
+
+\address[imp]{Institute of Modern Physicas,Chinese Academy of Sciences, 509 Nanchang Road, Lanzhou, 730000, P.R.China}
+\address[ucas]{Graduate University of the Chinese Academy of Sciences, 19A Yuquan Road, Beijing, 100049, P.R.China}
+\address[lzu]{School of Nuclear Science and Technology, Lanzhou University, 222 South Tianshui Road, Lanzhou, 730000, P.R.China}
+%%\address[ano]{Anonymous Address of Anonymous author}
+
+%%
+\begin{abstract}
+blablabla
+\end{abstract}
+
+%%
+\begin{keyword}
+keyword1
+\sep keyword2
+\sep keyword3
+
+%% PACS codes here, in the form: \PACS code \sep codes
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%%%%%%%%%%%%%%%%  Introduction  %%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:introduction}
+
+DArk Matter Paricle Explorer(DAMPE)\cite{Chang_Jin_dampe} is a satellite-borne particle detector for dark matter search and cosmic ray study.
+It is designed to cover the energy range from 5~GeV to 10~TeV for electrons and photons with an energy resolution of 1\% at 800~GeV,from 100~GeV to 1~PeV for heavy ions with an energy resolution better than 40\% at 800~GeV.
+
+Plastic scintillator Strip Detector(PSD),which sits at the topmost of the satellite,is a key component of DAMPE detector.
+By measuring the energy deposit of particles pentrating through it,PSD serves as a anti-coincidence detector for e/$\gamma$ discrimination as well as a detector for charge measurement up to Z=20.
+PSD consists of 82 plastic scintillator strips(EJ-200\cite{ej200}) of dimention $864mm\times28mm\times10mm$,each readout at both ends by a Hamamastu R4443-Mod2 photomultiplier tube.
+These strips are arranged into two orthogonally oriented layers,convering an effective area of $820mm\times820mm$.
+Each PMT is readout at both dynode 5 and dynode 8 with different gains to cover the large dynamic range from $\sim$0.5~MIPs to $\sim$700~MIPs.
+The readout signals are processed by a highly-sensitive ASIC chip(VA32) with the range of 0-14~pC,and then digitized by an ADC with 14~bits resolution.
+
+Unlike groud-based experiments,the power supply system of DAMPE payload can only provide discrete high voltage levels with an interval of 30~V.
+Furthermore,every 6 or 7 PMTs of PSD form a HV-group and will share the same high voltage channel.
+In this case,the ususal method of fine-tuning individual PMT's high voltage to get optimal gain is not available.  
+The characteristics of PMTs in the same HV-group should have similar dependency on voltage.
+Thus a careful selection of the tubes is mandatory to get consistent energy response across the whole detector and optimal utilization of the mesuring range.
+For this selection,the gain of dynode 5 and dynode 8 as a function of supplying voltage needs to be measured precisely.  
+
+On the other hand,the harsh environment of satellite imposes a strict set of quality control processes for the production of PMT modules,as shown in Fig.~\ref{fig:production_procedure}.
+A PMT module is composed of a bare PMT tube,baseboards for HV supply and signal readout,silicone rubber for coupling with the palstic scintillator,pouring sealant to protect PMT from vibration and HV breakdown and the supporting Aluminum box.
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{pmt_production_procedure}
+\caption{Production Procedures of a PMT module.The PMT should be tested during the selection phase and qualification phase}
+\label{fig:production_procedure}
+\end{figure} 
+Some of the PMT modules may get irreversible deterioration,even damage,during these processes.
+Thus a qualification test shall be performed to certificate the performance of each PMT module before final installation. 
+
+Considering the large number of tubes involved in the Selection phase and Qualification phase,a PMT test facility for bulk testing was designed and contructed to facilitate this work.
+Totally,500 bare R4443-Mod2 tubes were thoroughly tested for PSD and 200 of them were selected for production and qualification.
+While mainly developped for the DAMPE-PSD project,this test facility has been designed to be as versatile as possible and can be upgaded seamlessly for future experiments.
+The detailed description of the test facility will be given in Sec.\ref{sec:description}.Some key characteristics of the test facility is summarized in Sec.\ref{sec:char_testfacility}.
+The testing results of PSD PMTs and the corresponding selection criteria will be discussed in Sec.\ref{sec:pmt_test}.
+%%%%%%%%%%%%%%%% Main Text Body %%%%%%%%%%%%%%%%%%%%%%%
+\section{Description of the test facility}
+\label{sec:description}
+
+
+\subsection{Light Source and Distribution}
+\label{sec:light_source}
+
+A 3~W blue LED from Z-light\cite{zlight} is apdopted as the light source for the test facility.This product has been used previously as the light source of PMT monitoring and calibration system\cite{yuyuhong_led} 
+
+\subsection{Three-dimention motorized stage}
+\label{sec:platform}
+
+A 3~dimention movable platform was built as the supporting structure
+
+\subsection{Auxiliary devices}
+\label{sec:integrating_sphere}
+
+\subsection{Reference PMTs}
+\label{sec:ref_pmt}
+
+\subsection{Software}
+\label{sec:control_daq}
+
+\section{Characteristics of the test facility}
+\label{sec:char_testfacility}
+
+\subsection{Long-term Stability}
+\label{sec:longterm_stability}
+
+\subsection{Spatial Uniformity of Integrating Sphere}
+\label{sec:spatialuniformity_insph}
+
+\subsection{Transmission Uniformity of Fibre-bundle}
+\label{sec:transuniformity_fibre}
+
+\section{PMT testing for PSD}
+\label{sec:pmt_test}
+
+\subsection{Selection criteria}
+\label{sec:selection}
+
+\subsection{Testing Result of Relative Gain}
+\label{sec:relative_gain}
+
+\subsection{Testing Result of Dynode Ratio}
+\label{sec:dynode_ratio}
+
+\subsection{PMT Qualification}
+\label{sec:qualification}
+
+%%%%%%%%%%%%%%%%  Conclustion   %%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\label{sec:conclustions}
+
+%%%%%%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgement}
+
+%%%%%%%%%%%%%%%%    Appendix     %%%%%%%%%%%%%%%%%%%%%%%
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+\appendix
+\section{}
+\label{app:}
+
+%%%%%%%%%%%%%%%%   Bibliography  %%%%%%%%%%%%%%%%%%%%%%%
+%% bibliography style
+\section*{References}
+\bibliographystyle{elsarticle-num}
+
+%% From BibTex file
+\bibliography{mybib}
+
+%% From hand-writing
+\begin{comment}
+%%\begin{thebibliography}{00}
+
+%%\bibitem{CEBAF12}
+%%V.D. Burkert, \emph{arXiv:1203.2373v1 [nucl-ex]}, 2012.
+
+%%\bibitem{CLAS}
+%%B.A. Mecking \emph{et al.}, Nucl. Ins. and Meth. in Phys. Research {\bf A503} (2003) 513
+
+%%\end{thebibliography}
+\end{comment}
+
+\end{document}
+\endinput
