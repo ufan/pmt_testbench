@@ -1,4 +1,4 @@
-\documentclass[preprint,3p,times]{elsarticle}
+\documentclass[preprint,5p,times]{elsarticle}
 
 %%%%%%%%%%%%%%   Preample  %%%%%%%%%%%%%%%%%%
 %% for comment (texts in between \begin{comment} and \end{comment} will be ignored)
@@ -22,7 +22,7 @@
 \usepackage{textgreek}
 
 %% package for large picture in two-colume
-\usepackage{dblfloatfix}
+%\usepackage{dblfloatfix}
 %\usepackage{fixltx2e}
 
 %% only jpg pdf eps are allowed,tiff format are not allowed in latex
@@ -128,9 +128,9 @@ design considerations
 schematic diagram and overview of the bench
 \begin{figure*}[hb]
  \centering
- \includegraphics[width=160mm]{test_bench}
-\caption{Schematic diagram of the test-bench system}
-\label{fig:test_bench_overveiw}
+ \includegraphics[width=140mm]{testbench_overview}
+\caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper},\textit{PTVPulser},\textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
+\label{fig:testbench_overveiw}
 \end{figure*} 
 
 summarization of the functionality of the bench,automatic,efficiency
@@ -152,8 +152,49 @@ A 3~dimention movable platform was built as the supporting structure
 \label{sec:ref_pmt}
 
 \subsection{Software}
-\label{sec:control_daq}
+\label{sec:software}
+The software system is developped in C++ and run under Windows.
+To facilitate maintainence and future upgrade,the software components are groupped in three levels as following:
+\begin{enumerate}
+ \item Device abstraction,which not only serves as an interface to the underlying hardwares,but also handles the abstraction of different types of devices. 
+ \item Framework libraries,which defines a general testing procedure and provides utility classes for configuration and management.
+ \item User inerface,which provides command line based or graphical executables for user interaction. 
+\end{enumerate}
 
+Designed as a versatile equipment,different hardware modules may be used in the future.
+For example,while the general-purpose VME or CAMAC platform may meet the demands of most of the use cases,some experiments may prefer to use project-specific DAQ hardware for testing.
+In another case,a laser light source with a ultra-short pulsing driver may be used for time-related characterization.
+%Instead of developping a dedicated program each time a hardware interface changes,an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details.
+Abstract classes for stepper controller,light pulser,DAQ system and HV supplier are defined,as shown in Fig.\ref{fig:testbench_overveiw}.
+Common operations of each type of device are extracted and encapsulated in the corresponding abstract class,which are the only interface to high level software components.
+Concrete classes inheritted from the same abstract class represent different devices of the same type.
+Currently,the concrete classes for Leetro MPC07SP motion controller,Tektronix AFG3252 pulse generator,CAEN SY1527 power supply system and DAMPE DAQ board are implemented.
+An DAQ interface for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
+
+Built upon the abstract device inerface,a general testing framework is defined,as shown in Fig.\ref{fig:software_framework}.
+\begin{figure}[h!]
+\centering
+ \includegraphics[width=90mm]{software_framework}
+\caption{Software framework}
+\label{fig:software_framework}
+\end{figure}
+A \textit{PTVProgram} represents the measurement procedure for a specific characteristic of PMT,such as cathode uniformity,gain,dark count rate,and so on.
+A \textit{PTVTest} represents the real testing operation,which corresponds to a specific testing condition.
+Usually,a \textit{PTVProgram} is consist of multiple \textit{PTVTest}.
+For example,for cathode uniformity test,the stepping motor will move to a series of positions.
+At each position,the PMT response will be recorded.
+Here the 
+As a first step,all used concrete device classes will be registered in the singlton class \textit{PTDeviceManager} and then retrieved from it during testing. 
+
+Two testing programs are defined for DAMPE projects,one for pedestal testing and one for amplitude scan and voltage scan.
+The warming step is defined in the PreTest phase of amplitude and voltage scan program.
+
+Based on the framework library,a light-weight user interface based on PDCurses\cite{pdcurses} has been developped.
+This program also incorporates status monitoring function,which is developped utilizing Phtread-win32 library\cite{pthread_win32}.
+
+A dedicated analysis program based on ROOT libraries is also developped for the DAMPE PSD project.
+The program does not depends on the framework libraries described above.
+The analysis results are inserted into a database for easy query.
 \section{Characteristics of the test bench}
 \label{sec:char_testbench}
 
