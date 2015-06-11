@@ -172,6 +172,8 @@ Currently,the concrete classes for Leetro MPC07SP motion controller,Tektronix AF
 An DAQ interface for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
 
 Built upon the abstract device inerface,a general testing framework is defined,as shown in Fig.\ref{fig:software_framework}.
+As a first step,all used concrete device classes will be registered in the singlton class \textit{PTDeviceManager}.
+Devices will then be retrieved from \textit{PTDeviceManager} during test.
 \begin{figure}[h!]
 \centering
  \includegraphics[width=90mm]{software_framework}
@@ -179,15 +181,15 @@ Built upon the abstract device inerface,a general testing framework is defined,a
 \label{fig:software_framework}
 \end{figure}
 A \textit{PTVProgram} represents the measurement procedure for a specific characteristic of PMT,such as cathode uniformity,gain,dark count rate,and so on.
-A \textit{PTVTest} represents the real testing operation,which corresponds to a specific testing condition.
-Usually,a \textit{PTVProgram} is consist of multiple \textit{PTVTest}.
-For example,for cathode uniformity test,the stepping motor will move to a series of positions.
-At each position,the PMT response will be recorded.
-Here the 
-As a first step,all used concrete device classes will be registered in the singlton class \textit{PTDeviceManager} and then retrieved from it during testing. 
-
-Two testing programs are defined for DAMPE projects,one for pedestal testing and one for amplitude scan and voltage scan.
-The warming step is defined in the PreTest phase of amplitude and voltage scan program.
+\textit{PTVTest} encapsulates the real testing operations,which corresponds to a specific set of testing conditions or device parameters.
+Usually,a \textit{PTVProgram} is consist of multiple \textit{PTVTest}s.
+For example,for cathode uniformity test,the stepping motor will move to a series of positions and the PMT response will be recorded by the DAQ system at each position.
+Here,device operations performed at each position constitute a \textit{PTVTest} and tests at all positions constitute a \textit{PTVProgram}.
+A typical implementation for \textit{PTVTest} using fake code is presented in the third column of Fig.\ref{fig:software_framework}.
+Besides real testing operations,additional actions may be added in the \textit{PreTest} method and \textit{PostTest} method of \textit{PTVProgram}.
+For example,PMT warming may be performed in \textit{PreTest} and analysis code may be added in \textit{PostTest}.
+Two concrete \textit{PTVProgram}s are implemented for DAMPE-PSD PMT test.
+One for pedestal testing and one for amplitude scan and voltage scan.
 
 Based on the framework library,a light-weight user interface based on PDCurses\cite{pdcurses} has been developped.
 This program also incorporates status monitoring function,which is developped utilizing Phtread-win32 library\cite{pthread_win32}.
