@@ -102,7 +102,7 @@ Thus a careful selection of the tubes is mandatory to get uniform energy respons
 For this selection,the gain of dynode 5 and dynode 8 as a function of supplying voltage needs to be measured precisely.  
 
 On the other hand,the harsh environment of satellite imposes a strict set of quality control processes for the production of PMT modules,as shown in Fig.~\ref{fig:production_procedure}.
-A PMT module is composed of a bare PMT tube,baseboards for HV supply and signal readout,silicone rubber for coupling with the palstic scintillator,pouring sealant to protect PMT from vibration and HV breakdown and the supporting Aluminum box.
+A PMT module is composed of a bare PMT tube,a layer of permalloy for magnetic shielding,baseboards for HV divider and signal readout,silicone rubber for coupling with the palstic scintillator,pouring sealant to protect PMT from vibration and HV breakdown and the supporting Aluminum box.
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{pmt_production_procedure}
@@ -123,18 +123,44 @@ The testing results of PSD PMTs and the corresponding selection procedure will b
 \section{Description of the test bench}
 \label{sec:description}
 
-design considerations
+The major design considerations of the test bench are summarized as follows:
+\begin{itemize}
+ \item \textit{Large capacity}: This is the primary driving force for developping the test bench as indicated in Sec.\ref{sec:introduction}.
+ Testing multiple PMTs simultaneously can increase the efficiency and save project time tremendously. 
+ \item \textit{Automation}: A single test run ususally takes several hours,during which most operations are trivial jobs like change voltage value,change light intensity,start/stop DAQ,and so on.
+ Manual operations are sometimes unreliable in such a long time testing period.
+ Thus computer controllable hardwares should be used wherever possible and corresponding software should be developped to automate these trivial operations.
+ Manual intervention is only needed in the beginning when mounting PMTs and configuring the testing software and in the end when unmounting PMTs and assessing testing result. 
+ \item \textit{Versatility}: The test bench is not designed for single use.
+ After its initial use in DAMPE PSD,it will be used for other experiments with different testing requirements.
+ Thus potential use cases should be considered and appropriate hardwares should be set up in the first place.
+ In particular,moving ability is desirable for characterization of large area PMTs. 
+ \item \textit{Flexibility}: As a by product of versatiltiy,flexibility is needed both in terms of hardware and software.
+ The hardware platform should be extensible and allow complex testing configurations.
+ The software should accommodate any changes in the hardware easily,while keeping the high level functionality unchanged and portable. 
+\end{itemize}
 
-schematic diagram and overview of the bench
+A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overveiw}.
 \begin{figure*}[hb]
  \centering
  \includegraphics[width=140mm]{testbench_overview}
 \caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper},\textit{PTVPulser},\textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
 \label{fig:testbench_overveiw}
-\end{figure*} 
+\end{figure*}
+The test bench is designed to test up to 20 R4443-Mod2 tubes in a single run.
+Light flashes from a LED are distributed to each tube's surface through an integrating sphere and a fibre bundle.
+Tubes under test,including their bases,are mounted on a fixed stage,while the light source and its distribution system are mounted on a separate three-dimention motorized stage.
+This allows scanning of the whole surface of all tested tubes.
+Two additional PMTs are mounted in the corner of the motorized stage.
+They will not be removed during all test runs and are used as references to monitor the stability of the light source as well as the performance of the whole system.
+Both stages are housed in a light-tight box made of steel and paited black in and out.
+The dimention of the box is
+It can be opened from the top plate.
+All other devices are located outside the light-tight box.
+Cables are led out through varous cable-feedthroughs in the light-box side-plate.
 
-summarization of the functionality of the bench,automatic,efficiency
-
+The test bench is sitted in a clean room.
+In the following,each key components will be described in detail.
 \subsection{Light Source and Distribution}
 \label{sec:light_source}
 
@@ -145,16 +171,16 @@ A 3~W blue LED from Z-light\cite{zlight} is apdopted as the light source for the
 
 A 3~dimention movable platform was built as the supporting structure
 
-\subsection{Auxiliary devices}
+\subsection{Electronics}
 \label{sec:integrating_sphere}
 
-\subsection{Reference PMTs}
+\subsection{High Voltage Supply}
 \label{sec:ref_pmt}
 
 \subsection{Software}
 \label{sec:software}
-The software system is developped in C++ and run under Windows.
-To facilitate maintainence and future upgrade,the software components are groupped in three levels as following:
+The software is developped under Windows and written in C++,which is an efficient language and well suited to the modular design of the test bench.
+To facilitate maintainence and future upgrade,the software components are groupped into three hierarchies as following:
 \begin{enumerate}
  \item Device abstraction,which not only serves as an interface to the underlying hardwares,but also handles the abstraction of different types of devices. 
  \item Framework libraries,which defines a general testing procedure and provides utility classes for configuration and management.
@@ -164,15 +190,15 @@ To facilitate maintainence and future upgrade,the software components are groupp
 Designed as a versatile equipment,different hardware modules may be used in the future.
 For example,while the general-purpose VME or CAMAC platform may meet the demands of most of the use cases,some experiments may prefer to use project-specific DAQ hardware for testing.
 In another case,a laser light source with a ultra-short pulsing driver may be used for time-related characterization.
-%Instead of developping a dedicated program each time a hardware interface changes,an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details.
-Abstract classes for stepper controller,light pulser,DAQ system and HV supplier are defined,as shown in Fig.\ref{fig:testbench_overveiw}.
-Common operations of each type of device are extracted and encapsulated in the corresponding abstract class,which are the only interface to high level software components.
+Instead of developping a dedicated program each time a hardware interface changes,an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details.
+Abstract classes are defined for four frequently-used devices in PMT testing,i.e. stepper controller,light pulser,DAQ system and HV supplier,as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
+Common operations of each type of device are extracted and encapsulated in the corresponding abstract class,which are the only interface to higher level software components.
 Concrete classes inheritted from the same abstract class represent different devices of the same type.
-Currently,the concrete classes for Leetro MPC07SP motion controller,Tektronix AFG3252 pulse generator,CAEN SY1527 power supply system and DAMPE DAQ board are implemented.
-An DAQ interface for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
+Currently,device classes for Leetro MPC07SP motion controller,Tektronix AFG3252 pulse generator,CAEN SY1527 power supply system and DAMPE gound test DAQ board are implemented.
+DAQ device class for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
 
 Built upon the abstract device inerface,a general testing framework is defined,as shown in Fig.\ref{fig:software_framework}.
-As a first step,all used concrete device classes will be registered in the singlton class \textit{PTDeviceManager}.
+As a first step,all used concrete device classes are registered in the singlton class \textit{PTDeviceManager}.
 Devices will then be retrieved from \textit{PTDeviceManager} during test.
 \begin{figure}[h!]
 \centering
@@ -181,14 +207,15 @@ Devices will then be retrieved from \textit{PTDeviceManager} during test.
 \label{fig:software_framework}
 \end{figure}
 A \textit{PTVProgram} represents the measurement procedure for a specific characteristic of PMT,such as cathode uniformity,gain,dark count rate,and so on.
-\textit{PTVTest} encapsulates the real testing operations,which corresponds to a specific set of testing conditions or device parameters.
-Usually,a \textit{PTVProgram} is consist of multiple \textit{PTVTest}s.
+\textit{PTVTest} is a subunit of \textit{PTVProgram},which encapsulates the real testing operations performed under a specific condition.
+A typical implementation for \textit{PTVTest} using fake code is presented in the third column of Fig.\ref{fig:software_framework}.
+Usually,a \textit{PTVProgram} consists of a series of \textit{PTVTest}s,which are invoked sequentially in a test loop.
 For example,for cathode uniformity test,the stepping motor will move to a series of positions and the PMT response will be recorded by the DAQ system at each position.
 Here,device operations performed at each position constitute a \textit{PTVTest} and tests at all positions constitute a \textit{PTVProgram}.
-A typical implementation for \textit{PTVTest} using fake code is presented in the third column of Fig.\ref{fig:software_framework}.
-Besides real testing operations,additional actions may be added in the \textit{PreTest} method and \textit{PostTest} method of \textit{PTVProgram}.
-For example,PMT warming may be performed in \textit{PreTest} and analysis code may be added in \textit{PostTest}.
-Two concrete \textit{PTVProgram}s are implemented for DAMPE-PSD PMT test.
+Additional actions may be added in the \textit{PreTest} method and \textit{PostTest} method of \textit{PTVProgram},which will be invoked before and after the test loop repectively.
+Typically,PMT warming shall be performed in \textit{PreTest} and analysis code shall be added in \textit{PostTest}.
+\textit{PTVProgram}s of different testing objectives will finally be chained together to constitute a complete characterization of PMT.
+Two concrete \textit{PTVProgram}s have been implemented for DAMPE-PSD PMT test.
 One for pedestal testing and one for amplitude scan and voltage scan.
 
 Based on the framework library,a light-weight user interface based on PDCurses\cite{pdcurses} has been developped.
