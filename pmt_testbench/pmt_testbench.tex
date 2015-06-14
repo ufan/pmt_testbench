@@ -9,6 +9,9 @@
 %% The amsthm package provides extended theorem environments
 \usepackage{amsthm}
 
+%% for celcius symbol
+\usepackage{textcomp}
+
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
@@ -147,20 +150,19 @@ A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overv
 \caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper},\textit{PTVPulser},\textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
 \label{fig:testbench_overveiw}
 \end{figure*}
-The test bench is designed to test up to 20 R4443-Mod2 tubes in a single run.
+The test bench is designed to test up to 25 R4443-Mod2 tubes in a single run.
 Light flashes from a LED are distributed to each tube's surface through an integrating sphere and a fibre bundle.
 Tubes under test,including their bases,are mounted on a fixed stage,while the light source and its distribution system are mounted on a separate three-dimention motorized stage.
 This allows scanning of the whole surface of all tested tubes.
 Two additional PMTs are mounted in the corner of the motorized stage.
-They will not be removed during all test runs and are used as references to monitor the stability of the light source as well as the performance of the whole system.
-Both stages are housed in a light-tight box made of steel and paited black in and out.
-The dimention of the box is
-It can be opened from the top plate.
+They will not be removed from their fixed positions during all test runs and thus are used as references to monitor the stability of the light source as well as the performance of the whole system.
+Both stages are housed in a large light-tight box made of aluminium alloy,with the dimension of $176cm\times100cm\times78cm$.
+The box is painted black inside and out and can be opened from the top plate for PMT mounting.
 All other devices are located outside the light-tight box.
-Cables are led out through varous cable-feedthroughs in the light-box side-plate.
+Cables are led out through various light-tight cable feedthroughs left in the side-plate of the box.
+The test bench is sitted in a cleanroom of class 100000,the temperature of which is controlled around 22\textpm2\textcelsius~during test time.
 
-The test bench is sitted in a clean room.
-In the following,each key components will be described in detail.
+In the following,each key component will be described in detail.
 \subsection{Light Source and Distribution}
 \label{sec:light_source}
 
@@ -171,6 +173,7 @@ A 3~W blue LED from Z-light\cite{zlight} is apdopted as the light source for the
 
 A 3~dimention movable platform was built as the supporting structure
 
+optical breadboard made of stainless steel $156cm\times25cm\times2.5cm$
 \subsection{Electronics}
 \label{sec:integrating_sphere}
 
