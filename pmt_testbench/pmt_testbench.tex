@@ -12,6 +12,9 @@
 %% for celcius symbol
 \usepackage{textcomp}
 
+%% for units
+\usepackage{siunitx}
+
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
@@ -166,8 +169,14 @@ In the following,each key component will be described in detail.
 \subsection{Light Source and Distribution}
 \label{sec:light_source}
 
-A 3~W blue LED from Z-light\cite{zlight} is apdopted as the light source for the test bench.This product has been used previously as the light source of PMT monitoring and calibration system\cite{yuyuhong_led} 
+A high-power blue LED(\SI{3}{\watt},\SIrange{465}{485}{\nano\meter}, from Z-light\cite{zlight}) is apdopted as the light source for the test bench.
+This product has been used before in the monitoring and calibration system of Neutron Wall Detector at IMP,CAS\cite{yuyuhong_led}. 
+A \SI{5}{\centi\meter} diameter integrating sphere is used to convert the LED into a uniform light source.
+The integrating sphere is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}) and has two ports of \SI{14}{\milli\meter} diameter.
+To get better heat dissipation,the LED is fixed on a special designed base using thermally conductive silicone rubber.
+The base is then coupled to the integrating sphere directly,making the whole sphere as the LED's heat sink.
 
+A bundle of 30 optical fibres are coupled to the output port of integrating sphere.
 \subsection{Three-dimention motorized stage}
 \label{sec:platform}
 
