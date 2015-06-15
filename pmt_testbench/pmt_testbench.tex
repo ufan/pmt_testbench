@@ -15,6 +15,9 @@
 %% for units
 \usepackage{siunitx}
 
+%% multirow
+\usepackage{multirow}
+
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
@@ -174,7 +177,7 @@ This product has been used before in the monitoring and calibration system of Ne
 A \SI{5}{\centi\meter} diameter integrating sphere is used to convert the LED into a uniform light source.
 The integrating sphere is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}) and has two ports of \SI{14}{\milli\meter} diameter.
 To get better heat dissipation,the LED is fixed on a special designed base using thermally conductive silicone rubber.
-The base is then coupled to the input port of integrating sphere directly,making the whole sphere as the LED's heat sink.
+The base is then coupled to the input port of integrating sphere,making the whole sphere as the LED's heat sink.
 
 A bundle of 35 plastic clad silica(PCS) fibres is utilized to distribute light to each PMT under test.
 The fibres are \SI{1.5}{\meter} long and have a \SI{400}{\micro\meter} diameter core,a \SI{550}{\micro\meter} diameter cladding.The numerical aperture(NA) is 0.37.
@@ -184,9 +187,35 @@ On the other end,each fibre is fixed using a special designed fibre holder which
 Before testing,all used fibres are aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
 For easier manipulation and to protect the fibres from mechanical stress,both ends of the fibre bundle are coated with customized stainless steel ferrules.
 
-Integrating sphere is a perfect device for light uniformity.
-However,the light pulse may be streched significantly due to multiple reflections in the sphere,making it unsuitable in time-related characterization.
- 
+An off the shelf hardware,Tektronix AFG3252 arbitrary/function generator,is adpoted as the LED driver.
+As a commertial product,various interfaces for remote control are provided in AFG3252,making it suitable for automation.
+All of the pulse parameters of AFG3252 can be adjusted in a wide range with high precison,as show in Table \ref{tab:afg3252}.
+This is a critical feature for the PMT test of DAMPE PSD,as light intensities covering a large dynamic range are needed to measure the gain ratio between dynode 8 and dynode 5 at different voltages.
+\begin{table}[h!]
+\caption{Summary of AFG3252 Pulse Mode Characteristics}
+\label{tab:afg3252}
+ \begin{center}
+ \begin{tabular}{lr}
+ \multicolumn{2}{l}{Summary of AFG3252 pulse mode characteristics}\\ \hline
+ Frequecny & up to \SI{120}{\MHz} \\
+ Amplitude & max \SI{5}{\volt} \\
+ Pulse width & min \SI{4}{\nano\second} \\
+             & resolution \SI{10}{\pico\second} \\
+ Leading edge & \SI{2.5}{\nano\second} to 0.625*pusle period \\
+ Trailing edge & \SI{2.5}{\nano\second} to 0.625*pusle period \\
+ Jitter(typical) & \SI{100}{\pico\second} \\
+ Interface     & GPIB,LAN,USB
+ \end{tabular}
+ \end{center}
+\end{table} 
+AFG3252 has two independent analog outputs which can be synchronized together.
+Thus one of the outputs can be connected to the LED directly,while the other one can generate trigger signal to DAQ. 
+Although not designed to be a dedicated LED driver,the stability of AFG3252 is quite satifactory,see Sec.\ref{sec:longterm_stability}.
+One limitation of AFG3252 as a LED driver is that it has a limited leading edge of \SI{2.5}{ns}.
+This makes it not suitable for timing-related characterizations,where ultra-short(down to hundreds of \si{\pico\second} magnitude) light pulse is needed
+In this casse,a dedicated LED driver of special design(commertial or home-made)may be used instead.
+But AFG3252 can still be used as a trigger generator to control both the LED driver and DAQ.
+
 \subsection{Three-dimention motorized stage}
 \label{sec:platform}
 
