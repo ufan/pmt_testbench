@@ -239,8 +239,27 @@ The grid pattern of tapped holes on the surface facilitate mounting/unmounting o
 \subsection{Electronics}
 \label{sec:electronics}
 
+To get more realistic results,electronics for PSD ground test is utilitized for the PMT test.
+It consists of a front end electronics(FEE) box and a data acquisition(DAQ) board.
+The FEE is based on the same design as the flight model of PSD,except that it uses commertial grade components instead.
+Signals from R4443-Mod2 are connected to the FEE box directly and undergo charge integration and pusle shaping there by VA32 chip.
+Trigger signal from AFG3252 is connected to the DAQ board,which then dispatch the trigger to the FEE box.
+Upon recieving the trigger,FEE will hold and digitize the shaped signal and transmit the digits to the DAQ board for packaging.
+The packaged data are finally readout by a computer through the USB port on the DAQ board.
+Commands from computer are sent to the DAQ board through a RS232 serial port.
+Both the USB and serial interface are controlled using the NI-VISA library.
+
 \subsection{High Voltage Supply}
 \label{sec:hv}
+
+The high voltage to PMTs is provided by a CAEN A1535SP board housed in the CAEN mainframe SY1527LC. 
+A1535SP houses 24 independent positive HV channels,with an output range from \SIrange{0}{3500}{\volt}.
+Current and voltage protection are provided by the board,thus allowing protection of the PMT from accidental ambient light exposure when HV is on.
+Both current and voltage values can be set and monitored through the Ethernet interface of SY1527LC using the dynamic library provided by CAEN.
+
+SY1527LC is a universal power supply system with 16 slots.
+If needed,A1535SP can be replaced by other boards with more appropriate parameters,while the control interface remains unchanged.
+Due to its multi-user feature,this mainframe is also shared by several other devices in the cleanroom.
 
 \subsection{Software}
 \label{sec:software}
@@ -259,7 +278,7 @@ Instead of developping a dedicated program each time a hardware interface change
 Abstract classes are defined for four frequently-used devices in PMT testing,i.e. stepper controller,light pulser,DAQ system and HV supplier,as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
 Common operations of each type of device are extracted and encapsulated in the corresponding abstract class,which are the only interface to higher level software components.
 Concrete classes inheritted from the same abstract class represent different devices of the same type.
-Currently,device classes for Leetro MPC07SP motion controller,Tektronix AFG3252 pulse generator,CAEN SY1527 power supply system and DAMPE gound test DAQ board are implemented.
+Currently,device classes for Leetro MPC07SP motion controller,Tektronix AFG3252 pulse generator,CAEN SY1527 power supply system and DAMPE ground test DAQ board are implemented.
 DAQ device class for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
 
 Built upon the abstract device inerface,a general testing framework is defined,as shown in Fig.\ref{fig:software_framework}.
