@@ -143,7 +143,7 @@ The major design considerations of the test bench are summarized as follows:
  \item \textit{Versatility}: The test bench is not designed for single use.
  After its initial use in DAMPE PSD,it will be used for other experiments with different testing requirements.
  Thus potential use cases should be considered and appropriate hardwares should be set up in the first place.
- In particular,moving ability is desirable for characterization of large area PMTs. 
+ In particular,positon scanning capability is desirable for characterization of large area PMTs. 
  \item \textit{Flexibility}: As a by product of versatiltiy,flexibility is needed both in terms of hardware and software.
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily,while keeping the high level functionality unchanged and portable. 
@@ -156,10 +156,10 @@ A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overv
 \caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper},\textit{PTVPulser},\textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
 \label{fig:testbench_overveiw}
 \end{figure*}
-The test bench is designed to test up to 25 R4443-Mod2 tubes in a single run.
-Light flashes from a LED are distributed to each tube's surface through an integrating sphere and a fibre bundle.
-Tubes under test,including their bases,are mounted on a fixed stage,while the light source and its distribution system are mounted on a separate three-dimention motorized stage.
-This allows scanning of the whole surface of all tested tubes.
+The test bench is designed to test at least 20 R4443-Mod2 tubes in a single run.
+Light flashes from a LED are distributed to each tube through an integrating sphere and a fibre bundle.
+Tubes under test,including their bases,are mounted on a fixed stage,while the light source and its distribution system are mounted on a separate three-dimentional motorized stage.
+This allows position scanning of all tested tubes simultaneously.
 Two additional PMTs are mounted in the corner of the motorized stage.
 They will not be removed from their fixed positions during all test runs and thus are used as references to monitor the stability of the light source as well as the performance of the whole system.
 Both stages are housed in a large light-tight box made of aluminium alloy,with the dimension of $176cm\times100cm\times78cm$.
@@ -183,7 +183,7 @@ A bundle of 35 plastic clad silica(PCS) fibres is utilized to distribute light t
 The fibres are \SI{1.5}{\meter} long and have a \SI{400}{\micro\meter} diameter core,a \SI{550}{\micro\meter} diameter cladding.The numerical aperture(NA) is 0.37.
 The relatively large core and large NA make the fibre an efficient light extracter of integrating sphere output. 
 The input end of the fibre bundle is coupled to the centre of the output port of integrating sphere using a three-dimensional fibre alignment stage.
-On the other end,each fibre is fixed using a special designed fibre holder which allows rough position adjustment individually.
+On the other end,each fibre is fixed using a customized fibre holder which allows rough position adjustment individually.
 Before testing,all used fibres are aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
 For easier manipulation and to protect the fibres from mechanical stress,both ends of the fibre bundle are coated with customized stainless steel ferrules.
 
@@ -212,21 +212,35 @@ AFG3252 has two independent analog outputs which can be synchronized together.
 Thus it can output a trigger signal to DAQ at the same time it driving the LED. 
 Although not designed to be a dedicated LED driver,the stability of AFG3252 is quite satifactory,see Sec.\ref{sec:longterm_stability}.
 One limitation of AFG3252 as a LED driver is that it has a limited leading edge of \SI{2.5}{ns}.
-This makes it not suitable for timing-related characterizations,where ultra-short(down to hundreds of \si{\pico\second} magnitude) light pulse is needed
+This makes it not suitable for timing-related characterizations,where ultra-short(down to hundreds of \si{\pico\second} magnitude) light pulse is preferred.
 In this casse,a dedicated LED driver of special design(commertial or home-made)may be used instead.
 But AFG3252 can still be used as a trigger generator to control both the LED driver and DAQ.
 
-\subsection{Three-dimention motorized stage}
-\label{sec:platform}
+\subsection{Motorized and Fixed Stages}
+\label{sec:stages}
 
-A 3~dimention movable platform was built as the supporting structure
+Although not a primary concern in DAMPE PSD,the cathode uniformity of PMT is a critical characteristic in some applications,such as where bundled sintillating fibres or wavelenght shifting fibres are coupled to PMT and where multi-anode PMT is utilized for readout.
+It's decided from the very beginning that position scanning capability should be added to the test bench.
+Thus a motorized stage is designed for this purpose.
 
-optical breadboard made of stainless steel $156cm\times25cm\times2.5cm$
+The motorized stage is driven by three stepping motors with a step size of \SI{1.56}{\micro\meter}.
+The travel range in the horizontal direction and vertical direction is \SI{60}{\milli\meter} and \SI{70}{\milli\meter} respectively.
+Thus the maximum scanning area is $60mm\times60mm$,which covers the size of the majority of PMTs and multi-anode PMTs.
+The third direction with travel range of $15mm$ is added to control the separation between the fibre head and the tube's cathode surface.
+The load capacity of the motorized stage is \SI{30}{\kilo\gram}.
+All stepping motors are controlled by a single motion controller MPC07SP from Leetro.
+MPC07SP can control up to 4 axises simultaneously and provide a PCI interface for remote control and automation.
+
+The motorized and fixed stages are the main body of the test bench.
+They are arranged face to face with each other and the surfaces of them are both covered with an optical breadboard of an area $1560mm\times250mm$.
+The optical breadboards are made of \SI{2.5}{cm} thick stainless steel,thus providing substantial resistance to deformation in this application.
+The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations,thus providing extra flexibility in the configuration of the test system.
+
 \subsection{Electronics}
-\label{sec:integrating_sphere}
+\label{sec:electronics}
 
 \subsection{High Voltage Supply}
-\label{sec:ref_pmt}
+\label{sec:hv}
 
 \subsection{Software}
 \label{sec:software}
