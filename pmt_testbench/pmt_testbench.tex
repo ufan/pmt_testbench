@@ -139,11 +139,11 @@ The major design considerations of the test bench are summarized as follows:
  \item \textit{Automation}: A single test run ususally takes several hours,during which most operations are trivial jobs like change voltage value,change light intensity,start/stop DAQ,and so on.
  Manual operations are sometimes unreliable in such a long time testing period.
  Thus computer controllable hardwares should be used wherever possible and corresponding software should be developped to automate these trivial operations.
- Manual intervention is only needed in the beginning when mounting PMTs and configuring the testing software and in the end when unmounting PMTs and assessing testing result. 
+ Manual intervention is only needed in the beginning when mounting PMTs and configuring the software and in the end when unmounting PMTs and assessing testing result. 
  \item \textit{Versatility}: The test bench is not designed for single use.
  After its initial use in DAMPE PSD,it will be used for other experiments with different testing requirements.
  Thus potential use cases should be considered and appropriate hardwares should be set up in the first place.
- In particular,positon scanning capability is desirable for characterization of large area PMTs. 
+ %In particular,positon scanning capability is desirable for characterization of large area PMTs. 
  \item \textit{Flexibility}: As a by product of versatiltiy,flexibility is needed both in terms of hardware and software.
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily,while keeping the high level functionality unchanged and portable. 
@@ -159,16 +159,39 @@ A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overv
 The test bench is designed to test at least 20 R4443-Mod2 tubes in a single run.
 Light flashes from a LED are distributed to each tube through an integrating sphere and a fibre bundle.
 Tubes under test,including their bases,are mounted on a fixed stage,while the light source and its distribution system are mounted on a separate three-dimentional motorized stage.
-This allows position scanning of all tested tubes simultaneously.
+%This allows position scanning of all tested tubes simultaneously.
 Two additional PMTs are mounted in the corner of the motorized stage.
 They will not be removed from their fixed positions during all test runs and thus are used as references to monitor the stability of the light source as well as the performance of the whole system.
 Both stages are housed in a large light-tight box made of aluminium alloy,with the dimension of $176cm\times100cm\times78cm$.
 The box is painted black inside and out and can be opened from the top plate for PMT mounting.
 All other devices are located outside the light-tight box.
 Cables are led out through various light-tight cable feedthroughs left in the side-plate of the box.
-The test bench is sitted in a cleanroom of class 100000,the temperature of which is controlled around 22\textpm2\textcelsius~during test time.
+The test bench is sitted in a cleanroom of class 100000,the temperature of which is controlled around 22\textpm2\textcelsius~all the time.
 
-In the following,each key component will be described in detail.
+In the following,each key component of the test bench will be described in detail.
+\subsection{Motorized and Fixed Stages}
+\label{sec:stages}
+
+The motorized and fixed stages are the main body of the test bench.
+They are arranged face to face with each other and are both covered with an optical breadboard of an area $1560mm\times250mm$.
+All other objects inside the light-tight box will be mounted on the top of them.
+In particular,a specific fixture for R4443-Mod2 is designed that allows precise positioning of the tube with an accuracy of \textpm\SI{0.5}{\milli\meter}
+The optical breadboards are made of \SI{2.5}{cm} thick stainless steel,which provides substantial resistance to deformation in this application.
+The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations,which not only increase efficiency but also provide extra flexibility in the configuration of the test system.
+
+Although not a primary concern in DAMPE PSD,the cathode uniformity of PMT is a critical characteristic in some applications,such as where bundled scintillating fibres or wavelenght shifting fibres are coupled to PMT and where multi-anode PMT is utilized for readout.
+It's decided from the very beginning that position scanning capability should be added to the test bench.
+The three-dimensional motorized stage is designed for this purpose.
+%It will hold optical fibres,thus allowing scanning of the tubes fixed on the fixed stage.
+The stage is driven by three stepping motors with a step size of \SI{1.56}{\micro\meter}.
+The travel range in the horizontal direction and vertical direction is \SI{60}{\milli\meter} and \SI{70}{\milli\meter} respectively.
+Thus the maximum scanning area is $60mm\times60mm$,which covers the size of the majority of PMTs and multi-anode PMTs.
+The third direction with a travel range of $15mm$ is added to control the gap between the fibre and the tube's cathode surface.
+This may be useful when extra space is needed for unmounting tubes without disturbing the optical fibres. 
+The load capacity of the motorized stage is \SI{30}{\kilo\gram}.
+All stepping motors are controlled by a single motion controller MPC07SP from Leetro.
+MPC07SP can control up to 4 axises simultaneously and possesses a PCI interface for remote control and automation.
+
 \subsection{Light Source and Distribution}
 \label{sec:light_source}
 
@@ -216,33 +239,15 @@ This makes it not suitable for timing-related characterizations,where ultra-shor
 In this casse,a dedicated LED driver of special design(commertial or home-made)may be used instead.
 But AFG3252 can still be used as a trigger generator to control both the LED driver and DAQ.
 
-\subsection{Motorized and Fixed Stages}
-\label{sec:stages}
-
-Although not a primary concern in DAMPE PSD,the cathode uniformity of PMT is a critical characteristic in some applications,such as where bundled sintillating fibres or wavelenght shifting fibres are coupled to PMT and where multi-anode PMT is utilized for readout.
-It's decided from the very beginning that position scanning capability should be added to the test bench.
-Thus a motorized stage is designed for this purpose.
-
-The motorized stage is driven by three stepping motors with a step size of \SI{1.56}{\micro\meter}.
-The travel range in the horizontal direction and vertical direction is \SI{60}{\milli\meter} and \SI{70}{\milli\meter} respectively.
-Thus the maximum scanning area is $60mm\times60mm$,which covers the size of the majority of PMTs and multi-anode PMTs.
-The third direction with travel range of $15mm$ is added to control the separation between the fibre head and the tube's cathode surface.
-The load capacity of the motorized stage is \SI{30}{\kilo\gram}.
-All stepping motors are controlled by a single motion controller MPC07SP from Leetro.
-MPC07SP can control up to 4 axises simultaneously and provide a PCI interface for remote control and automation.
-
-The motorized and fixed stages are the main body of the test bench.
-They are arranged face to face with each other and the surfaces of them are both covered with an optical breadboard of an area $1560mm\times250mm$.
-The optical breadboards are made of \SI{2.5}{cm} thick stainless steel,thus providing substantial resistance to deformation in this application.
-The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations,thus providing extra flexibility in the configuration of the test system.
-
 \subsection{Electronics}
 \label{sec:electronics}
 
 To get more realistic results,electronics for PSD ground test is utilitized for the PMT test.
 It consists of a front end electronics(FEE) box and a data acquisition(DAQ) board.
+Both of them are standalone devices powered by a standalone DC power.
 The FEE is based on the same design as the flight model of PSD,except that it uses commertial grade components instead.
-Signals from R4443-Mod2 are connected to the FEE box directly and undergo charge integration and pusle shaping there by VA32 chip.
+
+Signals from R4443-Mod2 are connected to the FEE box directly and undergo charge integration and pusle shaping there.
 Trigger signal from AFG3252 is connected to the DAQ board,which then dispatch the trigger to the FEE box.
 Upon recieving the trigger,FEE will hold and digitize the shaped signal and transmit the digits to the DAQ board for packaging.
 The packaged data are finally readout by a computer through the USB port on the DAQ board.
@@ -264,32 +269,34 @@ Due to its multi-user feature,this mainframe is also shared by several other dev
 \subsection{Software}
 \label{sec:software}
 The software is developped under Windows and written in C++,which is an efficient language and well suited to the modular design of the test bench.
-To facilitate maintainence and future upgrade,the software components are groupped into three hierarchies as following:
+To facilitate maintainence and future upgrade,the software components are groupped into three hierarchies as follows:
 \begin{enumerate}
- \item Device abstraction,which not only serves as an interface to the underlying hardwares,but also handles the abstraction of different types of devices. 
- \item Framework libraries,which defines a general testing procedure and provides utility classes for configuration and management.
- \item User inerface,which provides command line based or graphical executables for user interaction. 
+ \item \textit{Device abstraction},which not only serves as an interface to the underlying hardwares,but also handles the abstraction of different types of devices. 
+ \item \textit{Framework libraries},which defines a general testing procedure and provides utility classes for configuration and management.
+ \item \textit{User inerface},which provides command line based or graphical executables for user interaction. 
 \end{enumerate}
 
 Designed as a versatile equipment,different hardware modules may be used in the future.
-For example,while the general-purpose VME or CAMAC platform may meet the demands of most of the use cases,some experiments may prefer to use project-specific DAQ hardware for testing.
-In another case,a laser light source with a ultra-short pulsing driver may be used for time-related characterization.
-Instead of developping a dedicated program each time a hardware interface changes,an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details.
-Abstract classes are defined for four frequently-used devices in PMT testing,i.e. stepper controller,light pulser,DAQ system and HV supplier,as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
+For example,while the general-purpose VME or CAMAC platform may meet the demands of most of the use cases,some experiments may prefer to use project-specific DAQ hardware for testing,like the current case of DAMPE PSD.
+%In another case,a laser light source with a ultra-short pulsing driver may be used for time-related characterization.
+%For example,although project specific electronics are used in the PMT testing of DAMPE PSD,a DAQ system based on VME or CAMAC may meet the demands of most of the general-purpose characterizations.
+Instead of developping a dedicated program each time a hardware interface changes,an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details. 
+Abstract classes are defined for four frequently-used devices in PMT testing,i.e. motion controller,pulse generator,DAQ system and HV supplier,as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
 Common operations of each type of device are extracted and encapsulated in the corresponding abstract class,which are the only interface to higher level software components.
 Concrete classes inheritted from the same abstract class represent different devices of the same type.
-Currently,device classes for Leetro MPC07SP motion controller,Tektronix AFG3252 pulse generator,CAEN SY1527 power supply system and DAMPE ground test DAQ board are implemented.
+Currently,device classes for MPC07SP motion controller,AFG3252 pulse generator,SY1527LC power supply system and PSD DAQ board for ground test are implemented.
 DAQ device class for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
 
-Built upon the abstract device inerface,a general testing framework is defined,as shown in Fig.\ref{fig:software_framework}.
-As a first step,all used concrete device classes are registered in the singlton class \textit{PTDeviceManager}.
-Devices will then be retrieved from \textit{PTDeviceManager} during test.
+Built upon the abstract device inerface,a general testing framework is defined.
+As a first step,all used concrete device classes shall be registered in the singlton class \textit{PTDeviceManager}.
+Devices are then retrieved from \textit{PTDeviceManager} during test,thus making the rest of the framework independent from specific hardwares.
 \begin{figure}[h!]
 \centering
  \includegraphics[width=90mm]{software_framework}
 \caption{Software framework}
 \label{fig:software_framework}
 \end{figure}
+The testing procedures are then grouped as shown in Fig.\ref{fig:software_framework}.
 A \textit{PTVProgram} represents the measurement procedure for a specific characteristic of PMT,such as cathode uniformity,gain,dark count rate,and so on.
 \textit{PTVTest} is a subunit of \textit{PTVProgram},which encapsulates the real testing operations performed under a specific condition.
 A typical implementation for \textit{PTVTest} using fake code is presented in the third column of Fig.\ref{fig:software_framework}.
