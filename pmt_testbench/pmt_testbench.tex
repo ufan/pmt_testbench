@@ -350,14 +350,34 @@ The analysis results are inserted into a database for easy query.
 \section{Characteristics of the test bench}
 \label{sec:char_testbench}
 
-\subsection{Long-term Stability}
-\label{sec:longterm_stability}
-
 \subsection{Spatial Uniformity of Integrating Sphere}
 \label{sec:spatialuniformity_insph}
 
+Before coupling to the fibre bundle,the spatial uniformity of the light source(LED + Integrating Sphere) is investigated. 
+A single optical fibre of the same type as the fibre bundle in the test bench is utilitized.
+One end of the fibre is fixed on a three-dimensional alignment stage and used to scan the output port horizontally and vertically in a \SI{1}{\milli\meter} step.
+The other end is readout by a PMT of R4443-Mod2 and processed by the electronics of PSD groud test.
+The LED is driven by a \SI{40}{\nano\second} width pulse of fixed amplitude at \SI{500}{\Hz}.
+%The same LED signal is used during the scanning.
+
+The result(Fig.~\ref{fig:uniformity_integratingsphere}) shows that the integrating sphere works as expected and the light intensity is almost the same(within \textpm0.5\%) over the entire surface of the output port.   
+
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{uniformity_integratingsphere}
+\caption{Spatial uniformity of the integrating sphere.}
+\label{fig:uniformity_integratingsphere}
+\end{figure} 
+
 \subsection{Transmission Uniformity of Fibre-bundle}
 \label{sec:transuniformity_fibre}
+
+The fibre bundle is then coupled to the integrating sphere and the output intensity of each fibre at the other end is tested.
+As the test 
+
+\subsection{Long-term Stability}
+\label{sec:longterm_stability}
 
 \section{PMT testing for PSD}
 \label{sec:pmt_test}
