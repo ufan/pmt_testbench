@@ -121,10 +121,12 @@ The testing results of PSD PMTs and the corresponding selection procedure will b
 
 %%Photomultiplier tubes(PMTs) are widely used as photosensors in various fields, such as particle detectors in experimental physics and medical equipments in medical diagnosis.
 %%PMT features in high sensitivity, large gain and easy-operation, whic make it still popular about 80 years after its invention.
-Photomultiplier tubes(PMTs), due to its high gain,large dynamic range and easy-operation, are widely used as photosensors in particle detectors.
-Large detectors usually contain hundreds, even thousands of PMTs as detection channels.
-As the characteristics of PMTs exhibit large individual differences, a
-However, 
+Photomultiplier tubes(PMTs) are widely used as photosensors in particle detectors.
+The gain of PMT have a power law dependency on supplying voltage.
+On the other hand, characteristics of PMTs usually exhibit large individual differences.
+Thus accurate characterization of PMTs is needed for any serious applications.
+
+\begin{comment}
 In this case, a test of all PMTs before assembly is mandatory for the following reasons:
 \begin{enumerate}
  \item Parameters from manufacturers are usually tested using tungstun filament lamp and only give a general and rough estimation of the performance of tubes.
@@ -137,7 +139,14 @@ In this case, a test of all PMTs before assembly is mandatory for the following 
  \item As a qualification step, the performance of all PMTs needs to be verified.
  PMTs which failed the specification should be rejected.
 \end{enumerate}
+\end{comment}
 
+Large detectors may contain hundreds, even thousands of PMTs as detection channels.
+A thorough characterization of all these tubes cost much time and labor.
+In this case, a dedicated test bench is desirable to facilitate the work and improve the efficiency.
+In this paper, a versatile test bench designed for PMT fast characterization is reported.
+This work is motivated primarily by the Plastic scintillator Strip Detector(PSD) of DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe}, where large number of PMTs need to be characterized and qualified.
+It is soon realized that a general purpose test hardware and software platform is beneficial for other projects conducted by IMP.
 
 The major design considerations of the test bench are summarized as follows:
 \begin{itemize}
