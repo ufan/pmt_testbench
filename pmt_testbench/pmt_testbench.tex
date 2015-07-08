@@ -93,6 +93,7 @@ keyword1
 \section{Introduction}
 \label{sec:introduction}
 
+\begin{comment}
 DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe} is a satellite-borne particle detector for dark matter search and cosmic ray study.
 It is designed to cover the energy range from 5~GeV to 10~TeV for electrons and photons with an energy resolution of 1\% at 800~GeV, from 100~GeV to 1~PeV for heavy ions with an energy resolution better than 40\% at 800~GeV.
 
@@ -110,34 +111,33 @@ The characteristics of PMTs in the same HV-group should have similar dependency 
 Thus a careful selection of the tubes is mandatory to get uniform energy response across the whole detector and optimal utilization of the mesuring range.
 For this selection, the gain of dynode 5 and dynode 8 as a function of supplying voltage needs to be measured precisely.  
 
-On the other hand, the harsh environment of satellite imposes a strict set of quality control processes for the production of PMT modules, as shown in Fig.~\ref{fig:production_procedure}.
-A PMT module is composed of a bare PMT tube, a layer of permalloy for magnetic shielding, baseboards for HV divider and signal readout, silicone rubber for coupling with the palstic scintillator, pouring sealant to protect PMT from vibration and HV breakdown and the supporting Aluminum box.
-\begin{figure}[h!]
- \centering
- \includegraphics[width=90mm]{pmt_production_procedure}
-\caption{Production Procedures of a PMT module.The PMT should be tested during the selection phase and qualification phase}
-\label{fig:production_procedure}
-\end{figure} 
-Some of the PMT modules may get irreversible deterioration, even damage, during these processes.
-Thus a qualification test shall be performed to certificate the performance of each PMT module before final installation. 
-
 Considering the large number of tubes involved in the Selection phase and Qualification phase, a PMT test bench for bulk testing was designed and contructed to facilitate this work.
 500 bare R4443-Mod2 tubes were thoroughly tested and 200 of them were selected for production and qualification.
 Finally, 164 PMT modules with the optimal characteristics were installed.
 While mainly developped for the DAMPE-PSD project, this test bench has been designed to be as versatile as possible and can be upgaded seamlessly for future experiments.
 The detailed description of the test bench will be given in Sec.\ref{sec:description}.Some key characteristics of the test bench is summarized in Sec.\ref{sec:char_testbench}.
 The testing results of PSD PMTs and the corresponding selection procedure will be discussed in Sec.\ref{sec:pmt_test}.
+\end{comment}
 
-%%%%%%%%%%%%%%%% Main Text Body %%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure*}[b]
- \centering
- \includegraphics[width=140mm]{testbench_overview}
-\caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper}, \textit{PTVPulser}, \textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
-\label{fig:testbench_overveiw}
-\end{figure*}
+%%Photomultiplier tubes(PMTs) are widely used as photosensors in various fields, such as particle detectors in experimental physics and medical equipments in medical diagnosis.
+%%PMT features in high sensitivity, large gain and easy-operation, whic make it still popular about 80 years after its invention.
+Photomultiplier tubes(PMTs), due to its high gain,large dynamic range and easy-operation, are widely used as photosensors in particle detectors.
+Large detectors usually contain hundreds, even thousands of PMTs as detection channels.
+As the characteristics of PMTs exhibit large individual differences, a
+However, 
+In this case, a test of all PMTs before assembly is mandatory for the following reasons:
+\begin{enumerate}
+ \item Parameters from manufacturers are usually tested using tungstun filament lamp and only give a general and rough estimation of the performance of tubes.
+ They are not suitable for accurate tuning of tubes in  where the light intensity is much lesser.
+ \item Characteristics of PMTs ususally exhibit large individual differences.
+ Only PMTs 
+ \item The gain of PMT is dependent on supplying voltage.especially the gain.
+ To get a uniform response across the whole system and better resolution, a tuning of the position and supplying voltage a thorough characterization of each PMT is needed.
+ \item Furthermore, some of the parameters may not provided by 
+ \item As a qualification step, the performance of all PMTs needs to be verified.
+ PMTs which failed the specification should be rejected.
+\end{enumerate}
 
-\section{Description of the test bench}
-\label{sec:description}
 
 The major design considerations of the test bench are summarized as follows:
 \begin{itemize}
@@ -155,6 +155,17 @@ The major design considerations of the test bench are summarized as follows:
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
 \end{itemize}
+
+%%%%%%%%%%%%%%%% Main Text Body %%%%%%%%%%%%%%%%%%%%%%%
+\section{Description of the test bench}
+\label{sec:description}
+
+\begin{figure*}[t]
+ \centering
+ \includegraphics[width=140mm]{testbench_overview}
+\caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper}, \textit{PTVPulser}, \textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
+\label{fig:testbench_overveiw}
+\end{figure*}
 
 A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overveiw}.
 The test bench is designed to test at least 20 R4443-Mod2 tubes in a single run.
@@ -385,6 +396,7 @@ As the test
 
 \section{Application in the PMT testing for PSD of DAMPE}
 \label{sec:application}
+
 
 \subsection{Requirements of PSD}
 \label{sec:psd_requirements}
