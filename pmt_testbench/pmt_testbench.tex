@@ -122,31 +122,29 @@ The testing results of PSD PMTs and the corresponding selection procedure will b
 %%Photomultiplier tubes(PMTs) are widely used as photosensors in various fields, such as particle detectors in experimental physics and medical equipments in medical diagnosis.
 %%PMT features in high sensitivity, large gain and easy-operation, whic make it still popular about 80 years after its invention.
 Photomultiplier tubes(PMTs) are widely used as photosensors in particle detectors.
-The gain of PMT have a power law dependency on supplying voltage.
-On the other hand, characteristics of PMTs usually exhibit large individual differences.
-Thus accurate characterization of PMTs is needed for any serious applications.
+Modern detectors can easily contain hundreds, even thousands of PMTs as detection channels.
+Testing of PMTs is a commonly encountered procedure in these applications.%%citing
+These tests are citical for the following reasons:
+\begin{itemize}
+ \item Each project have specific requirements for the characteristics of PMTs.
+ As PMTs exhibit big individual difference in their characteristics, these parameters should be tested thoroughly.
+ Tubes that are not within the specification of the project will be rejected.
+ \item To get a uniform behavior across the whole detector system and thus better resolution, the response of PMT as a function of supplying voltage, sometimes of the cathode position, need to be determined.
+  These data will be referenced both in the installation phase and operating phase. 
+ \item Last but not least, qualification test for the whole PMT assembly before final mounting is mandatory for the success of any large project. 
+\end{itemize}
 
-\begin{comment}
-In this case, a test of all PMTs before assembly is mandatory for the following reasons:
-\begin{enumerate}
- \item Parameters from manufacturers are usually tested using tungstun filament lamp and only give a general and rough estimation of the performance of tubes.
- They are not suitable for accurate tuning of tubes in  where the light intensity is much lesser.
- \item Characteristics of PMTs ususally exhibit large individual differences.
- Only PMTs 
- \item The gain of PMT is dependent on supplying voltage.especially the gain.
- To get a uniform response across the whole system and better resolution, a tuning of the position and supplying voltage a thorough characterization of each PMT is needed.
- \item Furthermore, some of the parameters may not provided by 
- \item As a qualification step, the performance of all PMTs needs to be verified.
- PMTs which failed the specification should be rejected.
-\end{enumerate}
-\end{comment}
+Massive testing of large number of PMTs cost much time and labor.
+Usually, a dedicated test bench will be constructed to facilitate this work and improve efficiency.
+Setting up a system of this kind is no trivial work.
+It is desirable that the same test bench can be shared among different projects. 
 
-Large detectors may contain hundreds, even thousands of PMTs as detection channels.
-A thorough characterization of all these tubes cost much time and labor.
-In this case, a dedicated test bench is desirable to facilitate the work and improve the efficiency.
-In this paper, a versatile test bench designed for PMT fast characterization is reported.
+For this purpose, a versatile test bench fot PMT fast characterization has been built up at the Institute of Modern Physics,CAS.
 This work is motivated primarily by the Plastic scintillator Strip Detector(PSD) of DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe}, where large number of PMTs need to be characterized and qualified.
 It is soon realized that a general purpose test hardware and software platform is beneficial for other projects conducted by IMP.
+
+\section{Consideration in the design of the test bench}
+\label{sec:design_consideration}
 
 The major design considerations of the test bench are summarized as follows:
 \begin{itemize}
