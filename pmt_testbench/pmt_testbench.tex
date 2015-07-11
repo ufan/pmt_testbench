@@ -235,10 +235,13 @@ All stepping motors are controlled by a motion controller MPC07SP from Leetro~\c
 \subsection{Light Source}
 \label{sec:light_source}
 
-A high-power blue LED(\SI{3}{\watt}, \SIrange{465}{485}{\nano\meter}) from Z-light~\cite{zlight} is apdopted as the light source for the test bench, which has been used before in the monitoring and calibration system of Neutron Wall Detector at IMP~\cite{yuyuhong_led}. 
-The LED is fixed on a special designed base using thermally conductive silicone rubber and then coupled to a \SI{5}{\centi\meter} diameter integrating sphere directly, making the whole sphere as its heat sink.
-The integrating sphere is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}), thus converting the LED into a perfect uniform light source(\ref{fig:uniformity_integratingsphere}).
-This is important
+A high-power blue LED~\cite{zlight}(\SI{3}{\watt}, \SIrange{465}{485}{\nano\meter}) coupled to a \SI{5}{\centi\meter} diameter integrating sphere is adoptted as the light source of the test bench.
+The LED has been used before successfully in the monitoring and calibration system of Neutron Wall Detector at IMP~\cite{yuyuhong_led} and proved to be suitable for massive light distribution.
+The integrating sphere, which is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}), is used to convert the LED into a uniform light source.
+To get better heat dissipation, the LED is fixed on a special designed base using thermally conductive silicone rubber and then coupled to the sphere directly making the whole sphere as its heat sink.
+The uniformity of the light source has been verified using a Hamamastu R4443 Mod2 PMT read out by the groud test electronics of DAMPE(Sec.\ref{sec:application}).
+The result is shown in Fig.\ref{fig:uniformity_integratingsphere}. 
+An uniformity within \textpm\SI{0.5}{\percent} has been reached, which makes the coupling between the light source and fibre bundle much easier and additional calibration for the spatial effect of the light source not needed. 
 
 \begin{figure}[h!]
  \centering
@@ -291,13 +294,6 @@ On the other end, each fibre is fixed using a customized fibre holder which allo
 Before testing, all used fibres are aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
 For easier manipulation and to protect the fibres from mechanical stress, both ends of the fibre bundle are coated with stainless steel ferrules.
 
-\begin{figure*}[b]
-\centering
- \includegraphics[width=140mm]{software_framework}
-\caption{General PMT testing framework}
-\label{fig:software_framework}
-\end{figure*}
-
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{fibre_diff}
@@ -330,6 +326,13 @@ Due to its multi-user feature, this mainframe is also shared by several other de
 
 \subsection{Software}
 \label{sec:software}
+
+\begin{figure*}[b]
+\centering
+ \includegraphics[width=140mm]{software_framework}
+\caption{General PMT testing framework}
+\label{fig:software_framework}
+\end{figure*}
 
 The software is developped under Windows and written in C++ which is well suited for the modular design of the test bench.
 To facilitate maintainence and future upgrade,it is groupped into three hierarchies as follows:
