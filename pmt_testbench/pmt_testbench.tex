@@ -122,42 +122,62 @@ The testing results of PSD PMTs and the corresponding selection procedure will b
 %%Photomultiplier tubes(PMTs) are widely used as photosensors in various fields, such as particle detectors in experimental physics and medical equipments in medical diagnosis.
 %%PMT features in high sensitivity, large gain and easy-operation, whic make it still popular about 80 years after its invention.
 Photomultiplier tubes(PMTs) are widely used as photosensors in particle detectors.
-Modern detectors can easily contain hundreds, even thousands of PMTs as detection channels.
-Testing of PMTs is a commonly encountered procedure in these applications.%%citing
+They are ususally charaterized thoroughly in the laboratoy before using, as the parameters provided by the manufacturer only give a rough indication of the performance.
 These tests are citical for the following reasons:
 \begin{itemize}
- \item Each project have specific requirements for the characteristics of PMTs.
- As PMTs exhibit big individual difference in their characteristics, these parameters should be tested thoroughly.
- Tubes that are not within the specification of the project will be rejected.
+ \item Each application have specific requirements for the characteristics of PMTs.
+ As PMTs exhibit big individual difference, these parameters should be tested and selection based on the testing data should be performed to reject tubes that are out of the specification.
  \item To get a uniform behavior across the whole detector system and thus better resolution, the response of PMT as a function of supplying voltage, sometimes of the cathode position, need to be determined.
   These data will be referenced both in the installation phase and operating phase. 
  \item Last but not least, qualification test for the whole PMT assembly before final mounting is mandatory for the success of any large project. 
 \end{itemize}
 
-Massive testing of large number of PMTs cost much time and labor.
-Usually, a dedicated test bench will be constructed to facilitate this work and improve efficiency.
-Setting up a system of this kind is no trivial work.
-It is desirable that the same test bench can be shared among different projects. 
+Modern detectors can easily contain hundreds, even thousands of PMTs as detection channels.
+Massive testing of all used PMTs is a tough job.
+Usually, a dedicated test bench is constructed to facilitate this work and improve efficiency~\cite{barnhill_testing_2008,akgun_complete_2005,adragna_pmt-block_2006}.
+Setting up a system like this is none trivial work, which demands considerable investment of time and effort.
+On the other hand, testing of PMTs is a commonly encountered procedure.
+Thus, it is desirable that the same test bench, with minimum configuration changes, can be reused in different applications. 
 
-For this purpose, a versatile test bench fot PMT fast characterization has been built up at the Institute of Modern Physics,CAS.
-This work is motivated primarily by the Plastic scintillator Strip Detector(PSD) of DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe}, where large number of PMTs need to be characterized and qualified.
-It is soon realized that a general purpose test hardware and software platform is beneficial for other projects conducted by IMP.
+In this paper, a versatile test bench of this kind is reported.
+The test bench is designed to be a standard laboratoy equipment for fast PMT characterization for several experiments prepared and planned at the Institute of Modern Physics, Chinese Academy of Sciences.
+Different projects have different requirements for the testing configuration.
+Thus, the test bench has adoptted a modular design pattern both in the hardware and the associated software platform.
+This makes the migration from one testing configuration to another light-weight and time-saving.
+The design considerations of the bench are summarized in Sec.\ref{sec:design_consideration}.
+Detailed description of its implementation is presented in Sec.\ref{sec:description}.
 
-\section{Consideration in the design of the test bench}
+The initial application of the test bench in the PMT testing for the Plastic Scintillator Strip Detector(PSD) of DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe} is reported in Sec.\ref{sec:application}.
+DAMPE is a statellite-borne  exeperiment, which imposes severe testing procedure for the PMT used.
+PSD of DAMPE is a large-area two-layer plastic scintillator array which aims for  e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the energy deposited.
+It requires a \SI{25}{\percent} energy uniformity across all the detection units.
+Totally, 570 PMTs are charaterized and 194 of them are selected for production and qualification.
+This application is successfull and has verified the efficiency and stability of the test bench.
+The performance of the test bench during these tests is discussed in Sec.\ref{sec:performance}.
+
+\section{Considerations in the design of the test bench}
 \label{sec:design_consideration}
 
-The major design considerations of the test bench are summarized as follows:
+\begin{figure*}[t]
+ \centering
+ \includegraphics[width=160mm]{testbench_overview}
+\caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper}, \textit{PTVPulser}, \textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
+\label{fig:testbench_overveiw}
+\end{figure*}
+
+The major design considerations of the test bench summarized as follows:
 \begin{itemize}
- \item \textit{Large capacity}: This is the primary driving force for developping the test bench as indicated in Sec.\ref{sec:introduction}.
- Testing multiple PMTs simultaneously can increase the efficiency and save project time tremendously. 
- \item \textit{Automation}: A single test run ususally takes several hours,  during which most operations are trivial jobs like change voltage value, change light intensity, start/stop DAQ, and so on.
- Manual operations are sometimes unreliable in such a long time testing period.
- Thus computer controllable hardwares should be used wherever possible and corresponding software should be developped to automate these trivial operations.
- Manual intervention is only needed in the beginning when mounting PMTs and configuring the software and in the end when unmounting PMTs and assessing testing result. 
- \item \textit{Versatility}: The test bench is not designed for single use.
- After its initial use in DAMPE PSD, it will be used for other experiments with different testing requirements.
+ \item \textit{Large capacity}: This is the primary driving force for developping a test bench dedicated for PMT characterization.
+ Testing multiple tubes simultaneously can increase the efficiency and save project time tremendously.
+ This is a critical factor in large projects as DAMPE PSD.
+ \item \textit{Automation}: A single test run ususally takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity, starting/stopping DAQ.
+ Manual operations are inefficient and unreliable in such a long testing period.
+ Thus computer controllable hardwares should be used whenever possible and corresponding software should be developped to automate these trivial operations.
+ Manual intervention is only expected in the beginning when mounting PMTs and configuring the software and in the end when unmounting PMTs and assessing testing result. 
+ \item \textit{Versatility}: As indicated in Sec.\ref{sec:introduction}, the test bench is not designed for single use.
+ %It will be utilitized in different experiments with different testing requirements.
  T\-h\-u\-s potential use cases should be considered and appropriate hardwares should be set up in the first place.
- %In particular, positon scanning capability is desirable for characterization of large area PMTs. 
+ In particular, positon scanning capability is desirable for characterization of large area PMTs. 
  \item \textit{Flexibility}: As a by product of versatiltiy, flexibility is needed both in terms of hardware and software.
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
@@ -167,36 +187,28 @@ The major design considerations of the test bench are summarized as follows:
 \section{Description of the test bench}
 \label{sec:description}
 
-\begin{figure*}[t]
- \centering
- \includegraphics[width=140mm]{testbench_overview}
-\caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper}, \textit{PTVPulser}, \textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
-\label{fig:testbench_overveiw}
-\end{figure*}
-
 A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overveiw}.
-The test bench is designed to test at least 20 R4443-Mod2 tubes in a single run.
-Light flashes from a LED are distributed to each tube through an integrating sphere and a fibre bundle.
-Tubes under test, including their bases, are mounted on a fixed stage, while the light source and its distribution system are mounted on a separate three-dimentional motorized stage.
-%This allows position scanning of all tested tubes simultaneously.
-Two additional PMTs are mounted in the corner of the motorized stage.
-They will not be removed from their fixed positions during all test runs and thus are used as references to monitor the stability of the light source as well as the performance of the whole system.
-Both stages are housed in a large light-tight box made of aluminium alloy, with the dimension of $176cm\times100cm\times78cm$.
-The box is painted black inside and out and can be opened from the top plate for PMT mounting.
+The test bench can test up to 25 PMTs in a single run.
+Light pulses are distributed to each tube through an integrating sphere and a fibre bundle, which are mounted on a three-dimensional motorized stage.
+PMTs under test will be mounted on a separate fixed stage, thus allowing position scanning of all tubes simultaneously.
+Two additional PMTs will be mounted on the motorized stage, serving as reference to monitor the stability of the light source as well as the performance of the whole system(see Sec.\ref{sec:performance}).
+They will move with the light distribution system and not be removed from their fixed positions during all test runs. 
+Both stages are housed in a light-tight box made of aluminium alloy, with the dimension of $176cm\times100cm\times78cm$.
+The box is painted black inside and out and can be opened from the top plate for tube mounting.
 All other devices are located outside the light-tight box.
-Cables are led out through various light-tight cable feedthroughs left in the side-plate of the box.
+Cables are led out through light-tight cable feedthroughs left in the side plate.
 The test bench is sitted in a cleanroom of class 100000, the temperature of which is controlled around 22\textpm2\textcelsius~all the time.
 
-In the following, each key component of the test bench will be described in detail.
+In the following, key components of the test bench will be described in detail.
 \subsection{Motorized and Fixed Stages}
 \label{sec:stages}
 
 The motorized and fixed stages are the main body of the test bench.
-They are arranged face to face with each other and are both covered with an optical breadboard of an area $1560mm\times250mm$, as shown in Fig.\ref{fig:stages}.
 All other objects inside the light-tight box will be mounted on the top of them.
-In particular, a specific fixture for R4443-Mod2 is designed that allows precise positioning of the tube with an accuracy of \textpm\SI{0.5}{\milli\meter}
+They are arranged face to face with each other and are both covered with an optical breadboard of an area $1560mm\times250mm$, as shown in Fig.\ref{fig:stages}.
 The optical breadboards are made of \SI{2.5}{cm} thick stainless steel, which provides substantial resistance to deformation in this application.
-The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations, which not only increase efficiency but also provide extra flexibility in the configuration of the test system.
+The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations, which not only increase efficiency but also provide extra flexibility in testing configuration.
+In particular, customized fixtures for fibres and tubes have been designed for accurate poistioning.
 
 \begin{figure}[h!]
  \centering
@@ -205,89 +217,94 @@ The grid pattern of tapped holes on the surface facilitate mounting/unmounting o
 \label{fig:stages}
 \end{figure} 
 
-Although not a primary concern in DAMPE PSD, the cathode uniformity of PMT is a critical characteristic in some applications, such as where bundled scintillating fibres or wavelenght shifting fibres are coupled to PMT and where multi-anode PMT is utilized for readout.
-It's decided from the very beginning that position scanning capability should be added to the test bench.
-The three-dimensional motorized stage is designed for this purpose.
-%It will hold optical fibres, thus allowing scanning of the tubes fixed on the fixed stage.
-The stage is driven by three stepping motors with a step size of \SI{1.56}{\micro\meter}.
-The travel range in the horizontal direction and vertical direction is \SI{60}{\milli\meter} and \SI{70}{\milli\meter} respectively.
-Thus the maximum scanning area is $60mm\times60mm$, which covers the size of the majority of PMTs and multi-anode PMTs.
-The third direction with a travel range of $15mm$ is added to control the gap between the fibre and the tube's cathode surface.
-This may be useful when extra space is needed for unmounting tubes without disturbing the optical fibres. 
-The load capacity of the motorized stage is \SI{30}{\kilo\gram}.
-All stepping motors are controlled by a single motion controller MPC07SP from Leetro.
-MPC07SP can control up to 4 axises simultaneously and possesses a PCI interface for remote control and automation.
-
-\subsection{Light Source and Distribution}
-\label{sec:light_source}
-
-A high-power blue LED(\SI{3}{\watt}, \SIrange{465}{485}{\nano\meter},  from Z-light~\cite{zlight}) is apdopted as the light source for the test bench.
-This product has been used before in the monitoring and calibration system of Neutron Wall Detector at IMP, CAS~\cite{yuyuhong_led}. 
-A \SI{5}{\centi\meter} diameter integrating sphere is used to convert the LED into a uniform light source.
-The integrating sphere is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}) and has two ports of \SI{14}{\milli\meter} diameter.
-To get better heat dissipation, the LED is fixed on a special designed base using thermally conductive silicone rubber.
-The base is then coupled to the input port of integrating sphere, making the whole sphere as the LED's heat sink.
-
-A bundle of 35 plastic clad silica(PCS) fibres is utilized to distribute light to each PMT under test.
-The fibres are \SI{1.5}{\meter} long and have a \SI{400}{\micro\meter} diameter core and a \SI{550}{\micro\meter} diameter cladding.
-The numerical aperture(NA) is 0.37.
-The relatively large core and large NA make the fibre an efficient light extracter of integrating sphere output. 
-The input end of the fibre bundle is coupled to the centre of the output port of integrating sphere using a three-dimensional fibre alignment stage.
-On the other end, each fibre is fixed using a customized fibre holder which allows rough position adjustment individually.
-Before testing, all used fibres are aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
-For easier manipulation and to protect the fibres from mechanical stress, both ends of the fibre bundle are coated with customized stainless steel ferrules.
-
-\begin{figure}[h!]
+\begin{figure*}[t]
  \centering
  \includegraphics[width=90mm]{light_source1_crop}
 \caption{Light source and its distribution system}
 \label{fig:light_source}
-\end{figure} 
+\end{figure*} 
+
+The load capacity of the motorized stage is \SI{30}{\kilo\gram}, which is sufficient for all use cases.
+It is driven by three stepping motors with a minimum step of \SI{1.56}{\micro\meter}.
+The travel range in the horizontal direction and vertical direction is \SI{60}{\milli\meter} and \SI{70}{\milli\meter} respectively.
+Thus the maximum scanning area is $60mm\times60mm$, which covers the size of the majority of PMTs.
+The third direction with a travel range of $15mm$ is added to control the gap between the fibre and the tube's cathode surface.
+This may also be useful when extra space is needed for unmounting tubes without disturbing the optical fibres. 
+All stepping motors are controlled by a motion controller MPC07SP from Leetro~\cite{leetro}, which possesses a PCI interface for remote control.
+
+\subsection{Light Source}
+\label{sec:light_source}
+
+A high-power blue LED(\SI{3}{\watt}, \SIrange{465}{485}{\nano\meter}) from Z-light~\cite{zlight} is apdopted as the light source for the test bench, which has been used before in the monitoring and calibration system of Neutron Wall Detector at IMP~\cite{yuyuhong_led}. 
+The LED is fixed on a special designed base using thermally conductive silicone rubber and then coupled to a \SI{5}{\centi\meter} diameter integrating sphere directly, making the whole sphere as its heat sink.
+The integrating sphere is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}), thus converting the LED into a perfect uniform light source(\ref{fig:uniformity_integratingsphere}).
+This is important
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{fixtures1_crop}
-\caption{Special designed fixtures for tube and optical fibre are used}
-\label{fig:fixture}
-\end{figure}
-
-\begin{figure*}[t]
- \centering
- \includegraphics[width=140mm]{integration1_crop}
-\caption{The integrated testbench,with tubes under test mounted.}
-\label{fig:testbench_integrated}
-\end{figure*}
+ \includegraphics[width=90mm]{uniformity_integratingsphere}
+\caption{Spatial uniformity of the integrating sphere.}
+\label{fig:uniformity_integratingsphere}
+\end{figure} 
   
 An off the shelf hardware, Tektronix AFG3252 arbitrary/function generator, is adpoted as the LED driver.
-As a commertial product, various interfaces for remote control are provided in AFG3252, making it suitable for automation.
+Although not designed to be a dedicated LED driver, the stability of AFG3252 is quite satifactory(see Sec.\ref{sec:performance}).
+Moreover, the 
 All of the pulse parameters of AFG3252 can be adjusted in a wide range with high precison, as show in Table \ref{tab:afg3252}.
-This is a critical feature for the PMT test of DAMPE PSD, as light intensities covering a large dynamic range are needed to measure the gain ratio between dynode 8 and dynode 5 at different voltages.
+This is a critical feature for a versatile equipment, as light intensities covering a large dynamic range are needed for different applications.
+
 \begin{table}[h!]
 \caption{Summary of AFG3252 Pulse Mode Characteristics}
 \label{tab:afg3252}
  \begin{center}
  \begin{tabular}{lr}
  \multicolumn{2}{l}{Summary of AFG3252 pulse mode characteristics}\\ \hline
- Frequecny & up to \SI{120}{\MHz} \\
- Amplitude & max \SI{5}{\volt} \\
+ Frequecny & max \SI{120}{\MHz} \\
+ Amplitude & \SIrange{0}{5}{\volt} \\
+           & resolution \SI{0.01}{\volt} \\
  Pulse width & min \SI{4}{\nano\second} \\
              & resolution \SI{10}{\pico\second} \\
  Leading edge & \SI{2.5}{\nano\second} to 0.625*pusle period \\
  Trailing edge & \SI{2.5}{\nano\second} to 0.625*pusle period \\
- Jitter(typical) & \SI{100}{\pico\second} \\
+ %Jitter(typical) & \SI{100}{\pico\second} \\
  Interface     & GPIB, LAN, USB
  \end{tabular}
  \end{center}
 \end{table} 
-AFG3252 has two independent analog outputs which can be synchronized together.
-Thus it can output a trigger signal to DAQ at the same time it driving the LED. 
-Although not designed to be a dedicated LED driver, the stability of AFG3252 is quite satifactory, see Sec.\ref{sec:longterm_stability}.
-One limitation of AFG3252 as a LED driver is that it has a limited leading edge of \SI{2.5}{ns}.
-This makes it not suitable for timing-related characterizations, where ultra-short(down to hundreds of \si{\pico\second} magnitude) light pulse is preferred.
-In this casse, a dedicated LED driver of special design(commertial or home-made)may be used instead.
-But AFG3252 can still be used as a trigger generator to control both the LED driver and DAQ.
+AFG3252 possesses two independent analog outputs which can be synchronized together.
+Thus it can also be used as a trigger generator at the same time it driving the LED, which will symplify the DAQ configuration in most cases. 
 
-\subsection{Electronics}
+One limitation of AFG3252 as a LED driver is that it has a limited leading edge of \SI{2.5}{ns}.
+This may not be suitable for timing-related characterizations, where ultra-short(down to hundreds of \si{\pico\second} magnitude) light pulse is preferred.
+In this case, a dedicated LED driver of special design(commertial or home-made)shall be used instead.
+However the rich interfaces AFG3252 possesses still make it valuable as a trigger generator to control both the LED driver and DAQ remotely. 
+
+\subsection{Fibre Bundle}
+\label{sec:fibre_bundle}
+
+A bundle of 35(25 for test, 2 for reference and 13 spares) plastic clad silica fibres is utilized to distribute light to each PMT under test.
+The fibres are \SI{1.5}{\meter} long and have a \SI{400}{\micro\meter} diameter core and a \SI{550}{\micro\meter} diameter cladding.
+The numerical aperture(NA) is 0.37.
+The relatively large core and large NA make the fibre an efficient light extracter of integrating sphere output. 
+The bundle end is coupled to the centre of the output port of integrating sphere using a stable fibre alignment stage.
+On the other end, each fibre is fixed using a customized fibre holder which allows two-dimensional position adjustment.
+Before testing, all used fibres are aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
+For easier manipulation and to protect the fibres from mechanical stress, both ends of the fibre bundle are coated with stainless steel ferrules.
+
+\begin{figure*}[b]
+\centering
+ \includegraphics[width=140mm]{software_framework}
+\caption{General PMT testing framework}
+\label{fig:software_framework}
+\end{figure*}
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{fibre_diff}
+\caption{Transmission difference of the fibrese}
+\label{fig:fibre_diff}
+\end{figure} 
+\subsection{Electronics and High Voltage Supply}
 \label{sec:electronics}
 
 To get more realistic results, electronics for PSD ground test is utilitized for the PMT test.
@@ -302,9 +319,6 @@ The packaged data are finally readout by a computer through the USB port on the 
 Commands from computer are sent to the DAQ board through a RS232 serial port.
 Both the USB and serial interface are controlled using the NI-VISA library.
 
-\subsection{High Voltage Supply}
-\label{sec:hv}
-
 The high voltage to PMTs is provided by a CAEN A1535SP board housed in the CAEN mainframe SY1527LC. 
 A1535SP houses 24 independent positive HV channels, with an output range from \SIrange{0}{3500}{\volt}.
 Current and voltage protection are provided by the board, thus allowing protection of the PMT from accidental ambient light exposure when HV is on.
@@ -317,25 +331,17 @@ Due to its multi-user feature, this mainframe is also shared by several other de
 \subsection{Software}
 \label{sec:software}
 
-\begin{figure*}
-\centering
- \includegraphics[width=140mm]{software_framework}
-\caption{Software framework}
-\label{fig:software_framework}
-\end{figure*}
-
-The software is developped under Windows and written in C++, which is an efficient language and well suited to the modular design of the test bench.
-To facilitate maintainence and future upgrade, the software components are groupped into three hierarchies as follows:
+The software is developped under Windows and written in C++ which is well suited for the modular design of the test bench.
+To facilitate maintainence and future upgrade,it is groupped into three hierarchies as follows:
 \begin{enumerate}
  \item \textit{Device abstraction}, which not only serves as an interface to the underlying hardwares, but also handles the abstraction of different types of devices. 
- \item \textit{Framework libraries}, which defines a general testing procedure and provides utility classes for configuration and management.
+ \item \textit{Framework libraries}, which defines a general testing pecedure and provides utility classes for configuration and management.
  \item \textit{User inerface}, which provides command line based or graphical executables for user interaction. 
 \end{enumerate}
 
 Designed as a versatile equipment, different hardware modules may be used in the future.
-For example, while the general-purpose VME or CAMAC platform may meet the demands of most of the use cases, some experiments may prefer to use project-specific DAQ hardware for testing, like the current case of DAMPE PSD.
-%In another case, a laser light source with a ultra-short pulsing driver may be used for time-related characterization.
-%For example, although project specific electronics are used in the PMT testing of DAMPE PSD, a DAQ system based on VME or CAMAC may meet the demands of most of the general-purpose characterizations.
+For example, while the general-purpose CAMAC DAQ system may meet the demands of most of the use cases, some experiments may prefer to use project-specific DAQ hardware for testing,see Sec.{sec:application}.
+In another case, a laser light source with a ultra-short pulsing driver may be used for timing-related characterization.
 Instead of developping a dedicated program each time a hardware interface changes, an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details. 
 Abstract classes are defined for four frequently-used devices in PMT testing, i.e. motion controller, pulse generator, DAQ system and HV supplier, as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
 Common operations of each type of device are extracted and encapsulated in the corresponding abstract class, which are the only interface to higher level software components.
@@ -356,15 +362,13 @@ Here, device operations performed at each position constitute a \textit{PTVTest}
 Additional actions may be added in the \textit{PreTest} method and \textit{PostTest} method of \textit{PTVProgram}, which will be invoked before and after the test loop repectively.
 Typically, PMT warming shall be performed in \textit{PreTest} and analysis code shall be added in \textit{PostTest}.
 \textit{PTVProgram}s of different testing objectives will finally be chained together to constitute a complete characterization of PMT.
-Two concrete \textit{PTVProgram}s have been implemented for DAMPE-PSD PMT test.
-One for pedestal testing and one for amplitude scan and voltage scan.
 
 Based on the framework library, a light-weight user interface based on PDCurses~\cite{pdcurses} has been developped.
-This program also incorporates status monitoring function, which is developped utilizing Phtread-win32 library~\cite{pthread_win32}.
-
-A dedicated analysis program based on ROOT libraries is also developped for the DAMPE PSD project.
-The program does not depends on the framework libraries described above.
-The analysis results are inserted into a database for easy query.
+This program features in testing control, status monitoring and logging.
+Thanks to the abstraction described above, the architecture of the program is rather independent of the specific hardware used and testing program performed.
+A decoding function from binary file to root file~\cite{root} is also incorporated into it.
+However, detailed analysis of the testing data is not part of the program as this is rather project-specific and is not within the scope of the program's function.
+It is left to the user of the test bench to develop an independent program to do this job.
 
 \begin{comment}
 \section{Characteristics of the test bench}
@@ -383,13 +387,6 @@ The LED is driven by a \SI{40}{\nano\second} width pulse of fixed amplitude at \
 The result(Fig.~\ref{fig:uniformity_integratingsphere}) shows that the integrating sphere works as expected and the light intensity is almost the same(within \textpm0.5\%) over the entire surface of the output port.   
 
 
-\begin{figure}[h!]
- \centering
- \includegraphics[width=90mm]{uniformity_integratingsphere}
-\caption{Spatial uniformity of the integrating sphere.}
-\label{fig:uniformity_integratingsphere}
-\end{figure} 
-
 \subsection{Transmission Uniformity of Fibre-bundle}
 \label{sec:transuniformity_fibre}
 
@@ -404,20 +401,40 @@ As the test
 \section{Application in the PMT testing for PSD of DAMPE}
 \label{sec:application}
 
+\begin{figure*}[t]
+ \centering
+ \includegraphics[width=140mm]{integration1_crop}
+\caption{The integrated testbench,with tubes under test mounted.}
+\label{fig:testbench_integrated}
+\end{figure*}
 
-\subsection{Requirements of PSD}
-\label{sec:psd_requirements}
+relative gain logic
+large dynamic range, dy58 requirements
+voltage step logic
+electronics logic
+implementation of test programs
+calibration logic
+test procedure summary
 
 \subsection{Testing Result of Relative Gain}
 \label{sec:psd_gain}
 
+A relative gain method 
+
+
 \subsection{Testing Result of Dynode Ratio}
 \label{sec:psd_dy58}
+
+
 
 \subsection{Testing Result of Cathode Scan}
 \label{sec:psd_cathodescan}
 
-\subsection{Performance of the test bench during test}
+The cathode uniformity of R4443 Mod2 is investigated for a small sample of tubes.
+These data is used to verify the scanning ability of the test bench.
+The gain
+
+\section{Performance of the test bench during test}
 \label{sec:performance}
 
 %%%%%%%%%%%%%%%%  Conclustion   %%%%%%%%%%%%%%%%%%%%%%%
