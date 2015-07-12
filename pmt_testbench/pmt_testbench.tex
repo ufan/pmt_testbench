@@ -337,16 +337,13 @@ Commands from computer are sent to the DAQ board through a RS232 serial port.
 Both the USB and serial interface are controlled using the NI-VISA library.
 \end{comment}
 
-The electronics and high voltage supply are highly project-specific components for PMT characterization.
-They are expected to be changed frequently from one 
-The high voltage to PMTs is provided by a CAEN A1535SP board housed in the CAEN mainframe SY1527LC. 
-A1535SP houses 24 independent positive HV channels, with an output range from \SIrange{0}{3500}{\volt}.
-Current and voltage protection are provided by the board, thus allowing protection of the PMT from accidental ambient light exposure when HV is on.
-Both current and voltage values can be set and monitored through the Ethernet interface of SY1527LC using the dynamic library provided by CAEN.
+A CAMAC system based on Wiener CC-USB control board has been set up for data acquisition.
+This system is ready to use and shall be adequate for fast PMT characterization in the laboratoy.
+However, it shall be noted that the DAQ system of the test bench is expected to change frequently, as customized electronics with different control interface may be preferred in some project.
 
-SY1527LC is a universal power supply system with 16 slots.
-If needed, A1535SP can be replaced by other boards with more appropriate parameters, while the control interface remains unchanged.
-Due to its multi-user feature, this mainframe is also shared by several other devices in the cleanroom.
+A mainframe from CAEN, SY1527LC, is adoptted as the high voltage supply system of the test bench.
+While HV boards of various properties can be housed in SY1527LC, the same control interface will be used for all kinds of operation.
+This feature simplifies our implementation of the test bench as a versatile equipment.More information about SY1527LC can be found in~\cite{sy1527lc}.
 
 \subsection{Software}
 \label{sec:software}
@@ -358,6 +355,8 @@ Due to its multi-user feature, this mainframe is also shared by several other de
 \label{fig:software_framework}
 \end{figure*}
 
+Software is a critical part of the test bench.
+Instead of a 
 The software is developped under Windows and written in C++ which is well suited for the modular design of the test bench.
 To facilitate maintainence and future upgrade,it is groupped into three hierarchies as follows:
 \begin{enumerate}
