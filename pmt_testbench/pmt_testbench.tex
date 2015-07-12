@@ -239,7 +239,7 @@ A high-power blue LED~\cite{zlight}(\SI{3}{\watt}, \SIrange{465}{485}{\nano\mete
 The LED has been used before successfully in the monitoring and calibration system of Neutron Wall Detector at IMP~\cite{yuyuhong_led} and proved to be suitable for massive light distribution.
 The integrating sphere, which is coated interiorly with highly reflective material($\approx$\SI{98}{\percent} at \SI{400}{\nano\meter}), is used to convert the LED into a uniform light source.
 To get better heat dissipation, the LED is fixed on a special designed base using thermally conductive silicone rubber and then coupled to the sphere directly making the whole sphere as its heat sink.
-The uniformity of the light source has been verified using a Hamamastu R4443 Mod2 PMT read out by the groud test electronics of DAMPE(Sec.\ref{sec:application}).
+The uniformity of the light source has been verified using a Hamamastu R4443 Mod2 PMT read out by the groud test electronics of DAMPE(Sec.\ref{sec:application}). 
 The result is shown in Fig.\ref{fig:uniformity_integratingsphere}. 
 An uniformity within \textpm\SI{0.5}{\percent} has been reached, which makes the coupling between the light source and fibre bundle much easier and additional calibration for the spatial effect of the light source not needed. 
 
@@ -250,11 +250,21 @@ An uniformity within \textpm\SI{0.5}{\percent} has been reached, which makes the
 \label{fig:uniformity_integratingsphere}
 \end{figure} 
   
-An off the shelf hardware, Tektronix AFG3252 arbitrary/function generator, is adpoted as the LED driver.
-Although not designed to be a dedicated LED driver, the stability of AFG3252 is quite satifactory(see Sec.\ref{sec:performance}).
-Moreover, the 
-All of the pulse parameters of AFG3252 can be adjusted in a wide range with high precison, as show in Table \ref{tab:afg3252}.
-This is a critical feature for a versatile equipment, as light intensities covering a large dynamic range are needed for different applications.
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{intesityVSvoltage}
+\caption{Light intensity as a function of AFG3252 pulse voltage}
+\label{fig:afg3252_intensityVSvoltage}
+\end{figure} 
+
+An off the shelf hardware, Tektronix AFG3252 arbitrary/ function generator, is adpoted as the LED driver.
+As a commertial product, it possesses a rich interface for remote control.
+All the pulse parameters of AFG3252 can be adjusted in a wide range with high precison as show in Table \ref{tab:afg3252} and an example is given in Fig.\ref{fig:afg3252_intensityVSvoltage}.
+This is a critical feature for a test bench with an objective of versatiltiy, as diverse requirements for the light source exist for different applications.
+AFG3252 also has two analog outputs which can be synchronized together.
+Thus it be used as a trigger generator at the same time it driving the LED, which will symplify the DAQ configuration in most use cases. 
+All these features make it an effective replacement of a dedicated LED driver. 
+After all, a stability better than \SI{0.5}{\percent} has been achieved after light intensity calibration, the details of which will be given in Sec.\ref{sec:performance}.
 
 \begin{table}[h!]
 \caption{Summary of AFG3252 Pulse Mode Characteristics}
@@ -274,13 +284,13 @@ This is a critical feature for a versatile equipment, as light intensities cover
  \end{tabular}
  \end{center}
 \end{table} 
-AFG3252 possesses two independent analog outputs which can be synchronized together.
-Thus it can also be used as a trigger generator at the same time it driving the LED, which will symplify the DAQ configuration in most cases. 
 
-One limitation of AFG3252 as a LED driver is that it has a limited leading edge of \SI{2.5}{ns}.
+\begin{comment}
+One limitation of AFG3252 is that it has a limited leading edge of \SI{2.5}{ns}.
 This may not be suitable for timing-related characterizations, where ultra-short(down to hundreds of \si{\pico\second} magnitude) light pulse is preferred.
 In this case, a dedicated LED driver of special design(commertial or home-made)shall be used instead.
 However the rich interfaces AFG3252 possesses still make it valuable as a trigger generator to control both the LED driver and DAQ remotely. 
+\end{comment}
 
 \subsection{Fibre Bundle}
 \label{sec:fibre_bundle}
@@ -289,17 +299,27 @@ A bundle of 35(25 for test, 2 for reference and 13 spares) plastic clad silica f
 The fibres are \SI{1.5}{\meter} long and have a \SI{400}{\micro\meter} diameter core and a \SI{550}{\micro\meter} diameter cladding.
 The numerical aperture(NA) is 0.37.
 The relatively large core and large NA make the fibre an efficient light extracter of integrating sphere output. 
+For easier manipulation and to protect the fibres from mechanical stress, both ends of the fibre bundle are coated with stainless steel ferrules.
 The bundle end is coupled to the centre of the output port of integrating sphere using a stable fibre alignment stage.
 On the other end, each fibre is fixed using a customized fibre holder which allows two-dimensional position adjustment.
-Before testing, all used fibres are aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
-For easier manipulation and to protect the fibres from mechanical stress, both ends of the fibre bundle are coated with stainless steel ferrules.
+In each test run, all used fibres will aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
 
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{fibre_diff}
-\caption{Transmission difference of the fibrese}
+\caption{Transmission difference of the fibres}
 \label{fig:fibre_diff}
 \end{figure} 
+
+After coupling to the integrating sphere, the light output of each fibre is measured and a variance of \SI{10}{\percent} is observed among the fibres. 
+As the un-uniformity of the light source(see Sec.\ref{sec:light_source}) is much less than the mesurement result, the result is a direct reflection of the transmition difference among the fibres.
+Plus, the result also shows no dependency on the light intesity used(see Fig.\ref{fig:fibre_diff}). 
+This is within expectation, because transmition coefficient is an intrinsic characteristic of the fibre itself.
+The transmition difference get here will be used for light intensity correction in the relative gain measurement,see Sec.\ref{sec:psd_gain}.
+%%The testing configuration includes two R4443 Mode PMTs, one for light source monitoring and the other one for fibre testing.
+%%As stable fixture for the tubes and fibres are utilitized, the major uncertainty comes from the coupling distance between the fibre and the PMT in the longitudinal direction.
+
+
 \subsection{Electronics and High Voltage Supply}
 \label{sec:electronics}
 
