@@ -165,12 +165,12 @@ The performance of the test bench during these tests is discussed in Sec.\ref{se
 \label{fig:testbench_overveiw}
 \end{figure*}
 
-The major design considerations of the test bench summarized as follows:
+The major design considerations of the test bench summarized is as follows:
 \begin{itemize}
  \item \textit{Large capacity}: This is the primary driving force for developping a test bench dedicated for PMT characterization.
  Testing multiple tubes simultaneously can increase the efficiency and save project time tremendously.
- This is a critical factor in large projects as DAMPE PSD.
- \item \textit{Automation}: A single test run ususally takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity, starting/stopping DAQ.
+ This is a critical factor in large projects such as DAMPE PSD.
+ \item \textit{Automation}: A single test run ususally takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity, starting~/~stopping DAQ.
  Manual operations are inefficient and unreliable in such a long testing period.
  Thus computer controllable hardwares should be used whenever possible and corresponding software should be developped to automate these trivial operations.
  Manual intervention is only expected in the beginning when mounting PMTs and configuring the software and in the end when unmounting PMTs and assessing testing result. 
@@ -197,7 +197,7 @@ Both stages are housed in a light-tight box made of aluminium alloy, with the di
 The box is painted black inside and out and can be opened from the top plate for tube mounting.
 All other devices are located outside the light-tight box.
 Cables are led out through light-tight cable feedthroughs left in the side plate.
-The test bench is sitted in a cleanroom of class 100000, the temperature of which is controlled around 22\textpm2\textcelsius~all the time.
+The test bench and all associated devices are sitted in a cleanroom of class 100000, the temperature of which is controlled around 22\textpm2\textcelsius~all the time.
 
 In the following, key components of the test bench will be described in detail.
 \subsection{Motorized and Fixed Stages}
@@ -258,7 +258,7 @@ An uniformity within \textpm\SI{0.5}{\percent} has been reached, which makes the
 \end{figure} 
 
 An off the shelf hardware, Tektronix AFG3252 arbitrary/ function generator, is adpoted as the LED driver.
-As a commertial product, it possesses a rich interface for remote control.
+As a commertial product, it possesses a rich set of interfaces for remote control.
 All the pulse parameters of AFG3252 can be adjusted in a wide range with high precison as show in Table \ref{tab:afg3252} and an example is given in Fig.\ref{fig:afg3252_intensityVSvoltage}.
 This is a critical feature for a test bench with an objective of versatiltiy, as diverse requirements for the light source exist for different applications.
 AFG3252 also has two analog outputs which can be synchronized together.
@@ -315,7 +315,7 @@ After coupling to the integrating sphere, the light output of each fibre is meas
 As the un-uniformity of the light source(see Sec.\ref{sec:light_source}) is much less than the mesurement result, the result is a direct reflection of the transmition difference among the fibres.
 Plus, the result also shows no dependency on the light intesity used(see Fig.\ref{fig:fibre_diff}). 
 This is within expectation, because transmition coefficient is an intrinsic characteristic of the fibre itself.
-The transmition difference get here will be used for light intensity correction in the relative gain measurement,see Sec.\ref{sec:psd_gain}.
+The transmition difference got here will be used for light intensity correction in the relative gain measurement,see Sec.\ref{sec:psd_gain}.
 %%The testing configuration includes two R4443 Mode PMTs, one for light source monitoring and the other one for fibre testing.
 %%As stable fixture for the tubes and fibres are utilitized, the major uncertainty comes from the coupling distance between the fibre and the PMT in the longitudinal direction.
 
@@ -323,6 +323,7 @@ The transmition difference get here will be used for light intensity correction 
 \subsection{Electronics and High Voltage Supply}
 \label{sec:electronics}
 
+\begin{comment}
 To get more realistic results, electronics for PSD ground test is utilitized for the PMT test.
 It consists of a front end electronics(FEE) box and a data acquisition(DAQ) board.
 Both of them are standalone devices powered by a standalone DC power.
@@ -334,7 +335,10 @@ Upon recieving the trigger, FEE will hold and digitize the shaped signal and tra
 The packaged data are finally readout by a computer through the USB port on the DAQ board.
 Commands from computer are sent to the DAQ board through a RS232 serial port.
 Both the USB and serial interface are controlled using the NI-VISA library.
+\end{comment}
 
+The electronics and high voltage supply are highly project-specific components for PMT characterization.
+They are expected to be changed frequently from one 
 The high voltage to PMTs is provided by a CAEN A1535SP board housed in the CAEN mainframe SY1527LC. 
 A1535SP houses 24 independent positive HV channels, with an output range from \SIrange{0}{3500}{\volt}.
 Current and voltage protection are provided by the board, thus allowing protection of the PMT from accidental ambient light exposure when HV is on.
@@ -442,7 +446,28 @@ test procedure summary
 \subsection{Testing Result of Relative Gain}
 \label{sec:psd_gain}
 
-A relative gain method 
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{gainVSvoltage}
+\caption{Gain dependency on high voltage of two PMTs}
+\label{fig:gainVSvoltage}
+\end{figure} 
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{GainDist}
+\caption{Relative Gain Distribution(Normalized to AA2483)}
+\label{fig:gain_dist}
+\end{figure} 
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{correlation}
+\caption{Correlation between the parameters given by Hamamastu and the gain tested in this paper}
+\label{fig:correl_abVSgain}
+\end{figure} 
+
+A relative method for 
 
 
 \subsection{Testing Result of Dynode Ratio}
@@ -453,12 +478,48 @@ A relative gain method
 \subsection{Testing Result of Cathode Scan}
 \label{sec:psd_cathodescan}
 
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{cathode_uniformity}
+\caption{A typical cathode uniformity}
+\label{fig:cathode_uniformity}
+\end{figure} 
+
 The cathode uniformity of R4443 Mod2 is investigated for a small sample of tubes.
 These data is used to verify the scanning ability of the test bench.
 The gain
 
+
 \section{Performance of the test bench during test}
 \label{sec:performance}
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{led_stability}
+\caption{Stability of the Light Source}
+\label{fig:led_stability}
+\end{figure} 
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{RefDy58Dist}
+\caption{Stability of Dy8/Dy5 Measurement}
+\label{fig:dy58_stabiltiy}
+\end{figure} 
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{RelativeGainRef}
+\caption{RelativeGainRef}
+\label{fig:refgain_relation}
+\end{figure} 
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{RelativeGainRefDist}
+\caption{Stability of Gain Measurement}
+\label{fig:gain_stability}
+\end{figure} 
 
 %%%%%%%%%%%%%%%%  Conclustion   %%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
