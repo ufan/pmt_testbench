@@ -157,7 +157,7 @@ The performance of the test bench has been extracted from these tests and is dis
 \section{Considerations in the design of the test bench}
 \label{sec:design_consideration}
 
-\begin{figure*}[t]
+\begin{figure*}
  \centering
  \includegraphics[width=160mm]{testbench_overview}
 \caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper}, \textit{PTVPulser}, \textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
@@ -216,7 +216,7 @@ In particular, customized fixtures for fibres and tubes have been designed for a
 \label{fig:stages}
 \end{figure} 
 
-\begin{figure*}[t]
+\begin{figure*}
  \centering
  \includegraphics[width=90mm]{light_source1_crop}
 \caption{Light source and its distribution system}
@@ -265,6 +265,34 @@ Thus it be used as a trigger generator at the same time it driving the LED, whic
 All these features make it an effective replacement of a dedicated LED driver. 
 After all, a stability better than \SI{0.5}{\percent} has been achieved after light intensity calibration, the details of which will be given in Sec.\ref{sec:performance}.
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=90mm]{fibre_diff}
+\caption{Transmission difference of the fibres}
+\label{fig:fibre_diff}
+\end{figure} 
+
+\begin{figure*}
+\centering
+ \includegraphics[width=140mm]{software_framework}
+\caption{General PMT testing framework}
+\label{fig:software_framework}
+\end{figure*}
+
+\begin{figure*}[t]
+ \centering
+ \includegraphics[width=140mm]{integration1_crop}
+\caption{The integrated testbench,with tubes under test mounted.}
+\label{fig:testbench_integrated}
+\end{figure*}
+
+\begin{figure*}
+ \centering
+ \includegraphics[width=140mm]{GainDist_Correlation}
+\caption{Relative Gain Distribution(Normalized to AA2483)}
+\label{fig:gain_dist}
+\end{figure*}
+
 \begin{table}[h!]
 \caption{Summary of AFG3252 Pulse Mode Characteristics}
 \label{tab:afg3252}
@@ -303,13 +331,6 @@ The bundle end is coupled to the centre of the output port of integrating sphere
 On the other end, each fibre is fixed using a customized fibre holder which allows two-dimensional position adjustment.
 In each test run, all used fibres will aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
 
-\begin{figure}[]
- \centering
- \includegraphics[width=90mm]{fibre_diff}
-\caption{Transmission difference of the fibres}
-\label{fig:fibre_diff}
-\end{figure} 
-
 After coupling to the integrating sphere, the light output of each fibre is measured and a variance of \SI{10}{\percent} is observed among the fibres. 
 As the un-uniformity of the light source(see Sec.\ref{sec:light_source}) is much less than the mesurement result, the result is a direct reflection of the transmition difference among the fibres.
 Plus, the result also shows no dependency on the light intesity used(see Fig.\ref{fig:fibre_diff}). 
@@ -346,13 +367,6 @@ This feature simplifies our implementation of the test bench as a versatile equi
 
 \subsection{Software}
 \label{sec:software}
-
-\begin{figure*}[t]
-\centering
- \includegraphics[width=140mm]{software_framework}
-\caption{General PMT testing framework}
-\label{fig:software_framework}
-\end{figure*}
 
 The software system is a critical part of the test bench.
 It is developped under Windows and written in C++.
@@ -423,20 +437,16 @@ As the test
 \section{Application in the PMT testing for PSD of DAMPE}
 \label{sec:application}
 
-\begin{figure*}[t]
- \centering
- \includegraphics[width=140mm]{integration1_crop}
-\caption{The integrated testbench,with tubes under test mounted.}
-\label{fig:testbench_integrated}
-\end{figure*}
+PSD adopts Hamamastu R4443 Mod2 for scintillation light readout. 
+R4443 Mod2 is a \SI{14.5}{\milli\meter} head-on type PMT with 10 tages dynode structure.
+It has a photocathode with minimum effective area of \SI{10}{\milli\meter}.
 
+Selection of tubes based the testing data is not the object of this article.
+Here, only the major results are presented with a focus on the demonstration of the validity of the test bench. 
 
-relative gain logic
 large dynamic range, dy58 requirements
-voltage step logic
 electronics logic
 implementation of test programs
-calibration logic
 test procedure summary
 
 \subsection{Testing of Gain of Dynode 8}
@@ -448,13 +458,6 @@ test procedure summary
 \caption{Gain dependency on high voltage of two PMTs}
 \label{fig:gainVSvoltage}
 \end{figure} 
-
-\begin{figure*}
- \centering
- \includegraphics[width=140mm]{GainDist_Correlation}
-\caption{Relative Gain Distribution(Normalized to AA2483)}
-\label{fig:gain_dist}
-\end{figure*} 
 
 \begin{figure}[h!]
  \centering
@@ -493,21 +496,22 @@ This is a demonstration of the validity of our testing method.
 
 \subsection{Testing of the Ratio between Dynode8 and Dynode5}
 \label{sec:psd_dy58}
-\begin{figure}[h!]
+
+\begin{figure}[h]
  \centering
  \includegraphics[width=90mm]{dy58_example}
 \caption{Example of the Dynode8/Dynode5}
 \label{fig:dy58_example}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure}[h]
  \centering
  \includegraphics[width=90mm]{dy58_dist}
 \caption{Distribution of the Dynode8/Dynode5 at the voltage value equivalent to Hamamastu typical voltage}
 \label{fig:dy58_dist}
 \end{figure} 
 
-\begin{figure*}[b]
+\begin{figure*}[]
  \centering
  \includegraphics[width=140mm]{dy58_ledvscm}
 \caption{Comparison of the dy8/dy5 measured from LED and from cosmic ray.}
@@ -525,7 +529,7 @@ As shown in Fig.\ref{fig:dy58_ledvscm}, a small shift of the mean value exists a
 This effect may be attributed to the fact that in cosmic ray test the result is an average of the response in the whole cathode surface, while in LED test the result is the reponse at the center of the cathode surface with a spot of \SI{1}{\milli\meter}.
 
 
-\subsection{Cathode Uniformity of R4443 Mod2}
+\subsection{Testing of Cathode Uniformity}
 \label{sec:psd_cathodescan}
 
 \begin{figure}[h!]
@@ -535,10 +539,13 @@ This effect may be attributed to the fact that in cosmic ray test the result is 
 \label{fig:cathode_uniformity}
 \end{figure} 
 
-The cathode uniformity of R4443 Mod2 is investigated for a small sample of tubes.
-These data is used to verify the scanning ability of the test bench.
-The gain
+A \textit{PTVProgram} for cathode uniformity characterization is implemented to validate the position scanning ability of the test bench.
+The scanning is performed in the verical and horizontal direction with a step of \SI{1}{\milli\meter}.
+At each position, the relative gain is measured according to the method described in Sec.\ref{sec:psd_gain}.
 
+Cathode uniformity of 20 tubes have been measured in a single test run using this \textit{PTVProgram}.
+A typical distribution of cathode uniformity is shown in Fig.\ref{fig:cathode_uniformity}.
+The results for all 20 tubes are summarized and it is found that in the central \SI{9}{\milli\meter} of the photocathode, about \SI{75}{\percent} of the testing data are within \textpm\SI{10}{\percent} range around the average value.
 
 \section{Performance of the test bench during test}
 \label{sec:performance}
