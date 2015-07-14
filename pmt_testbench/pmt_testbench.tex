@@ -303,7 +303,7 @@ The bundle end is coupled to the centre of the output port of integrating sphere
 On the other end, each fibre is fixed using a customized fibre holder which allows two-dimensional position adjustment.
 In each test run, all used fibres will aligned to the centre of their corresponding PMT's input window with a precision of \SI{0.5}{\milli\meter}.  
 
-\begin{figure}[h!]
+\begin{figure}[]
  \centering
  \includegraphics[width=90mm]{fibre_diff}
 \caption{Transmission difference of the fibres}
@@ -347,7 +347,7 @@ This feature simplifies our implementation of the test bench as a versatile equi
 \subsection{Software}
 \label{sec:software}
 
-\begin{figure*}[b]
+\begin{figure*}[t]
 \centering
  \includegraphics[width=140mm]{software_framework}
 \caption{General PMT testing framework}
@@ -439,7 +439,7 @@ implementation of test programs
 calibration logic
 test procedure summary
 
-\subsection{Testing Result of Relative Gain}
+\subsection{Testing of Gain of Dynode 8}
 \label{sec:psd_gain}
 
 \begin{figure}[h!]
@@ -449,42 +449,50 @@ test procedure summary
 \label{fig:gainVSvoltage}
 \end{figure} 
 
-\begin{figure}[h!]
+\begin{figure*}
  \centering
- \includegraphics[width=90mm]{GainDist}
+ \includegraphics[width=140mm]{GainDist_Correlation}
 \caption{Relative Gain Distribution(Normalized to AA2483)}
 \label{fig:gain_dist}
-\end{figure} 
+\end{figure*} 
 
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{correlation}
 \caption{Correlation between the parameters given by Hamamastu and the gain tested in this paper}
-\label{fig:correl_abVSgain}
+\label{fig:gain_correlation}
 \end{figure} 
 
-By recording the reponse of PMT at the same light intensity, the relative gain of all tubes can be measured.
-This method is more efficient than the absolute measurement of gain using single photon electron spectrum.
-However, two additional corrections are needed to get an accurate result as follows: 
+The gain of dynode 8 is measured by recording the response of PMT at a fixed light source setting. 
+This is a relative method and the result depends on the light intensity:
 \begin{equation}
- G_{relative}=\frac{A_{mean}}{K_{runid} T_{chid}}
+ G_{relative} = L_i \times G(V) = L_i k V^\beta
+\end{equation}
+where $G(V)$ is the absolute gain of PMT and $L_i$ is the light intensity used.
+$G_{relative}$ is a direct reflection of $G(V)$ if the inconsistency of light intensity can be eliminated.
+Two corrections are made to accomplish this goal, as follows: 
+\begin{equation}
+ G_{relative} = \frac{A_{mean}}{K_{runid} T_{chid}}
 \end{equation} 
-where $A_{mean}$ is the mean value of the raw ADC spectrum at the specified light intensity, $K_runid$ is the light source  
-$K_{runid}$ can be calculated using the two reference PMTs described in Sec.\ref{sec:description}.
-$T_{chid}$ is a fixed parameter, which has been calibrated in Sec.\ref{sec:fibre_bundle}.
+where $A_{mean}$ is the mean value of the raw ADC spectrum at the specified light intensity,
+$K_{runid}$ is the light source fluctuation between different test runs and $T_{chid}$ is the light transmition difference among testing channels.
+$K_{runid}$ can be calculated at each test run using the two reference PMTs described in Sec.\ref{sec:description}.
+$T_{chid}$ mainly comes from the fibres and is a fixed parameter, which has been measured accurately before(Sec.\ref{sec:fibre_bundle}).
+These corrections are made for all testing results.
 
-\subsection{Testing Result of the Ratio between Dynode8 and Dynode5}
+5 light source settings, with a maximum intesity difference of about 2 times, have been used for gain measurement.
+The results from different light intensities are cross checked and they are consistent with each other.
+Distribution of the relative gain at 850V are shown in (a) of Fig.\ref{fig:gain_dist} and the matching between two light intensities are shown in (b).
+7 voltage steps(from 700V to 1000V with a 50V step) are scanned to measure the gain variation as a function of supply voltage.
+The results are then fitted using power law function,as shown in Fig.\ref{fig:gainVSvoltage}.
+
+Based on the fitting result,the gain at the Hamamastu equivalent voltage is calculated for comparison with the parameters provided by Hamamastu.
+Hamamastu equivalent voltage is the voltage that should be applied to the PSD voltage divider so that the same value on dynode 8 can be achieved as that used by Hamamastu for PMT testing.
+Linear correlation between the calculated gain and the anode blue sensitivity index has been observed(Fig.\ref{fig:gain_correlation}).
+This is a demonstration of the validity of our testing method.
+
+\subsection{Testing of the Ratio between Dynode8 and Dynode5}
 \label{sec:psd_dy58}
-
-The ratio between dynode8 and dynode5 is measured by varying the light intensity in a large range until saturation of the dynode 8 is observed(see Fig\ref{fig:dy58_example}).
-The same procedure is repeated at 7 voltage steps(700V to 1000V with a 50V step) to get the dependency on voltage.
-As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.\ref{fig:dy58_example}.
-The dy8/dy5 ratio can then be calculated at any voltage value based on the fitting result.
-As an example, the distribution of dy8/dy5 ratios at the Hamamastu equivalent voltage is shown in Fig.\ref{fig:dy58_dist}.
-
-Matching between the result measured using the test bench in this paper and the result measured from comsic ray after coupling to the scintillator has been checked for a small sample of tubes.
-As shown in Fig.\ref{fig:dy58_ledvscm}, a small shift of the mean value exists and the distribution of cosmic ray test is narrower than that of LED test. 
-This effect may be attributed to the fact that in cosmic ray test the result is an average of the response in the whole cathode surface, while in LED test the result is the reponse at the center of the cathode surface with a spot of \SI{1}{\milli\meter}.
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{dy58_example}
@@ -499,14 +507,25 @@ This effect may be attributed to the fact that in cosmic ray test the result is 
 \label{fig:dy58_dist}
 \end{figure} 
 
-\begin{figure*}[t]
+\begin{figure*}[b]
  \centering
  \includegraphics[width=140mm]{dy58_ledvscm}
 \caption{Comparison of the dy8/dy5 measured from LED and from cosmic ray.}
 \label{fig:dy58_ledvscm}
 \end{figure*} 
 
-\subsection{Testing Result of Cathode Scan}
+The ratio between dynode8 and dynode5 is measured by varying the light intensity in a large range until saturation of the dynode 8 is observed(see Fig\ref{fig:dy58_example}).
+The same procedure is repeated at 7 voltage steps(700V to 1000V with a 50V step) to get the dependency on voltage.
+As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.\ref{fig:dy58_example}.
+The dy8/dy5 ratio can then be calculated at any voltage value based on the fitting result.
+As an example, the distribution of dy8/dy5 ratios at the Hamamastu equivalent voltage is shown in Fig.\ref{fig:dy58_dist}.
+
+Matching between the result measured using the test bench in this paper and the result measured from comsic ray after coupling to the scintillator has been checked for a small sample of tubes.
+As shown in Fig.\ref{fig:dy58_ledvscm}, a small shift of the mean value exists and the distribution of cosmic ray test is narrower than that of LED test. 
+This effect may be attributed to the fact that in cosmic ray test the result is an average of the response in the whole cathode surface, while in LED test the result is the reponse at the center of the cathode surface with a spot of \SI{1}{\milli\meter}.
+
+
+\subsection{Cathode Uniformity of R4443 Mod2}
 \label{sec:psd_cathodescan}
 
 \begin{figure}[h!]
