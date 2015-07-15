@@ -213,7 +213,7 @@ The motorized and fixed stages are the main body of the test bench.
 All other objects inside the light-tight box will be mounted on the top of them.
 They are arranged face to face with each other and are both covered with an optical breadboard of an area $1560mm\times250mm$, as shown in Fig.\ref{fig:stages}.
 The optical breadboards are made of \SI{2.5}{cm} thick stainless steel, which provides substantial resistance to deformation in this application.
-The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations, which not only increase efficiency but also provide extra flexibility in testing configuration.
+The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations, which not only increase efficiency but also provide extra flexibility in testing configuration setup.
 In particular, customized fixtures for fibres and tubes have been designed for accurate poistioning.
 
 \begin{figure}[h!]
@@ -270,7 +270,7 @@ This is a critical feature for a test bench with an objective of versatiltiy, as
 AFG3252 also has two analog outputs which can be synchronized together.
 Thus it be used as a trigger generator at the same time it driving the LED, which will symplify the DAQ configuration in most use cases. 
 All these features make it an effective replacement of a dedicated LED driver. 
-After all, a stability better than \SI{0.5}{\percent} has been achieved after light intensity calibration, the details of which will be given in Sec.\ref{sec:performance}.
+After all, a stability better than \SI{0.5}{\percent} has been achieved after light intensity correction, the details of which will be given in Sec.\ref{sec:performance}.
 
 \begin{figure}[h]
  \centering
@@ -342,7 +342,7 @@ After coupling to the integrating sphere, the light output of each fibre is meas
 As the un-uniformity of the light source(see Sec.\ref{sec:light_source}) is much less than the mesurement result, the result is a direct reflection of the transmition difference among the fibres.
 Plus, the result also shows no dependency on the light intesity used(see Fig.\ref{fig:fibre_diff}). 
 This is within expectation, because transmition coefficient is an intrinsic characteristic of the fibre itself.
-The transmition difference got here will be used for light intensity correction in the relative gain measurement,see Sec.\ref{sec:psd_gain}.
+The transmition difference got here will be used later in the relative gain measurement,see Sec.\ref{sec:psd_gain}.
 %%The testing configuration includes two R4443 Mode PMTs, one for light source monitoring and the other one for fibre testing.
 %%As stable fixture for the tubes and fibres are utilitized, the major uncertainty comes from the coupling distance between the fibre and the PMT in the longitudinal direction.
 
@@ -376,70 +376,41 @@ This feature simplifies our implementation of the test bench as a versatile equi
 \label{sec:software}
 
 The software system is a critical part of the test bench.
-It is developped under Windows and written in C++.
-To facilitate maintainence and future upgrade,it is groupped into three hierarchies as follows:
+It is developped under Windows in C++ and divided into three hierarchies as follows:
 \begin{enumerate}
  \item \textit{Device abstraction}, which not only serves as an interface to the underlying hardwares, but also handles the abstraction of different types of devices. 
+ %which serves as an interface to the underlying hardwares.
  \item \textit{Framework libraries}, which defines a general testing pecedure and provides utility classes for configuration and management.
  \item \textit{User inerface}, which provides command line based or graphical executables for user interaction. 
 \end{enumerate}
 
-Designed as a versatile equipment, different hardware modules may be used in the future.
-Instead of developping a dedicated program each time a hardware interface changes, an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details. 
-Abstract classes are defined for four frequently-used devices in PMT testing, i.e. motion controller, pulse generator, DAQ system and HV supplier, as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
-Common operations of each type of device are extracted and encapsulated in the corresponding abstract class, which are the only interface to higher level software components.
-Concrete classes inheritted from the same abstract class represent different devices of the same type.
-Currently, device classes for MPC07SP motion controller, AFG3252 pulse generator, SY1527LC power supply system and PSD DAQ board for ground test are implemented.
-DAQ device class for the CAMAC system based on CC-USB controller is also implemented and thoroughly tested.
+%Designed as a versatile equipment, different hardware modules may be used in the future.
+Instead of developping a dedicated program each time a hardware changes, an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details. 
+Abstract classes are defined for four frequently used devices in the test bench, i.e. motion controller, pulse generator, DAQ system and HV supplier, as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
+%Common operations of each type of device are extracted as the interface of the corresponding abstract class.
+New device only needs to inherit from its corresponding abstract class and implement its interface methods and then registered in the singlton class \textit{PTDeviceManager}, leaving all other part of the software unchanged.
+Currently, concrete device classes for the hardware described in Sec.\ref{sec:description} have all been implemented and fully tested.
+%Used concrete device class shall be registered in the singlton class \textit{PTDeviceManager} and retrieved from it in other part of the software. 
 
-Built upon the abstract device inerface, a general testing framework is defined.
-As a first step, all used concrete device classes shall be registered in the singlton class \textit{PTDeviceManager}.
-Devices are then retrieved from \textit{PTDeviceManager} during test, thus making the rest of the framework independent from specific hardwares.
-The testing procedures are then grouped as shown in Fig.\ref{fig:software_framework}.
-A \textit{PTVProgram} represents the measurement procedure for a specific characteristic of PMT, such as cathode uniformity, gain, dark count rate, and so on.
-\textit{PTVTest} is a subunit of \textit{PTVProgram}, which encapsulates the real testing operations performed under a specific condition.
-A typical implementation for \textit{PTVTest} using fake code is presented in the third column of Fig.\ref{fig:software_framework}.
+Built upon the abstract device inerface, a general testing framework is defined as shown in Fig.\ref{fig:software_framework}.
+%As a first step, all used concrete device classes shall be registered in the singlton class \textit{PTDeviceManager}.
+%Devices are then retrieved from \textit{PTDeviceManager} in all other part of the software.
+%Testing procedures are grouped as shown in Fig.\ref{fig:software_framework}.
+A \textit{PTVProgram} represents the measurement for a specific characteristic of PMT, such as cathode uniformity, gain and so on.
+\textit{PTVTest} is a subunit of \textit{PTVProgram}, which encapsulates the real device operations performed under a specific condition.
+%As an example, typical implementation for \textit{PTVTest} using fake code is presented in the third column of Fig.\ref{fig:software_framework}.
 Usually, a \textit{PTVProgram} consists of a series of \textit{PTVTest}s, which are invoked sequentially in a test loop.
-For example, for cathode uniformity test, the stepping motor will move to a series of positions and the PMT response will be recorded by the DAQ system at each position.
+For example, in cathode uniformity test, the stepping motor will move to a series of positions and the PMT response will be recorded by the DAQ system at each position.
 Here, device operations performed at each position constitute a \textit{PTVTest} and tests at all positions constitute a \textit{PTVProgram}.
-Additional actions may be added in the \textit{PreTest} method and \textit{PostTest} method of \textit{PTVProgram}, which will be invoked before and after the test loop repectively.
+Additional actions may be added in the \textit{PreTest} and \textit{PostTest} methods of \textit{PTVProgram}, which will be invoked before and after the test loop repectively.
 Typically, PMT warming shall be performed in \textit{PreTest} and analysis code shall be added in \textit{PostTest}.
-\textit{PTVProgram}s of different testing objectives will finally be chained together to constitute a complete characterization of PMT.
+\textit{PTVProgram}s of various testing objectives will finally be chained together to constitute a complete characterization of PMT.
 
 Finally, a light-weight user interface based on PDCurses~\cite{pdcurses} has been developped.
-This program features in testing control, status monitoring and logging.
+This program features in device control, status monitoring and information logging.
 Thanks to the abstraction described above, the architecture of the program is rather independent of the specific hardware used and testing program performed.
-A decoding function from binary file to root file~\cite{root} is also incorporated into it.
-However, detailed analysis of the testing data is not part of the program as this is rather project-specific and is not within the scope of the program's function.
-It is left to the user of the test bench to develop an independent program to do this job.
-
-\begin{comment}
-\section{Characteristics of the test bench}
-\label{sec:char_testbench}
-
-\subsection{Spatial Uniformity of Integrating Sphere}
-\label{sec:spatialuniformity_insph}
-
-Before coupling to the fibre bundle,the spatial uniformity of the light source(LED + Integrating Sphere) is investigated. 
-A single optical fibre of the same type as the fibre bundle in the test bench is utilitized.
-One end of the fibre is fixed on a three-dimensional alignment stage and used to scan the output port horizontally and vertically in a \SI{1}{\milli\meter} step.
-The other end is readout by a PMT of R4443-Mod2 and processed by the electronics of PSD groud test.
-The LED is driven by a \SI{40}{\nano\second} width pulse of fixed amplitude at \SI{500}{\Hz}.
-%The same LED signal is used during the scanning.
-
-The result(Fig.~\ref{fig:uniformity_integratingsphere}) shows that the integrating sphere works as expected and the light intensity is almost the same(within \textpm0.5\%) over the entire surface of the output port.   
-
-
-\subsection{Transmission Uniformity of Fibre-bundle}
-\label{sec:transuniformity_fibre}
-
-The fibre bundle is then coupled to the integrating sphere and the output intensity of each fibre at the other end is tested.
-As the test 
-
-\subsection{Long-term Stability}
-\label{sec:longterm_stability}
-
-\end{comment}
+A decoding function from binary file to root file~\cite{root} is also incorporated into it for online monitoring.
+However, more detailed analysis are considered project specific and not included in the program. 
 
 \section{Application in the PMT testing for PSD of DAMPE}
 \label{sec:application}
@@ -449,8 +420,8 @@ Both dynode5 and dynode8 of R4443 Mod2 are readout by a customized voltage divid
 Signals are then processed by a highly-sensitive ASIC chip(VA160~\cite{va160}) with a linear range of \SIrange{0}{12}{\pico\coulomb} and digitized by an ADC with 14~bits resolution.
 Both the gain of dynode8 and the ratio between dynode8 and dynode5 need to be ajusted carefully to accommodate the input range of VA160 and also to keep an uniform response across the whole detector.
 
-General purpose QDC of CAMAC or VME features a range of several hundreds \SI{}{\pico\coulomb} and thus not suitable for PMT characterization in this application.
-Instead, the groud test DAQ of DAMPE are utilitized, which is based on the same design with the flight model except that commertial grade components are used.
+General purpose QDC of CAMAC or VME features an input range of several hundreds \SI{}{\pico\coulomb} and thus not suitable for PMT characterization in this application.
+Instead, the groud test electronics of DAMPE are utilitized, which is based on the same design as the flight model except that commertial grade components are used.
 A dedicated \textit{PTVDaq} has been implemented for this system.
 
 About 20 tubes were tested in a single test run, as shown in Fig.\ref{fig:integrated_testbench}.
@@ -633,7 +604,6 @@ Results from all voltage steps are scaled to their respective mean value of all 
 \section*{Acknowledgement}
 
 This work was supported by the Strategic Priority Research Program on Space Science of the Chinese Academy of Science, Grant No. XDA04040202- 3. 
-The authors wish to thank all the people from DAMPE collaboration who helped make this work possible.
 %%%%%%%%%%%%%%%%    Appendix     %%%%%%%%%%%%%%%%%%%%%%%
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
