@@ -74,8 +74,9 @@
 \begin{abstract}
 
 A versatile test bench, dedicated for massive PMT characterization, is developped at the Institute of Modern Physics, Chinese Academy of Sciences.
-The test bench is suitable for reuse in different projects and incorporates the cathode surface scanning as its intrinsic capability.
-Initial application of the test bench in the Plastic Scintillator Strip Detector of DArk Matter Paricle Explorer is successfull and 570 Hamamastu R4443 Mod2 tubes have been charaterized.
+The test bench is suitable for reuse in different applications and incorporates the cathode surface scanning as its intrinsic capability.
+Initial application of the test bench in the Plastic Scintillator Strip Detector of DArk Matter Paricle Explorer is successfull and a total of 570 Hamamastu R4443 Mod2 tubes have been charaterized.
+Implementation details of the test bench is described in this article.
 Major results and performance of the test bench during this application are also reported. 
 \end{abstract}
 
@@ -155,10 +156,10 @@ Detailed description of its implementation is presented in Sec.\ref{sec:descript
 The application of the test bench in the PMT testing for the Plastic Scintillator Strip Detector(PSD) of DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe} is reported in Sec.\ref{sec:application}.
 DAMPE is a statellite-borne  exeperiment, which imposes severe testing procedure for the PMT used.
 PSD is a large-area two-layer plastic scintillator array which aims for  e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the energy deposited.
-It requires a \SI{25}{\percent} energy uniformity across all the detection units.
-Totally, 570 PMTs are charaterized and 194 of them are selected for production and qualification.
+PSD requires a \SI{25}{\percent} energy uniformity across all the detection units.
+%%Totally, 570 PMTs are charaterized and 194 of them are selected for production and qualification.
 This application is successfull and has verified the efficiency and stability of the test bench.
-The performance of the test bench has been extracted from these tests and is discussed in Sec.\ref{sec:performance}.
+The performance of the test bench has been extracted from these tests and will be discussed in Sec.\ref{sec:performance}.
 
 \section{Considerations in the design of the test bench}
 \label{sec:design_consideration}
@@ -170,7 +171,7 @@ The performance of the test bench has been extracted from these tests and is dis
 \label{fig:testbench_overveiw}
 \end{figure*}
 
-The major design considerations of the test bench summarized is as follows:
+The major design considerations of the test bench is summarized as follows:
 \begin{itemize}
  \item \textit{Large capacity}: This is the primary driving force for developping a test bench dedicated for PMT characterization.
  Testing multiple tubes simultaneously can increase the efficiency and save project time tremendously.
@@ -182,7 +183,7 @@ The major design considerations of the test bench summarized is as follows:
  \item \textit{Versatility}: As indicated in Sec.\ref{sec:introduction}, the test bench is not designed for single use.
  %It will be utilitized in different experiments with different testing requirements.
  T\-h\-u\-s potential use cases should be considered and appropriate hardwares should be set up in the first place.
- In particular, positon scanning capability is desirable for characterization of large area PMTs. 
+ In particular, cathode surface scanning capability is desirable in use cases like PET where several scintillators are coupled to a single PMT. 
  \item \textit{Flexibility}: As a by product of versatiltiy, flexibility is needed both in terms of hardware and software.
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
@@ -289,7 +290,7 @@ After all, a stability better than \SI{0.5}{\percent} has been achieved after li
  \centering
  \includegraphics[width=140mm]{integration1_crop}
 \caption{The integrated testbench,with tubes under test mounted.}
-\label{fig:testbench_integrated}
+\label{fig:integrated_testbench}
 \end{figure*}
 
 \begin{figure*}
@@ -443,26 +444,21 @@ As the test
 \section{Application in the PMT testing for PSD of DAMPE}
 \label{sec:application}
 
-PSD adopts Hamamastu R4443 Mod2 for scintillation light readout. 
-R4443 Mod2 is a \SI{14.5}{\milli\meter} head-on type PMT with 10 tages dynode structure.
-It has a photocathode with minimum effective area of \SI{10}{\milli\meter}.
-To cover the large dynamic range needed, a special voltage divider is implemented to readout the signal from dynode 5 and dynode 8.
-Both signals connected to VA32 with the range of 0-14~pC.
-The signal from R4443 is so small that general purpose QDC of CAMAC or VME is not suitable for the characterization of R4443 Mod2.
-Instead, the groud test electronics are utilitized in this application.
-The DAQ system is based on USB and serial port and a special \textit{PTVDaq} is implemented for this interface.
+PSD adopts Hamamastu R4443 Mod2 for scintillation light detection. 
+Both dynode5 and dynode8 of R4443 Mod2 are readout by a customized voltage divider to cover the large dynamic range required by PSD.
+Signals are then processed by a highly-sensitive ASIC chip(VA160~\cite{va160}) with a linear range of \SIrange{0}{12}{\pico\coulomb} and digitized by an ADC with 14~bits resolution.
+Both the gain of dynode8 and the ratio between dynode8 and dynode5 need to be ajusted carefully to accommodate the input range of VA160 and also to keep an uniform response across the whole detector.
 
+General purpose QDC of CAMAC or VME features a range of several hundreds \SI{}{\pico\coulomb} and thus not suitable for PMT characterization in this application.
+Instead, the groud test DAQ of DAMPE are utilitized, which is based on the same design with the flight model except that commertial grade components are used.
+A dedicated \textit{PTVDaq} has been implemented for this system.
 
-About 20 tubes were tested in a single run, which will last about 4 hours including 2 hour's PMT warming time before testing.
-28 test runs are performed in about one month.
-Totally, 570 rare tubes are charaterized and 196 of them are selected for production and qualification.
+About 20 tubes were tested in a single test run, as shown in Fig.\ref{fig:integrated_testbench}.
+A typical test run lasts about 5 hours including 2 hour's PMT warming time before test.
+Totally, 28 test runs are performed in a period of about one month.
+570 rare R4443 Mod2 tubes are charaterized and 196 of them are selected for production and qualification.
 Selection of tubes based the testing data is not the object of this article.
 Here, only the major results are presented with a focus on the demonstration of the validity of the test bench. 
-
-large dynamic range, dy58 requirements
-electronics logic
-implementation of test programs
-test procedure summary
 
 \subsection{Testing of Gain of Dynode 8}
 \label{sec:psd_gain}
@@ -560,7 +556,8 @@ At each position, the relative gain is measured according to the method describe
 
 Cathode uniformity of 20 tubes have been measured in a single test run using this \textit{PTVProgram}.
 A typical distribution of cathode uniformity is shown in Fig.\ref{fig:cathode_uniformity}.
-The results for all 20 tubes are summarized and it is found that in the central \SI{9}{\milli\meter} of the photocathode, about \SI{75}{\percent} of the testing data are within \textpm\SI{10}{\percent} range around the average value.
+R4443 Mod2 has a photocathode with a minimum effective area of about \SI{10}{\milli\meter}.
+The results of all 20 tubes are summarized and it is found that in the central \SI{9}{\milli\meter} of the photocathode, about \SI{75}{\percent} of the testing data are within \textpm\SI{10}{\percent} range around each tube's average value.
 
 \section{Performance of the test bench}
 \label{sec:performance}
