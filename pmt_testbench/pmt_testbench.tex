@@ -440,7 +440,16 @@ As the test
 PSD adopts Hamamastu R4443 Mod2 for scintillation light readout. 
 R4443 Mod2 is a \SI{14.5}{\milli\meter} head-on type PMT with 10 tages dynode structure.
 It has a photocathode with minimum effective area of \SI{10}{\milli\meter}.
+To cover the large dynamic range needed, a special voltage divider is implemented to readout the signal from dynode 5 and dynode 8.
+Both signals connected to VA32 with the range of 0-14~pC.
+The signal from R4443 is so small that general purpose QDC of CAMAC or VME is not suitable for the characterization of R4443 Mod2.
+Instead, the groud test electronics are utilitized in this application.
+The DAQ system is based on USB and serial port and a special \textit{PTVDaq} is implemented for this interface.
 
+
+About 20 tubes were tested in a single run, which will last about 4 hours including 2 hour's PMT warming time before testing.
+28 test runs are performed in about one month.
+Totally, 570 rare tubes are charaterized and 196 of them are selected for production and qualification.
 Selection of tubes based the testing data is not the object of this article.
 Here, only the major results are presented with a focus on the demonstration of the validity of the test bench. 
 
@@ -477,9 +486,9 @@ Two corrections are made to accomplish this goal, as follows:
 \begin{equation}
  G_{relative} = \frac{A_{mean}}{K_{runid} T_{chid}}
 \end{equation} 
-where $A_{mean}$ is the mean value of the raw ADC spectrum at the specified light intensity,
-$K_{runid}$ is the light source fluctuation between different test runs and $T_{chid}$ is the light transmition difference among testing channels.
-$K_{runid}$ can be calculated at each test run using the two reference PMTs described in Sec.\ref{sec:description}.
+where $A_{mean}$ is the mean value of the raw ADC spectrum at the specified light source setting,
+$K_{runid}$ is the light intensity fluctuation of LED between different test runs and $T_{chid}$ is the light transmition difference among testing channels.
+$K_{runid}$ can be calculated at each test run using the fixed reference PMT.
 $T_{chid}$ mainly comes from the fibres and is a fixed parameter, which has been measured accurately before(Sec.\ref{sec:fibre_bundle}).
 These corrections are made for all testing results.
 
@@ -547,37 +556,72 @@ Cathode uniformity of 20 tubes have been measured in a single test run using thi
 A typical distribution of cathode uniformity is shown in Fig.\ref{fig:cathode_uniformity}.
 The results for all 20 tubes are summarized and it is found that in the central \SI{9}{\milli\meter} of the photocathode, about \SI{75}{\percent} of the testing data are within \textpm\SI{10}{\percent} range around the average value.
 
-\section{Performance of the test bench during test}
+\section{Performance of the test bench}
 \label{sec:performance}
+
+Performance of the test bench is extracted from the reference PMTs using the data obtained in the PMT characterization for PSD.
+
+As a first step, stability of the reference PMT configuration is checked.
+If stable, the response to various light intensities of the two reference PMTs shall be linearly correlated.
+An example is shown in Fig.\ref{fig:refgain_relation}, where the data points can be fitted quite well with linear function.
+The slope of the fitting function does not depends on the light intensities used:
+\begin{equation}
+ M = \frac{G_{ref1} T_{ref1}}{G_{ref2} T_{ref2}}
+\end{equation}
+where $G_{ref}$ is the absolute gain of each reference PMT and $T_{ref}$ is the transmition difference of fibres between reference channels.
+As transmition difference is a fixed parameter(the good linearity of the fitting is an indication of that), $M$ is only related to the gain difference between the reference PMTs.
+$M$ values are calculated for all test runs and the variance of it is found to be \SI{0.48}{\percent}.
+This result verifies the high stability of the reference PMTs.
+
+By investigating the response of the reference PMT to a fixed light source setting, a maximum variation of \SI{4}{\percent} in the light intensity of LED is observed during a period of about one month.
+Light intensity fluctuation can be corrected using the method described in \ref{sec:psd_gain}.
+As two reference PMTs exists, this method can be validated by using one of them for light intensity correction and then checking the relative gain of the other. 
+As shown in Fig.\ref{fig:led_stability}, after correction the stability of the light source is controlled within \textpm\SI{0.5}{\percent}.
+
+Reference PMTs undergo the same testing procedures as other tubes under test.
+Thus, spread of the distribution of the parameters of reference PMT is an indication of the uncertainty of the testing method.
+As an example, distribution of dynode8/dynode5 of the reference PMTs is shown in Fig.\ref{fig:dy58_stabiltiy}, where the results from different voltage steps are scaled to their respective mean value of all test runs.
+The variance is \SI{1.59}{\percent}, which is adoptted as the testing uncertainty of the dynode8/dynode5 measurement.
+%%As an example, dynode8/dynode5 of the reference PMTs at a fixed voltage are first scaled to their mean value of all test runs.
+%%Then, scaled value at all voltage steps are filled into the histogram as shown in Fig.\ref{fig:dy58_stabiltiy}.
+%%The variance of the distribution is \SI{1.59}{\percent}, which is adoptted as the testing uncertainty of the dynode8/dynode5 measurement.
+In the same way, the uncertainty in the measurement of relative gain is estimated to be \SI{0.53}{\percent}. 
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{RelativeGainRef}
+\caption{Example of the correlation between reference PMTs at various light intensities at 1000V.}
+\label{fig:refgain_relation}
+\end{figure} 
 
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{led_stability}
-\caption{Stability of the Light Source}
+\caption{Stability of the light source monitored by reference PMT2.
+The data corresponds to a period of about one month and is all scaled to the first test run.
+Red line: mean ADC counts response to the same light source setting before light intensity correction.
+Blue line: relative gain measured using reference PMT1 for light intensity correction.}
 \label{fig:led_stability}
 \end{figure} 
 
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{RefDy58Dist}
-\caption{Stability of Dy8/Dy5 Measurement}
+\caption{Distribution of the dynode8/dynode5 ratio of the reference PMTs measured by the test bench.
+Results from all voltage steps are scaled to their respective mean value of all test runs.}
 \label{fig:dy58_stabiltiy}
 \end{figure} 
 
-\begin{figure}[h!]
- \centering
- \includegraphics[width=90mm]{RelativeGainRef}
-\caption{RelativeGainRef}
-\label{fig:refgain_relation}
-\end{figure} 
 
+
+\begin{comment}
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{RelativeGainRefDist}
 \caption{Stability of Gain Measurement}
 \label{fig:gain_stability}
 \end{figure} 
-
+\end{comment}
 %%%%%%%%%%%%%%%%  Conclustion   %%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 \label{sec:conclustions}
@@ -585,6 +629,8 @@ The results for all 20 tubes are summarized and it is found that in the central 
 %%%%%%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgement}
 
+This work was supported by the Strategic Priority Research Program on Space Science of the Chinese Academy of Science, Grant No. XDA04040202- 3. 
+The authors wish to thank all the people from DAMPE collaboration who helped make this work possible.
 %%%%%%%%%%%%%%%%    Appendix     %%%%%%%%%%%%%%%%%%%%%%%
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
