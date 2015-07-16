@@ -32,7 +32,7 @@
 
 %% package for large picture in two-colume
 \usepackage{dblfloatfix}
-%\usepackage{fixltx2e}
+\usepackage{fixltx2e}
 
 %% only jpg pdf eps are allowed, tiff format are not allowed in latex
 %% eps in principle can't be compiled by pdflatex, pdf not compiled by latex, but Kile can do some intermedate conversion to allow this happen.
@@ -147,7 +147,7 @@ The performance of the test bench has been extracted from these tests and will b
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{stage1_crop}
+ \includegraphics[width=80mm]{stage1_crop}
 \caption{Motorized and fixed stages before assembly.
 Fixtures for integrationg sphere, fibres and PMTs are mounted on top of them.}
 \label{fig:stages}
@@ -198,14 +198,19 @@ The optical breadboards are made of \SI{2.5}{cm} thick stainless steel, which pr
 The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations, which not only increase efficiency but also provide extra flexibility in testing configuration setup.
 In particular, customized fixtures for fibres and tubes have been designed for accurate poistioning.
 
-
-
-\begin{figure*}
+\begin{figure}
  \centering
- \includegraphics[width=90mm]{light_source1_crop}
-\caption{Light source and its distribution system}
+ \includegraphics[width=80mm]{fibre_led_insphere_crop}
+\caption{Components of the light distribution system}
+\label{fig:fibre_led_sphere}
+\end{figure} 
+
+\begin{figure}
+ \centering
+ \includegraphics[width=80mm]{light_source1_crop}
+\caption{Integration of the light distribution system as a whole}
 \label{fig:light_source}
-\end{figure*} 
+\end{figure} 
 
 The load capacity of the motorized stage is \SI{30}{\kilo\gram}, which is sufficient for all use cases.
 It is driven by three stepping motors with a minimum step of \SI{1.56}{\micro\meter}.
@@ -228,7 +233,7 @@ An uniformity within \textpm\SI{0.5}{\percent} has been reached, which makes the
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{uniformity_integratingsphere}
+ \includegraphics[width=80mm]{uniformity_integratingsphere}
 \caption{Spatial uniformity of the integrating sphere.
 The output port has a diameter of \SI{14}{\milli\meter}.
 Central \SI{12}{\milli\meter} is scanned both in the horizontal and verical direction with a step of \SI{1}{\milli\meter}}
@@ -237,7 +242,7 @@ Central \SI{12}{\milli\meter} is scanned both in the horizontal and verical dire
   
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{intesityVSvoltage}
+ \includegraphics[width=80mm]{intesityVSvoltage}
 \caption{Light intensity as a function of AFG3252 pulse voltage}
 \label{fig:afg3252_intensityVSvoltage}
 \end{figure} 
@@ -250,34 +255,6 @@ AFG3252 also has two analog outputs which can be synchronized together.
 Thus it be used as a trigger generator at the same time it driving the LED, which will symplify the DAQ configuration in most use cases. 
 All these features make it an effective replacement of a dedicated LED driver. 
 After all, a stability better than \SI{0.5}{\percent} has been achieved after light intensity correction, the details of which will be given in Sec.\ref{sec:performance}.
-
-\begin{figure}[h]
- \centering
- \includegraphics[width=90mm]{fibre_diff}
-\caption{Transmission difference of the fibres}
-\label{fig:fibre_diff}
-\end{figure} 
-
-\begin{figure*}
-\centering
- \includegraphics[width=140mm]{software_framework}
-\caption{General PMT testing framework}
-\label{fig:software_framework}
-\end{figure*}
-
-\begin{figure*}[t]
- \centering
- \includegraphics[width=140mm]{integration1_crop}
-\caption{The integrated testbench,with tubes under test mounted.}
-\label{fig:integrated_testbench}
-\end{figure*}
-
-\begin{figure*}
- \centering
- \includegraphics[width=140mm]{GainDist_Correlation}
-\caption{Relative Gain Distribution(Normalized to AA2483)}
-\label{fig:gain_dist}
-\end{figure*}
 
 \begin{table}[h!]
 \caption{Summary of AFG3252 Pulse Mode Characteristics}
@@ -324,7 +301,19 @@ This is within expectation, because transmition coefficient is an intrinsic char
 The transmition difference got here will be used later in the relative gain measurement,see Sec.\ref{sec:psd_gain}.
 %%The testing configuration includes two R4443 Mode PMTs, one for light source monitoring and the other one for fibre testing.
 %%As stable fixture for the tubes and fibres are utilitized, the major uncertainty comes from the coupling distance between the fibre and the PMT in the longitudinal direction.
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=80mm]{fibre_diff}
+\caption{Transmission difference of the fibres}
+\label{fig:fibre_diff}
+\end{figure} 
 
+\begin{figure*}
+\centering
+ \includegraphics[width=120mm]{software_framework}
+\caption{General PMT testing framework}
+\label{fig:software_framework}
+\end{figure*}
 
 \subsection{Electronics and High Voltage Supply}
 \label{sec:electronics}
@@ -353,6 +342,20 @@ This feature simplifies our implementation of the test bench as a versatile equi
 
 \subsection{Software}
 \label{sec:software}
+
+\begin{figure*}[t]
+ \centering
+ \includegraphics[width=120mm]{integration3}
+\caption{The integrated testbench,with tubes under test mounted.}
+\label{fig:integrated_testbench}
+\end{figure*}
+
+\begin{figure*}
+ \centering
+ \includegraphics[width=140mm]{GainDist_Correlation}
+\caption{Relative Gain Distribution(Normalized to AA2483)}
+\label{fig:gain_dist}
+\end{figure*}
 
 The software system is a critical part of the test bench.
 It is developped under Windows in C++ and divided into three hierarchies as follows:
@@ -415,14 +418,14 @@ Here, only the major results are presented with a focus on the demonstration of 
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{gainVSvoltage}
+ \includegraphics[width=80mm]{gainVSvoltage}
 \caption{Gain dependency on high voltage of two PMTs}
 \label{fig:gainVSvoltage}
 \end{figure} 
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{correlation}
+ \includegraphics[width=80mm]{correlation}
 \caption{Correlation between the parameters given by Hamamastu and the gain tested in this paper}
 \label{fig:gain_correlation}
 \end{figure} 
@@ -460,19 +463,19 @@ This is a demonstration of the validity of our testing method.
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=90mm]{dy58_example}
+ \includegraphics[width=80mm]{dy58_example}
 \caption{Example of the Dynode8/Dynode5}
 \label{fig:dy58_example}
 \end{figure} 
 
 \begin{figure}[h]
  \centering
- \includegraphics[width=90mm]{dy58_dist}
+ \includegraphics[width=80mm]{dy58_dist}
 \caption{Distribution of the Dynode8/Dynode5 at the voltage value equivalent to Hamamastu typical voltage}
 \label{fig:dy58_dist}
 \end{figure} 
 
-\begin{figure*}[]
+\begin{figure*}
  \centering
  \includegraphics[width=140mm]{dy58_ledvscm}
 \caption{Comparison of the dy8/dy5 measured from LED and from cosmic ray.}
@@ -495,7 +498,7 @@ This effect may be attributed to the fact that in cosmic ray test the result is 
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{cathode_uniformity}
+ \includegraphics[width=80mm]{cathode_uniformity}
 \caption{A typical cathode uniformity}
 \label{fig:cathode_uniformity}
 \end{figure} 
@@ -542,14 +545,14 @@ In the same way, the uncertainty in the measurement of relative gain is estimate
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{RelativeGainRef}
+ \includegraphics[width=80mm]{RelativeGainRef}
 \caption{Example of the correlation between reference PMTs at various light intensities at 1000V.}
 \label{fig:refgain_relation}
 \end{figure} 
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{led_stability}
+ \includegraphics[width=80mm]{led_stability}
 \caption{Stability of the light source monitored by reference PMT2.
 The data corresponds to a period of about one month and is all scaled to the first test run.
 Red line: mean ADC counts response to the same light source setting before light intensity correction.
@@ -559,7 +562,7 @@ Blue line: relative gain measured using reference PMT1 for light intensity corre
 
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{RefDy58Dist}
+ \includegraphics[width=80mm]{RefDy58Dist}
 \caption{Distribution of the dynode8/dynode5 ratio of the reference PMTs measured by the test bench.
 Results from all voltage steps are scaled to their respective mean value of all test runs.}
 \label{fig:dy58_stabiltiy}
@@ -570,7 +573,7 @@ Results from all voltage steps are scaled to their respective mean value of all 
 \begin{comment}
 \begin{figure}[h!]
  \centering
- \includegraphics[width=90mm]{RelativeGainRefDist}
+ \includegraphics[width=80mm]{RelativeGainRefDist}
 \caption{Stability of Gain Measurement}
 \label{fig:gain_stability}
 \end{figure} 
@@ -590,9 +593,9 @@ This work was supported by the Strategic Priority Research Program on Space Scie
 %%%%%%%%%%%%%%%%    Appendix     %%%%%%%%%%%%%%%%%%%%%%%
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
-\appendix
-\section{}
-\label{app:}
+%\appendix
+%\section{}
+%\label{app:}
 
 %%%%%%%%%%%%%%%%   Bibliography  %%%%%%%%%%%%%%%%%%%%%%%
 %% bibliography style
