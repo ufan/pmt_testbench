@@ -100,32 +100,6 @@ Photomultiplier
 \section{Introduction}
 \label{sec:introduction}
 
-\begin{comment}
-DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe} is a satellite-borne particle detector for dark matter search and cosmic ray study.
-It is designed to cover the energy range from 5~GeV to 10~TeV for electrons and photons with an energy resolution of 1\% at 800~GeV, from 100~GeV to 1~PeV for heavy ions with an energy resolution better than 40\% at 800~GeV.
-
-Plastic scintillator Strip Detector(PSD), which sits at the topmost of the satellite, is a key component of DAMPE detector.
-By measuring the energy deposit of particles pentrating through it, PSD serves as a anti-coincidence detector for e/$\gamma$ discrimination as well as a detector for charge measurement up to Z=20.
-PSD consists of 82 plastic scintillator strips(EJ-200~\cite{ej200}) of dimention $864mm\times28mm\times10mm$, each readout at both ends by a Hamamastu R4443-Mod2 photomultiplier tube.
-These strips are arranged into two orthogonally oriented layers, convering an effective area of $820mm\times820mm$.
-Each PMT is readout at both dynode 5 and dynode 8 with different gains to cover the large dynamic range from $\sim$0.5~MIPs to $\sim$700~MIPs.
-The readout signals are processed by a highly-sensitive ASIC chip(VA32) with the range of 0-14~pC, and then digitized by an ADC with 14~bits resolution.
-
-Unlike groud-based experiments, the power supply system of DAMPE payload can only provide discrete high voltage levels with an interval of 30~V.
-Furthermore, every 6 or 7 PMTs of PSD form a HV-group and share the same high voltage channel.
-In this case, the ususal method of fine-tuning individual PMT's high voltage to get optimal gain is not available.  
-The characteristics of PMTs in the same HV-group should have similar dependency on voltage.
-Thus a careful selection of the tubes is mandatory to get uniform energy response across the whole detector and optimal utilization of the mesuring range.
-For this selection, the gain of dynode 5 and dynode 8 as a function of supplying voltage needs to be measured precisely.  
-
-Considering the large number of tubes involved in the Selection phase and Qualification phase, a PMT test bench for bulk testing was designed and contructed to facilitate this work.
-500 bare R4443-Mod2 tubes were thoroughly tested and 200 of them were selected for production and qualification.
-Finally, 164 PMT modules with the optimal characteristics were installed.
-While mainly developped for the DAMPE-PSD project, this test bench has been designed to be as versatile as possible and can be upgaded seamlessly for future experiments.
-The detailed description of the test bench will be given in Sec.\ref{sec:description}.Some key characteristics of the test bench is summarized in Sec.\ref{sec:char_testbench}.
-The testing results of PSD PMTs and the corresponding selection procedure will be discussed in Sec.\ref{sec:pmt_test}.
-\end{comment}
-
 %%Photomultiplier tubes(PMTs) are widely used as photosensors in various fields, such as particle detectors in experimental physics and medical equipments in medical diagnosis.
 %%PMT features in high sensitivity, large gain and easy-operation, whic make it still popular about 80 years after its invention.
 Photomultiplier tubes(PMTs) are widely used as photosensors in particle detectors.
@@ -147,7 +121,7 @@ On the other hand, testing of PMTs is a commonly encountered procedure.
 Thus, it is desirable that the same test bench, with minimum configuration changes, can be reused in different applications. 
 
 In this paper, a versatile test bench of this kind is reported.
-The test bench is designed to be a standard laboratoy equipment for fast PMT characterization for several experiments prepared and planned at the Institute of Modern Physics, Chinese Academy of Sciences.
+The test bench is designed to be a standard laboratoy equipment for fast PMT characterization for several experiments prepared and planned at the Institute of Modern Physics(IMP), Chinese Academy of Sciences.
 To accommodate the various requirements of different experiments, the test bench has adoptted a modular design pattern both in the hardware and the associated software platform.
 This makes the migration from one testing configuration to another light-weight and time-saving.
 The design considerations of the bench are summarized in Sec.\ref{sec:design_consideration}.
@@ -167,9 +141,17 @@ The performance of the test bench has been extracted from these tests and will b
 \begin{figure*}
  \centering
  \includegraphics[width=160mm]{testbench_overview}
-\caption{Schematic diagram of the PMT test bench system.\textit{PTVStepper}, \textit{PTVPulser}, \textit{PTVDaq} and \textit{PTVHV} are abstract classes which separate the testing software from the hardware implementation details.}
+\caption{Schematic diagram of the PMT test bench system.}
 \label{fig:testbench_overveiw}
 \end{figure*}
+
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{stage1_crop}
+\caption{Motorized and fixed stages before assembly.
+Fixtures for integrationg sphere, fibres and PMTs are mounted on top of them.}
+\label{fig:stages}
+\end{figure} 
 
 The major design considerations of the test bench is summarized as follows:
 \begin{itemize}
@@ -216,12 +198,7 @@ The optical breadboards are made of \SI{2.5}{cm} thick stainless steel, which pr
 The grid pattern of tapped holes on the surface facilitate mounting/unmounting operations, which not only increase efficiency but also provide extra flexibility in testing configuration setup.
 In particular, customized fixtures for fibres and tubes have been designed for accurate poistioning.
 
-\begin{figure}[h!]
- \centering
- \includegraphics[width=90mm]{stage1_crop}
-\caption{Motorized and fixed stages before assembly.}
-\label{fig:stages}
-\end{figure} 
+
 
 \begin{figure*}
  \centering
@@ -252,7 +229,9 @@ An uniformity within \textpm\SI{0.5}{\percent} has been reached, which makes the
 \begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{uniformity_integratingsphere}
-\caption{Spatial uniformity of the integrating sphere.}
+\caption{Spatial uniformity of the integrating sphere.
+The output port has a diameter of \SI{14}{\milli\meter}.
+Central \SI{12}{\milli\meter} is scanned both in the horizontal and verical direction with a step of \SI{1}{\milli\meter}}
 \label{fig:uniformity_integratingsphere}
 \end{figure} 
   
@@ -388,7 +367,7 @@ It is developped under Windows in C++ and divided into three hierarchies as foll
 Instead of developping a dedicated program each time a hardware changes, an abstraction of the devices is adoptted to separate the testing procedure from hardware implementation details. 
 Abstract classes are defined for four frequently used devices in the test bench, i.e. motion controller, pulse generator, DAQ system and HV supplier, as shown in rounded boxes in Fig.\ref{fig:testbench_overveiw}.
 %Common operations of each type of device are extracted as the interface of the corresponding abstract class.
-New device only needs to inherit from its corresponding abstract class and implement its interface methods and then registered in the singlton class \textit{PTDeviceManager}, leaving all other part of the software unchanged.
+New hardware only needs to inherit from its corresponding abstract class and implement its interface methods and then registered in the singlton class \textit{PTDeviceManager}, leaving all other part of the software unchanged.
 Currently, concrete device classes for the hardware described in Sec.\ref{sec:description} have all been implemented and fully tested.
 %Used concrete device class shall be registered in the singlton class \textit{PTDeviceManager} and retrieved from it in other part of the software. 
 
@@ -403,7 +382,7 @@ Usually, a \textit{PTVProgram} consists of a series of \textit{PTVTest}s, which 
 For example, in cathode uniformity test, the stepping motor will move to a series of positions and the PMT response will be recorded by the DAQ system at each position.
 Here, device operations performed at each position constitute a \textit{PTVTest} and tests at all positions constitute a \textit{PTVProgram}.
 Additional actions may be added in the \textit{PreTest} and \textit{PostTest} methods of \textit{PTVProgram}, which will be invoked before and after the test loop repectively.
-Typically, PMT warming shall be performed in \textit{PreTest} and analysis code shall be added in \textit{PostTest}.
+Typically, PMT warming can be performed in \textit{PreTest} and analysis code can be added in \textit{PostTest}.
 \textit{PTVProgram}s of various testing objectives will finally be chained together to constitute a complete characterization of PMT.
 
 Finally, a light-weight user interface based on PDCurses~\cite{pdcurses} has been developped.
@@ -536,16 +515,16 @@ The results of all 20 tubes are summarized and it is found that in the central \
 Performance of the test bench is extracted from the reference PMTs using the data obtained in the PMT characterization for PSD.
 
 As a first step, stability of the reference PMT configuration is checked.
-If stable, the response to various light intensities of the two reference PMTs shall be linearly correlated.
+If stable, the response of the two reference PMTs to various light intensities shall be linearly correlated.
 An example is shown in Fig.\ref{fig:refgain_relation}, where the data points can be fitted quite well with linear function.
-The slope of the fitting function does not depends on the light intensities used:
+The slope of the fitting function does not depends on the light intensities used as follows:
 \begin{equation}
  M = \frac{G_{ref1} T_{ref1}}{G_{ref2} T_{ref2}}
 \end{equation}
 where $G_{ref}$ is the absolute gain of each reference PMT and $T_{ref}$ is the transmition difference of fibres between reference channels.
 As transmition difference is a fixed parameter(the good linearity of the fitting is an indication of that), $M$ is only related to the gain difference between the reference PMTs.
 $M$ values are calculated for all test runs and the variance of it is found to be \SI{0.48}{\percent}.
-This result verifies the high stability of the reference PMTs.
+The samll variation verifies the high stability of the reference PMTs.
 
 By investigating the response of the reference PMT to a fixed light source setting, a maximum variation of \SI{4}{\percent} in the light intensity of LED is observed during a period of about one month.
 Light intensity fluctuation can be corrected using the method described in \ref{sec:psd_gain}.
@@ -554,7 +533,7 @@ As shown in Fig.\ref{fig:led_stability}, after correction the stability of the l
 
 Reference PMTs undergo the same testing procedures as other tubes under test.
 Thus, spread of the distribution of the parameters of reference PMT is an indication of the uncertainty of the testing method.
-As an example, distribution of dynode8/dynode5 of the reference PMTs is shown in Fig.\ref{fig:dy58_stabiltiy}, where the results from different voltage steps are scaled to their respective mean value of all test runs.
+As an example, distribution of dynode8/dynode5 of the reference PMTs is shown in Fig.\ref{fig:dy58_stabiltiy}, where the results from different voltage steps are scaled to their respective mean value of all test runs and filled together.
 The variance is \SI{1.59}{\percent}, which is adoptted as the testing uncertainty of the dynode8/dynode5 measurement.
 %%As an example, dynode8/dynode5 of the reference PMTs at a fixed voltage are first scaled to their mean value of all test runs.
 %%Then, scaled value at all voltage steps are filled into the histogram as shown in Fig.\ref{fig:dy58_stabiltiy}.
@@ -599,6 +578,10 @@ Results from all voltage steps are scaled to their respective mean value of all 
 %%%%%%%%%%%%%%%%  Conclustion   %%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 \label{sec:conclustions}
+
+We bulilt a dedicated test bench for massive PMT characterization, which is suitable for various testing configurations.
+Initial application of the test bench in DAMPE PSD has proved the effectiveness of the test bench.
+Thus, it is adoptted as a standard laboratoy equipment for daily use at IMP.
 
 %%%%%%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgement}
