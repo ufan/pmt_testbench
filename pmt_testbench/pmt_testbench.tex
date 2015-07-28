@@ -160,7 +160,7 @@ The major design considerations of the test bench is summarized as follows:
  \item \textit{Versatility}: The test bench is not designed for single use.
  %It will be utilitized in different experiments with different testing requirements.
  T\-h\-u\-s potential use cases should be considered and appropriate hardwares should be set up in the first place.
- In particular, cathode surface scanning capability is desirable in use cases like PET where several scintillators are coupled to a single PMT. 
+ In particular, cathode surface scanning capability is desirable in use cases like TOF-PET~\cite{tof_pet} where multiple scintillators are coupled to a single position-sensitive PMT(PSPMT) or multi-anode PMT(MAPMT). 
  \item \textit{Flexibility}: As a by product of versatiltiy, flexibility is needed both in terms of hardware and software.
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
@@ -198,7 +198,7 @@ All devices are controlled by a single software.
 Changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
 %All other devices are located outside the light-tight box.
 
-The whole test bench system is sitted in a cleanroom of class 100000 at IMP.
+The whole test bench system is sitted in a cleanroom of ISO class 8 at IMP.
 Temperature of the room is controlled around 22\textpm~2\textcelsius~all the time.
 In the following, key components of the test bench will be described in detail.
 
@@ -225,7 +225,7 @@ The grid pattern of tapped holes on the surface of them not only facilitates mou
 
 The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it is driven by three stepping motors with a minimum step of \SI{1.56}{\micro\meter}.% which is sufficient for all use cases.
 The travel range in the horizontal direction and vertical direction is \SI{60}{\milli\meter} and \SI{70}{\milli\meter} respectively.%covering a maximum scanning area of $60mm\times60mm$.
-Thus the maximum scanning area is $60mm\times60mm$, which covers the size of the majority of PMTs.
+Thus the maximum scanning area is $60mm\times60mm$, which covers the size of the majority of PSPMTs and MAPMTs.
 The third direction with a travel range of $15mm$ is added to control the gap between the fibre and the tube's cathode surface.
 This may also be useful when extra space is needed to unmount tubes without disturbing the optical fibres. 
 Stepping motors are controlled by three stepper drivers together with a motion controller MPC07SP from Leetro~\cite{leetro}.
@@ -433,7 +433,7 @@ However, more detailed analysis are considered project specific and not included
 \section{Application in the PMT testing for PSD of DAMPE}
 \label{sec:application}
 
-PSD adopts Hamamastu R4443 Mod2 for scintillation light detection.
+PSD adopts Hamamastu R4443 Mod2~\cite{r4443_mod2} for scintillation light detection.
 %R4443 Mod2 is a \SI{14.5}{\milli\meter} diameter, 10 stages photomultiplier tube with a minimum photocathode area of about \SI{10}{\milli\meter}.  
 R4443 Mod2 is a ruggedized and low noise bialkali photocathode version of the previous R4443 tube, which is suitable for space usage. 
 To cover the large dynamic range required by PSD, both dynode5 and dynode8 of R4443 Mod2 are readout by a customized voltage divider.
@@ -459,7 +459,32 @@ Here, only the major results are presented with a focus on the demonstration of 
 \subsection{Gain of Dynode8}
 \label{sec:psd_gain}
 
+%\begin{comment}
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=85mm]{GainDist}
+\caption{Relative gain distribution at 850V measured using light intensity 5.
+Data are normalized to a specific tube of small gain.}
+\label{fig:gain_dist}
+%\end{figure}
 %\end{comment}
+
+%\begin{figure}[h!]
+ \centering
+ \includegraphics[width=85mm]{correlation_new}
+\caption{Correlation between the parameters given by Hamamastu and the gain measured using the test bench.
+Data are normalized to the same tube.}
+\label{fig:gain_correlation}
+\end{figure} 
+%\end{comment}
+
+\begin{figure*}
+ \centering
+ \includegraphics[width=140mm]{dy58_ledvscm}
+\caption{Comparison of the dynode8/dynode5 result measured using LED and using cosmic ray.
+Same voltage divider and voltage value are utilitized in these two measurements.}
+\label{fig:dy58_ledvscm}
+\end{figure*} 
 
 The gain of dynode8 is measured by recording the response of PMT at a fixed light source setting. 
 This is a relative method and the result depends on the light intensity used:
@@ -489,41 +514,6 @@ Based on the fitting result,the gain at the Hamamastu equivalent voltage is calc
 Hamamastu equivalent voltage is the voltage that should be applied to the PSD voltage divider so that the same voltage on dynode 8 can be achieved as that used by Hamamastu for PMT testing.
 Linear correlation between the calculated gain and the anode blue sensitivity index has been observed, while no relation to the cathode blue sensitivity has been found(see Fig.\ref{fig:gain_correlation}).
 This result is a direct demonstration of the validity of our testing method.
-
-%\begin{comment}
-\begin{figure}
- \centering
- \includegraphics[width=85mm]{GainDist}
-\caption{Relative gain distribution at 850V measured using light intensity 5.
-Data are normalized to a specific tube of small gain.}
-\label{fig:gain_dist}
-\end{figure}
-%\end{comment}
-
-\begin{comment}
-\begin{figure}[h!]
- \centering
- \includegraphics[width=90mm]{gainVSvoltage}
-\caption{Gain dependency on high voltage of two PMTs}
-\label{fig:gainVSvoltage}
-\end{figure} 
-\end{comment}
-
-\begin{figure}
- \centering
- \includegraphics[width=85mm]{correlation_new}
-\caption{Correlation between the parameters given by Hamamastu and the gain measured using the test bench.
-Data are normalized to the same tube.}
-\label{fig:gain_correlation}
-\end{figure} 
-
-\begin{figure*}
- \centering
- \includegraphics[width=140mm]{dy58_ledvscm}
-\caption{Comparison of the dynode8/dynode5 result measured using LED and using cosmic ray.
-Same voltage divider and voltage value are utilitized in these two measurements.}
-\label{fig:dy58_ledvscm}
-\end{figure*} 
 
 \subsection{Ratio between the Gain of Dynode8 and Dynode5}
 \label{sec:psd_dy58}
@@ -597,21 +587,15 @@ As $T_{ref}$ is a constant parameter, $M$ is only related to the gain difference
 $M$ values are calculated for all test runs and the variance of it is found to be \SI{0.48}{\percent}.
 The samll variation verifies the high stability of the reference PMTs.
 
-By investigating the response of the reference PMT to a fixed light source setting, a maximum variation of \SI{4}{\percent} in the light intensity of LED is observed during a period of about one month.
-Light intensity fluctuation can be corrected using the method described in \ref{sec:psd_gain}.
-As two reference PMTs exists, this method can be validated by using one of them for correction and then checking the relative gain of the other. 
-The result is shown in Fig.\ref{fig:led_stability}.
-After light intensity correction, stability of the light source is controlled within \textpm\SI{0.5}{\percent}.
-
-\begin{figure}
+\begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{RelativeGainRef}
 \caption{Correlation of the responses to various light intensities between the two reference PMTs measured at 900V.}
 \label{fig:refgain_relation}
-\end{figure} 
+%\end{figure} 
 
 %\begin{comment}
-\begin{figure}
+%\begin{figure}
  \centering
  \includegraphics[width=90mm]{led_stability}
 \caption{Stability of the light source monitored by Reference PMT2 at 900V.
@@ -619,9 +603,9 @@ The data corresponds to a period of about one month and is all scaled to the fir
 Red line: mean value of raw ADC counts, recorded at the same light source setting before light intensity correction.
 Blue line: relative gain, measured after using Reference PMT1 for light intensity correction.}
 \label{fig:led_stability}
-\end{figure} 
+%\end{figure} 
 
-\begin{figure}
+%\begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{RefDy58Dist}
 \caption{Distribution of the ration between dynode8 and dynode5 of the reference PMTs measured by the test bench.
@@ -630,14 +614,11 @@ Results from all voltage steps are normalized to their respective mean value of 
 \end{figure} 
 %\end{comment}
 
-\begin{comment}
-\begin{figure}[h!]
- \centering
- \includegraphics[width=90mm]{RelativeGainRefDist}
-\caption{Stability of Gain Measurement}
-\label{fig:gain_stability}
-\end{figure} 
-\end{comment}
+By investigating the response of the reference PMT to a fixed light source setting, a maximum variation of \SI{4}{\percent} in the light intensity of LED is observed during a period of about one month.
+Light intensity fluctuation can be corrected using the method described in \ref{sec:psd_gain}.
+As two reference PMTs exists, this method can be validated by using one of them for correction and then checking the relative gain of the other. 
+The result is shown in Fig.\ref{fig:led_stability}.
+After light intensity correction, stability of the light source is controlled within \textpm\SI{0.5}{\percent}.
 
 Reference PMTs underwent the same testing procedures as tubes under test.
 Thus, spread of the distribution of the parameters of reference PMT is an indication of the uncertainty of the testing method.
