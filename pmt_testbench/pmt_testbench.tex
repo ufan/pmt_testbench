@@ -1,4 +1,5 @@
-\documentclass[5p, times]{elsarticle}
+%\documentclass[5p, times]{elsarticle}
+\documentclass[review,number,sort&compress]{elsarticle}
 
 %%%%%%%%%%%%%%   Preample  %%%%%%%%%%%%%%%%%%
 %% for comment (texts in between \begin{comment} and \end{comment} will be ignored)
@@ -21,8 +22,8 @@
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers},  end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
-%\usepackage{lineno}
-%\linenumbers
+\usepackage{lineno}
+\linenumbers
 
 %% package for subfigure environment
 \usepackage{subcaption}
@@ -52,7 +53,7 @@
 %%\title{Title with footnote\tnoteref{t1}}
 %%\tnotetext[t1]{FootNote for title}
 
-\author[imp, lzu, ucas]{Yong Zhou}
+\author[imp,lzu,ucas]{Yong Zhou}
 %\ead{yong@impcas.ac.cn}
 
 \author[imp]{Yuhong Yu}
@@ -349,7 +350,8 @@ Thus, transmition difference of fibres can be used as correction constants in th
 \begin{figure}
  \centering
  \includegraphics[width=90mm]{fibre_diff}
-\caption{Up: Light output of different fibres measured at two light intensities.
+\caption{
+Up: Light output uniformity of the fibre bundle measured at two light intensities.
 Bottom: Ratio between the transmition difference measured at two light intesities, the results are consistent within \textpm\SI{0.3}{\percent}.}
 \label{fig:fibre_diff}
 \end{figure} 
@@ -357,7 +359,7 @@ Bottom: Ratio between the transmition difference measured at two light intesitie
 
 \begin{figure*}
   \centering
- \includegraphics[width=120mm]{software_framework}
+ \includegraphics[width=130mm]{software_framework}
 \caption{General PMT testing framework}
 \label{fig:software_framework}
 \end{figure*}
@@ -468,8 +470,8 @@ Data are normalized to a specific tube of small gain.}
 \label{fig:gain_dist}
 %\end{figure}
 %\end{comment}
-
-%\begin{figure}[h!]
+\vspace*{0.1in}
+%\begin{figure}[H]
  \centering
  \includegraphics[width=85mm]{correlation_new}
 \caption{Correlation between the parameters given by Hamamastu and the gain measured using the test bench.
@@ -477,14 +479,6 @@ Data are normalized to the same tube.}
 \label{fig:gain_correlation}
 \end{figure} 
 %\end{comment}
-
-\begin{figure*}
- \centering
- \includegraphics[width=140mm]{dy58_ledvscm}
-\caption{Comparison of the dynode8/dynode5 result measured using LED and using cosmic ray.
-Same voltage divider and voltage value are utilitized in these two measurements.}
-\label{fig:dy58_ledvscm}
-\end{figure*} 
 
 The gain of dynode8 is measured by recording the response of PMT at a fixed light source setting. 
 This is a relative method and the result depends on the light intensity used:
@@ -515,8 +509,6 @@ Hamamastu equivalent voltage is the voltage that should be applied to the PSD vo
 Linear correlation between the calculated gain and the anode blue sensitivity index has been observed, while no relation to the cathode blue sensitivity has been found(see Fig.\ref{fig:gain_correlation}).
 This result is a direct demonstration of the validity of our testing method.
 
-\subsection{Ratio between the Gain of Dynode8 and Dynode5}
-\label{sec:psd_dy58}
 
 \begin{figure}
  \centering
@@ -534,6 +526,18 @@ Power law fit to the measured dynode8/dynode5 at 7 voltage steps is shown in the
 \caption{Distribution of the Dynode8/Dynode5 at the Hamamastu equivalent voltage.}
 \label{fig:dy58_dist}
 \end{figure} 
+
+\begin{figure*}
+ \centering
+ \includegraphics[width=140mm]{dy58_ledvscm}
+\caption{Comparison of the dynode8/dynode5 result measured using LED and using cosmic ray.
+Same voltage divider and voltage value are utilitized in these two measurements.}
+\label{fig:dy58_ledvscm}
+\end{figure*} 
+
+
+\subsection{Ratio between the Gain of Dynode8 and Dynode5}
+\label{sec:psd_dy58}
 
 The ratio between the gain of dynode8 and dynode5 is measured by varying the light intensity in a large range until saturation of dynode8 singal is observed, as shown in Fig\ref{fig:dy58_example}.
 The same procedure is repeated at 7 voltage steps, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, to obtain the dynode8/dynode5 dependency on voltage.
@@ -592,20 +596,20 @@ The samll variation verifies the high stability of the reference PMTs.
  \includegraphics[width=90mm]{RelativeGainRef}
 \caption{Correlation of the responses to various light intensities between the two reference PMTs measured at 900V.}
 \label{fig:refgain_relation}
-%\end{figure} 
+\end{figure} 
 
 %\begin{comment}
-%\begin{figure}
+\begin{figure}[H]
  \centering
  \includegraphics[width=90mm]{led_stability}
 \caption{Stability of the light source monitored by Reference PMT2 at 900V.
 The data corresponds to a period of about one month and is all scaled to the first test run.
-Red line: mean value of raw ADC counts, recorded at the same light source setting before light intensity correction.
-Blue line: relative gain, measured after using Reference PMT1 for light intensity correction.}
+Red Triangle: mean value of raw ADC counts, recorded at the same light source setting before light intensity correction.
+Blue Circle: relative gain, measured after using Reference PMT1 for light intensity correction.}
 \label{fig:led_stability}
-%\end{figure} 
+\end{figure} 
 
-%\begin{figure}[h!]
+\begin{figure}[H]
  \centering
  \includegraphics[width=90mm]{RefDy58Dist}
 \caption{Distribution of the ration between dynode8 and dynode5 of the reference PMTs measured by the test bench.
@@ -619,6 +623,7 @@ Light intensity fluctuation can be corrected using the method described in \ref{
 As two reference PMTs exists, this method can be validated by using one of them for correction and then checking the relative gain of the other. 
 The result is shown in Fig.\ref{fig:led_stability}.
 After light intensity correction, stability of the light source is controlled within \textpm\SI{0.5}{\percent}.
+
 
 Reference PMTs underwent the same testing procedures as tubes under test.
 Thus, spread of the distribution of the parameters of reference PMT is an indication of the uncertainty of the testing method.
