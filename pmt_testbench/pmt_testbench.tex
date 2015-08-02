@@ -126,7 +126,8 @@ Detailed description can be found in Sec.\ref{sec:description}.
 
 The first user of this test bench is the Plastic Scintillator Detector(PSD), a key component of the DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe} which is a statellite-borne exeperiment. 
 PSD is a large-area plastic scintillator array which will work for high energy e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the energy deposited.
-PSD will use many PMTs for readout, and the test work for these PMTs using this test bench is very successfull. Some of the test results are shown in Sec.\ref{sec:application}.
+PSD will use 164 PMTs for readout, and the test work for these PMTs using this test bench is very successfull. 
+Some of the test results are shown in Sec.\ref{sec:application}.
 
 %%%%%%%%%%%%%%%% Main Text Body %%%%%%%%%%%%%%%%%%%%%%%
 \section{Description of the test bench}
@@ -157,24 +158,28 @@ As a massive PMT test bench, some aspects need to be considered in the design:
  The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
 \end{itemize}
 
-A schematic diagram of the PMT test bench is shown in Fig.\ref{fig:testbench_overveiw}, and up to 25 PMTs can be tested simultaneously.
+A schematic diagram of the final design is shown in Fig.\ref{fig:testbench_overveiw}, and up to 25 PMTs can be tested simultaneously.
 Light pulses are distributed to each tube through an integrating sphere and a fiber bundle, which are mounted on a three-dimensional motorized stage.
 PMTs under test will be mounted on a separate fixed stage, thus allowing position scanning of all tubes simultaneously.
 There also has 2 PMTs fixed on the motorized stage, serving as a reference to monitor the stability of the light source as well as the performance of the whole system.
 Both stages are housed in a light-tight container made of aluminium alloy, with a dimension of $176cm\times100cm\times78cm$.
 The container is painted black inside and the lid can be removed for operations such as tube mounting.
+Light-tight feedthroughs are left in the side plate of the container for cable routing to the outside.
 
-For the PMT test, many auxiliary equipments with different functions are necessary, such as motion controller, pulse generator for light source, high voltage supply and data acquisition system(DAQ).
-All these equipments are placed outside the light-tight container, and the cables needed are led out through light-tight feedthroughs.
-The whole test bench system is sitted in a cleanroom at IMP, and the room temperature is keeped to be 22\textpm~2\textcelsius~all the time. 
+Auxiliary devices of the test bench are placed outside the light-tight container.
+They are grouped into four types, motion controller, pulse generator, high voltage supply and data acquisition system(DAQ), according to the functions they provide.
+Among them, pulse generator is used to output trigger pulse to the LED driver as well as to the DAQ simultaneously.
 
-The motion controller and the pulse generator are tightly coupled to the test bench, and suitable for nearly all the cases the bench may work for. 
-So we regard them as parts of the test bench.
-On the other hand, DAQ and the high voltage supply system have more closer relation to the PMTs under test and their usage, so there may have replacement for them frequently. 
+These four types of devices are needed in every basic PMT characterization and are regarded as the essential parts of the test bench.
+However, different hardwares may be preferred in different applications.
+The motion controller and the pulse generator are tightly coupled to the test bench, so they can be shared for nearly all the use cases the bench may work for. 
+On the other hand, DAQ and the high voltage supply system have more closer relation to the PMTs under test, so they are expected to be replaced frequently. 
 Originally, we equiped a CAEN SY1527LC~\cite{sy1527lc} as high voltage supply and a universal CAMAC DAQ system with CC-USB crate controller~\cite{cc_usb}.
 
 The control of all these equipments are integrated into a single software. 
 The changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
+
+The whole test bench system is sitted in a cleanroom at IMP, and the room temperature is keeped to be 22\textpm~2\textcelsius~all the time.
 In the following sections, some key components of the test bench will be described in detail.
 
 %\begin{comment}
@@ -200,7 +205,7 @@ And the grid pattern of tapped holes on their surface facilitate mounting/unmoun
 
 The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it can do a 3D motion with the help of three stepping motors, which have a minimum step of \SI{1.56}{\micro\meter}.
 The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically, and it's enough to cover any PMTs less than 2 inches, which are mostly used.
-The stage can also move along the third direction for $15mm$, and this is to protect the fibers while mount/unmount the tubes as well as control the gap between the fiber and the window of the tube.
+The stage can also move along the third direction for $15mm$, and this is to control the gap between the fiber and the window of the tub as well as to protect the fibers while mounting/unmounting the tubes.
 All the stepping motors are controlled by one motion controller MPC07SP from Leetro~\cite{leetro}, which also provides a PCI interface for remote control.
 
 \subsection{Light Source}
@@ -253,7 +258,7 @@ On the other end, each fiber is fixed using a customized fiber holder which allo
 \begin{figure}
  \centering
  \includegraphics[width=80mm]{fibre_diff}
-\caption{Up: Light output of different fibres measured at two light intensities.
+\caption{Up: Light output of different fibres measured at two light intensities of about 4 times difference.
 Bottom: Ratio between the transmition difference measured at two light intesities, the results are consistent within \textpm\SI{0.3}{\percent}.}
 \label{fig:fibre_diff}
 \end{figure} 
@@ -325,12 +330,13 @@ Besides the dynamic range, PSD also requires a \SI{25}{\percent} uniformity amon
 So both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be measured before the installation.
 
 Concrete \textit{PTVProgram}s for gain, dynode8/dynode5 ratio and cathode uniformity measurements have been implemented for this purpose.
-To obtain more realistic results, we also made a specific data processing and acquiring system instead of the normal CAMAC system used with the PMT test bench. 
-This new system is many a copy of the real ones in PSD, and the dedicated \textit{PTVDaq} program based on NI-VISA library has been implemented for it.
+To obtain more realistic results, a standalone data processing and acquiring system~\cite{fee} have been developped to replace the normal CAMAC system used with the PMT test bench. 
+This new system is a clone of the real ones used in PSD and suitable for groud test of PSD components.
+A dedicated \textit{PTVDaq} class based on NI-VISA library~\cite{ni_visa} has been implemented for it.
 
 For a single run, about 20 tubes are mounted and tested, as shown in Fig.\ref{fig:integrated_testbench}, and it takes normally 5 hours, including 2 hour's PMT warming time. 
 We performed 28 runs in a month, and totally 570 R4443 tubes have been studied carefully with this PMT test bench. 
-All the data and analysis results are stored in a MySQL database for easy query, and the PMTs for PSD will be choosen from those.
+All the data and analysis results are stored in a MySQL database for easy query, and the PMTs for PSD will be selected from these tubes.
 
 Selection of tubes based the test data is not the object of this article.
 Here, only the major results are presented with a focus on the demonstration of the validity of the test bench. 
@@ -357,7 +363,7 @@ $K_{RunID}$ can be calculated at each test run using the reference PMT.
 $T_{ChID}$ is a constant parameter, which has been measured accurately before(Sec.\ref{sec:fiber_bundle}).
 These corrections are made for all measurement results.
 
-7 different high voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, are scanned to obtain the gain variation as a function of supply voltage for each PMT, and the results are fitted using the power law function(see Fig.\ref{fig:gain_example}).
+7 different high voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, are scanned to obtain the gain variation as a function of supply voltage for each PMT, and the results are fitted using the power law function.
 Based on the fitting result,the relative gain at a certain supply voltage is calculated for comparison with the parameters on the data sheets provided by Hamamastu.
 Linear correlation between the calculated gain and the anode blue sensitivity index has been observed, while no relation to the cathode blue sensitivity has been found(see Fig.\ref{fig:gain_correlation}).
 This result is a direct demonstration of the validity of our testing method.
@@ -366,14 +372,6 @@ This result is a direct demonstration of the validity of our testing method.
 The results from different light intensities are cross checked and they are consistent with each other.
 Distribution of the relative gain at 850V is shown in Fig.\ref{fig:gain_dist}, where all the tubes are normalized to the one with the smallest gain. 
 A maximum of about 6 times difference in the gain has been observed.
-
-\begin{figure}
- \centering
- \includegraphics[width=80mm]{gainVSvoltage}
-\caption{Two examples of the measured relative gain as a function of supply voltage at light intensity 5.}
-\label{fig:gain_example}
-\end{figure} 
-
 
 \begin{figure}
  \centering
@@ -424,16 +422,16 @@ It can been seen that the variance is much smaller than that of gain.
 \begin{figure}
  \centering
  \includegraphics[width=80mm]{cathode_uniformity}
-\caption{A typical cathode uniformity of R4443 Mod2.
+\caption{A typical cathode uniformity of R4443.
 Relative gain at each position is normalized to the center of the input window.}
 \label{fig:cathode_uniformity}
 \end{figure} 
 
-R4443 has a photocathode with a minimum effective area of about \SI{10}{\milli\meter} in diameter, and the uniformity of the cathode also be checked using our test bench.
+R4443 has a photocathode with a minimum effective area of about \SI{10}{\milli\meter} in diameter, and the uniformity of the cathode can also be checked using our test bench.
 This measurement is done by scanning the input window of R4443 with a step of \SI{1}{\milli\meter} in two directions that are perpendicular to each other.
 At each position, the relative gain is measured at a fixed light source setting according to the method described in Sec.\ref{sec:psd_gain}, and a typical result is shown in Fig.\ref{fig:cathode_uniformity}.
 
-The relative gain we measured at each position is proportional to the total efficiency of light transmission, photoelectric conversion and electron collection at this point, and we can see the rapid drop of this efficiency at the edge of the cathode. 
+The relative gain we measured at each position is proportional to the total efficiency of light transmission, photoelectric conversion and electron collection at this point, and we can see the rapid drop of this efficiency at the edge of the cathode surface. 
 If we define the uniform region as a region with the efficiency fluctuation less than \SI{10}{\percent}, we found that only \SI{75}{\percent} of the tested PMTs can have a uniform region larger than \SI{9}{\milli\meter} in diameter. 
 
 \section{Summary}
@@ -444,7 +442,7 @@ It's suitable for massive PMT test and has been applied in the construction of D
 Because the PMT test bench is monitored by two reference PMTs all the time, we can also get some knowledge about the performance of this system using the data obtained in the PMT characterization for DAMPE PSD.
 
 The stability of these reference PMTs is checked firstly.
-The ratio, $M$, between the response of the reference PMTs is a parameter irrelevant to the light intensity: 
+The ratio, $M$, between the response of two reference PMTs is a parameter irrelevant to the light intensity: 
 \begin{equation}
  M = \frac{G_{ref1} T_{ref1}}{G_{ref2} T_{ref2}}
  \label{equ:stability}
