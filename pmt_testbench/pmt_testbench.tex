@@ -1,4 +1,4 @@
-\documentclass[5p, times]{elsarticle}
+\documentclass[review, times]{elsarticle}
 
 %%%%%%%%%%%%%%   Preample  %%%%%%%%%%%%%%%%%%
 %% for comment (texts in between \begin{comment} and \end{comment} will be ignored)
@@ -21,8 +21,11 @@
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers},  end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
-%\usepackage{lineno}
+\usepackage{lineno}
+\modulolinenumbers[5]
 %\linenumbers
+
+\usepackage{hyperref}
 
 %% package for subfigure environment
 \usepackage{subcaption}
@@ -101,7 +104,7 @@ PMT
 \end{keyword}
 
 \end{frontmatter}
-
+\linenumbers
 %%%%%%%%%%%%%%%%  Introduction  %%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 \label{sec:introduction}
@@ -135,7 +138,7 @@ Some of the test results are shown in Sec.\ref{sec:application}.
 
 \begin{figure*}
  \centering
- \includegraphics[width=160mm]{testbench_overview}
+ \includegraphics[width=140mm]{testbench_overview}
 \caption{Schematic diagram of the PMT test bench system.}
 \label{fig:testbench_overveiw}
 \end{figure*}
@@ -258,7 +261,7 @@ On the other end, each fiber is fixed using a customized fiber holder which allo
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{fibre_diff}
+ \includegraphics[width=90mm]{fibre_diff}
 \caption{Up: Light output of different fibres measured at two light intensities of about 4 times difference.
 Bottom: Ratio between the transmition difference measured at two light intesities, the results are consistent within \textpm\SI{0.3}{\percent}.}
 \label{fig:fibre_diff}
@@ -299,7 +302,7 @@ Typically, PMT warming can be performed in \textit{PreTest} and analysis can be 
 
 \begin{figure}
   \centering
- \includegraphics[width=90mm]{software_framework}
+ \includegraphics[width=140mm]{software_framework}
 \caption{General PMT testing framework}
 \label{fig:software_framework}
 \end{figure}
@@ -315,7 +318,7 @@ However, more detailed analysis are considered project specific and not included
 
 \begin{figure}
  \centering
- \includegraphics[width=90mm]{integration3}
+ \includegraphics[width=140mm]{integration3}
 \caption{Integration of all components of the test bench for R4443 Mod2 characterization.
 Voltage dividers, same design as those used in the final assembly, are used. 
 20 rare tubes are mounted and ready for test.
@@ -376,7 +379,7 @@ A maximum of about 6 times difference in the gain has been observed.
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{correlation_new}
+ \includegraphics[width=90mm]{correlation_new}
 \caption{Correlation between the parameters given by Hamamastu and the gain measured using the test bench.
 Data are normalized to the same tube.}
 \label{fig:gain_correlation}
@@ -384,7 +387,7 @@ Data are normalized to the same tube.}
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{GainDist}
+ \includegraphics[width=90mm]{GainDist}
 \caption{Relative gain distribution at 850V measured using light intensity 5.
 Data are normalized to a specific tube of small gain.}
 \label{fig:gain_dist}
@@ -395,7 +398,7 @@ Data are normalized to a specific tube of small gain.}
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{dy58_example}
+ \includegraphics[width=90mm]{dy58_example}
 \caption{Example of the measurement of dynode8/dynode5.
 Correlation between dynode5 and dynode8 at 1000V, 850V and 700V is presented for a typical tube.
 Power law fit to the measured dynode8/dynode5 at 7 voltage steps is shown in the inset graph.
@@ -412,7 +415,7 @@ It can been seen that the variance is much smaller than that of gain.
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{dy58_dist}
+ \includegraphics[width=90mm]{dy58_dist}
 \caption{Distribution of the Dynode8/Dynode5 at the Hamamastu equivalent voltage.}
 \label{fig:dy58_dist}
 \end{figure} 
@@ -422,7 +425,7 @@ It can been seen that the variance is much smaller than that of gain.
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{cathode_uniformity}
+ \includegraphics[width=90mm]{cathode_uniformity}
 \caption{A typical cathode uniformity of R4443.
 Relative gain at each position is normalized to the center of the input window.}
 \label{fig:cathode_uniformity}
