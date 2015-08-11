@@ -159,14 +159,14 @@ There also has 2 PMTs fixed on the motorized stage, serving as a reference to mo
 Both stages are housed in a light-tight container made of aluminum alloy, with a dimension of $176cm\times100cm\times78cm$.
 The container is painted black inside and the lid can be removed for operations such as tube mounting.
 
-For the PMT test, many auxiliary equipment are also necessary. These equipment are divided into four groups according to the functions they provide: motion controller, pulse generator, high voltage supply and data acquisition system(DAQ).
-The motion controller and the pulse generator are tightly coupled to the test bench, and suitable for nearly all the cases the bench may work for.
-On the other hand, DAQ and the high voltage supply system have closer relation to the experiment which need massive PMTs been tested, and may change from experiment to experiment. Originally, we equipped a CAEN SY1527LC~\cite{sy1527lc} as high voltage supply and a universal CAMAC DAQ system with CC-USB crate controller~\cite{cc_usb}.
+For its proper operation, many auxiliary equipment are considered as the essential parts of the test bench. These equipment are divided into four groups according to the functions they provide: motion controller, pulse generator, high voltage supply and data acquisition system(DAQ).
+The motion controller and the pulse generator are tightly coupled to the test bench itself, and the same hardware can be reused for nearly all the cases the bench may work for.
+On the other hand, DAQ and the high voltage supply system have closer relation to the experiment which need massive PMT characterization, and project-specific hardware may be preferred in some experiments. Originally, we equipped a CAEN SY1527LC~\cite{sy1527lc} power crate as high voltage supply and a universal CAMAC system with CC-USB crate controller~\cite{cc_usb} as DAQ.
 
 All these equipment are placed outside the light-tight container, and the cables needed are led out through light-tight feedthroughs.
 The control of all these equipment are integrated into a single software. The changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
 
-The whole test bench system is sited in a cleanroom at IMP, and the room temperature is kept to be 22\textpm~2\textcelsius~all the time. 
+The whole test bench system is sitting in a cleanroom at IMP, and the room temperature is kept to be 22\textpm~2\textcelsius~all the time. 
 In the following sections, some key components of the test bench will be described in detail.
 
 \begin{figure}
@@ -253,7 +253,7 @@ The transmission difference among the fibers from this calibration will be used 
 
 As the PMT test bench is a combination of many different equipment and systems, an integrated control software will play a very important role. The software for the test bench is developed in Windows with C++ and divided into three hierarchies as follows:
 \begin{enumerate}
- \item \textit{Device abstraction}, which not only serves as an interface to the underlying hardwares, but also handles the abstraction of different types of devices. 
+ \item \textit{Device abstraction}, which not only serves as an interface to the underlying hardware, but also handles the abstraction of different types of devices. 
  \item \textit{Framework libraries}, which defines a general testing procedure and provides utility classes for configuration and management.
  \item \textit{User interface}, which provides command line based or graphical executable for user interaction. 
 \end{enumerate}
@@ -284,7 +284,7 @@ For easy usage, a light-weight user interface based on PDCurses~\cite{pdcurses} 
 This program features in device control, status monitoring and information logging.
 Thanks to the abstraction described above, the architecture of the program is rather independent of the specific hardware used and the testing programs performed.
 A decoding function from binary file to root file~\cite{root} is also incorporated into it for online monitoring.
-However, more detailed analysis are considered project specific and not included in the program. 
+However, more detailed analysis are considered project-specific and not included in the program. 
 
 \section{Application in the construction of DAMPE PSD}
 \label{sec:application}
