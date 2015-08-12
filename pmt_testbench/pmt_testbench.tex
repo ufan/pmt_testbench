@@ -83,17 +83,18 @@
 %%
 \begin{abstract}
 
-A versatile test bench system, dedicated for massive PMTs characterization, is developed at the Institute of Modern Physics, Chinese Academy of Sciences. 
+A versatile test bench system, dedicated for massive PMT characterization, is developed at the Institute of Modern Physics, Chinese Academy of Sciences. 
 It can perform many test contents with large capacity and high level of automation, and the migration from one testing configuration to another is lightweight and time-saving. 
-This system has been used in construction of the Plastic Scintillator Detector of DArk Matter Paricle Explorer already, and a total of 570 Hamamastu R4443 tubes have been tested successfully.
+This system has been used in the construction of the Plastic Scintillator Detector of DArk Matter Particle Explorer already, and a total of 570 Hamamastu R4443 tubes have been tested successfully.
 \end{abstract}
 
 %%
 \begin{keyword}
 PMT
+\sep PMT characterization
 \sep test bench
 \sep DAMPE-PSD
-
+\sep R4443
 %% PACS codes here,  in the form: \PACS code \sep codes
 
 %% MSC codes here,  in the form: \MSC code \sep code
@@ -107,14 +108,15 @@ PMT
 \section{Introduction}
 \label{sec:introduction}
 
-Since invented about 80 years ago, Photomultiplier tubes (PMTs) have been widely used as photosensors in nuclear and particle physics experiments due to the high sensitivity, fast time response and other benefits they have. Today, large experiments may contain thousands or even more PMTs. To make the detectors work well and get optimized performance, it's important to study the characteristics of each PMT before they are put into usage. 
-The manufacturers can provide some information about the PMTs they offered, but this can only give a rough indication of the performance because their test procedures are quite different from the usage of PMTs in real cases. On the other hand, the experiments may have special requirements for some characteristics of the PMTs, which the manufacturers can not provide. 
+Since invented about 80 years ago, Photomultiplier tubes (PMTs) have been widely used as photosensors in nuclear and particle physics experiments due to the high sensitivity, fast time response and other benefits they have. 
+Today, large experiments may contain thousands or even more PMTs. To make the detectors work well and get optimized performance, it's important to study the characteristics of each PMT before they are put into usage. 
+The manufacturers can provide some information about the PMTs they offered, but this can only give a rough indication of the performance because their test procedures~\cite{hamamatsu} are quite different from the usage of PMTs in real cases. 
+On the other hand, the experiments may have special requirements for some characteristics of the PMTs, which the manufacturers can not provide. 
 Thus characterization of PMTs in the laboratory is mandatory in large experiments.
 
 Testing a large number of PMTs in limited time is a tough job, and usually a dedicated test bench is constructed to facilitate this work~\cite{barnhill_testing_2008,akgun_complete_2005,adragna_pmt-block_2006}.
 Setting up a system like this is none trivial work, which demands considerable investment of time and effort.
 On the other hand, testing of PMTs is a commonly encountered procedure and many components of the testing configuration can be shared among different applications.
-%Thus, it is desirable that the same test bench, with minimum configuration changes, can be reused in different applications. 
 
 In this paper, a versatile test bench dedicated for PMT characterization is reported.
 The test bench is designed to be a standard laboratory equipment for fast PMT characterization for several experiments prepared and planned at the Institute of Modern Physics(IMP), Chinese Academy of Sciences(CAS).
@@ -122,7 +124,7 @@ To accommodate the various requirements of different experiments, the test bench
 This makes the migration from one testing configuration to another light-weight and time-saving.
 Detailed description can be found in Sec.\ref{sec:description}.
 
-The first user of this test bench is the Plastic Scintillator Detector(PSD), a key component of the DArk Matter Paricle Explorer(DAMPE)~\cite{Chang_Jin_dampe}, which is a satellite-borne exeperiment. 
+The first user of this test bench is the Plastic Scintillator Detector(PSD), a key component of the DArk Matter Particle Explorer(DAMPE)~\cite{Chang_Jin_dampe}, which is a satellite-borne exeperiment. 
 PSD is a large-area plastic scintillator array which will work for high energy e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the energy deposited.
 PSD will use PMTs for readout, and the test work for these PMTs using this test bench is very successful. Some of the test results are shown in Sec.\ref{sec:application}.
 
@@ -132,7 +134,7 @@ PSD will use PMTs for readout, and the test work for these PMTs using this test 
 
 \begin{figure*}
  \centering
- \includegraphics[width=160mm]{testbench_overview}
+ \includegraphics[width=140mm]{testbench_overview}
 \caption{Schematic diagram of the PMT test bench system.}
 \label{fig:testbench_overveiw}
 \end{figure*}
@@ -140,13 +142,16 @@ PSD will use PMTs for readout, and the test work for these PMTs using this test 
 As a massive PMT test bench, some aspects need to be considered in the design:
 \begin{itemize}
  \item \textit{Large capacity}: This is the primary driving force for developing a test bench dedicated for massive PMT characterization.
- Testing multiple tubes simultaneously can increase the efficiency and save time tremendously, and this is a critical factor in projects involving large number of PMTs. On the other hand, testing too many tubes at the same time will make the system very complicated and difficult to operate. So we need to make a tradeoff between efficiency, complexity and others.
+ Testing multiple tubes simultaneously can increase the efficiency and save time tremendously, and this is a critical factor in projects involving large number of PMTs. 
+ On the other hand, testing too many tubes at the same time will make the system very complicated and difficult to operate. 
+ So we need to make a tradeoff between efficiency and complexity.
  \item \textit{Automation}: A single test run for PMT characterization usually takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity and so on.
  Manual operations are inefficient and unreliable in such a long period.
  Computer controllable hardware should be used whenever possible and corresponding software should be developed to automate these trivial operations.
  Manual intervention is only expected in the beginning when mounting PMTs and configuring the software and in the end when unmounting PMTs and assessing testing result. 
- \item \textit{Versatility}: The test bench is not designed for a specific experiment only. We should consider as many potential use cases as possible, and the appropriate hardware should be set up in the first place.
- For example, the photocathode scanning capability is desirable in some cases that many scintillators are coupled to a single PMT~\cite{tof_pet}. 
+ \item \textit{Versatility}: The test bench is not designed for a specific experiment only. 
+ We should consider as many potential use cases as possible, and the appropriate hardware should be set up in the first place.
+ For example, the photocathode scanning capability is desirable in cases that many scintillators are coupled to a single PMT~\cite{tof_pet}. 
  \item \textit{Flexibility}: As a by-product of versatility, flexibility is needed both in terms of hardware and software.
  The hardware platform should be extensible and allow complex testing configurations.
  The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
@@ -159,9 +164,11 @@ There also has 2 PMTs fixed on the motorized stage, serving as a reference to mo
 Both stages are housed in a light-tight container made of aluminum alloy, with a dimension of $176cm\times100cm\times78cm$.
 The container is painted black inside and the lid can be removed for operations such as tube mounting.
 
-For its proper operation, many auxiliary equipment are considered as the essential parts of the test bench. These equipment are divided into four groups according to the functions they provide: motion controller, pulse generator, high voltage supply and data acquisition system(DAQ).
+For the proper operation of the test bench, a variety of auxiliary equipment is needed. 
+These equipment are divided into four groups according to the functions they provide: motion controller, pulse generator, high voltage supply and data acquisition system(DAQ).
 The motion controller and the pulse generator are tightly coupled to the test bench itself, thus the same hardware can be reused for nearly all the cases the bench may work for.
-On the other hand, DAQ and the high voltage supply system have closer relation to the experiment which need massive PMT characterization, and project-specific hardware may be preferred in different experiments. Originally, we equipped a universal CAEN SY1527LC~\cite{sy1527lc} power crate as high voltage supply and a CAMAC system with CC-USB crate controller~\cite{cc_usb} as DAQ.
+On the other hand, DAQ and the high voltage supply system have closer relation to the underlying experiment which need massive PMT characterization, and normally project-specific hardware is preferred in different experiments. 
+Originally, we equipped a universal CAEN SY1527LC~\cite{sy1527lc} power crate as the high voltage supply and a CAMAC system with CC-USB crate controller~\cite{cc_usb} as the DAQ.
 
 All these equipment are placed outside the light-tight container, and the cables needed are led out through light-tight feedthroughs.
 The control of all these equipment are integrated into a single software. The changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
@@ -185,10 +192,11 @@ All other objects inside the light-tight box will be mounted on the top of them.
 In particular, customized fixtures for fibers, tubes and integration sphere have been designed for convenient and accurate positioning.
 
 As shown in Fig.\ref{fig:stages}, both stages are covered with $1560mm\times250mm$ optical breadboards. 
-These breadboards are made of \SI{2.5}{cm} thick stainless steel, providing substantial resistance to deformation in the application. And the grid pattern of tapped holes on their surface provide extra flexibility in the configuration as well as facilitates mounting/unmounting operations.
+These breadboards are made of \SI{2.5}{cm} thick stainless steel, providing substantial resistance to deformation in this application. 
+And the grid pattern of tapped holes on their surface provide extra flexibility in the configuration as well as facilitates mounting/unmounting operations.
 
-The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it can do a 3-dimensional motion with the help of three stepping motors, who have a minimum step of \SI{1.56}{\micro\meter}.
-The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically, and it's enough to cover any PMTs less than 2 inches, which are mostly used.
+The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it can do a 3-dimensional motion with the help of three stepping motors, which have a minimum step of \SI{1.56}{\micro\meter}.
+The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically, and it's enough to cover any PMTs smaller than 2 inches, which are mostly used.
 The stage can also move along the third direction for $15mm$, and this is to protect the fibers while mounting and unmounting the tubes as well as to control the gap between the fiber and the input window of PMT.
 All the stepping motors are controlled by one motion controller MPC07SP from Leetro~\cite{leetro}, which also provides a PCI interface for remote control.
 
@@ -235,9 +243,9 @@ On the other end, each fiber is fixed using a customized fiber holder, which all
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{fibre_diff}
-\caption{Up: Light output of 35 fibers measured at two light intensities of about 4 times difference.
-Bottom: Ratio between the two light intensities measured by different fibers, the results are consistent within \textpm\SI{0.3}{\percent}.}
+ \includegraphics[width=90mm]{fibre_diff}
+\caption{Up: Light output of 35 fibers measured at two light intensities with an amplitude difference of about 4 times.
+Bottom: Ratio between the two measurements of each fiber, the results are consistent within \textpm\SI{0.3}{\percent}.}
 \label{fig:fibre_diff}
 \end{figure} 
 
@@ -246,14 +254,14 @@ For this calibration, the same PMT was used to scan all the fibers successively,
 After the light intensity correction, a variance of \SI{10}{\percent} is observed among the fibers, and this result is a direct reflection of the light transmission difference among the fibers because the contribution from light source non-uniformity is negligible.
 Moreover, different light intensities were used in the calibration process, and the result shows that the transmission has no dependency on the light intensity as shown in Fig.\ref{fig:fibre_diff}. 
 This is within the expectation, as the transmission coefficient is an intrinsic characteristic of the fiber itself.
-The transmission difference among the fibers from this calibration will be used as correction constants in the future measurements using this test bench.
+The transmission difference of the fibers from this calibration will be used as correction constants in the future measurements using this test bench.
 
 \subsection{Software}
 \label{sec:software}
 
 As the PMT test bench is a combination of many different equipment and systems, an integrated control software will play a very important role. The software for the test bench is developed in Windows with C++ and divided into three hierarchies as follows:
 \begin{enumerate}
- \item \textit{Device abstraction}, which not only serves as an interface to the underlying hardware, but also handles the abstraction of different types of devices. 
+ \item \textit{Device abstraction}, which not only serves as an interface to the hardware, but also handles the abstraction of different types of devices. 
  \item \textit{Framework libraries}, which defines a general testing procedure and provides utility classes for configuration and management.
  \item \textit{User interface}, which provides command line based or graphical executable for user interaction. 
 \end{enumerate}
@@ -306,15 +314,15 @@ In addition to the dynamic range, PSD also requires a \SI{25}{\percent} uniformi
 So both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be measured before the installation.
 
 Concrete \textit{PTVProgram}s for gain, dynode8/dynode5 ratio and cathode uniformity measurements have been implemented for this purpose.
-To obtain more realistic results, a standalone data processing and acquiring system~\cite{fee} was adopted instead of the normal CAMAC system used with the PMT test bench. 
-This new system is many a copy of the real ones used in PSD, and a dedicated \textit{PTVDaq} class based on NI-VISA library~\cite{ni_visa} has been implemented for it.
+To obtain more realistic results, a standalone signal processing and acquiring system~\cite{fee} was adopted instead of the normal CAMAC system used with the test bench. 
+This new system is mainly a copy of the real ones used in PSD, and a dedicated \textit{PTVDaq} class based on NI-VISA library~\cite{ni_visa} has been implemented for it.
 
 For a single run, about 20 tubes are mounted and tested, as shown in Fig.\ref{fig:integrated_testbench}.
 And it takes normally 5 hours for a complete characterization, including 2 hour's PMT warming time. 
-We performed 28 test runs in a month, and totally 570 R4443 tubes have been studied carefully with this PMT test bench. 
-All the data and analysis results are stored in a MySQL database for easy query, and 164 tubes will finally be selected from them for PSD usage.
+We performed 28 test runs in about a month, and totally 570 R4443 tubes have been studied carefully with this PMT test bench. 
+All the data and analysis results are stored in a MySQL database for easy query, and PMTs for PSD will be selected from them based on these data.
 
-Selection of tubes based on the test data is not the object of this article.
+The selection criteria and procedure are not the subject of this article.
 Here, only the major results are presented with a focus on the demonstration of the validity of the test bench. 
 
 \subsection{Gain of Dynode8}
@@ -349,7 +357,7 @@ A maximum of about 5.5 times difference in the gain has been observed.
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{correlation_new}
+ \includegraphics[width=90mm]{correlation_new}
 \caption{Correlation between the parameters given by Hamamastu and the gain measured using the test bench.
 Data are normalized to the same tube.}
 \label{fig:gain_correlation}
@@ -357,7 +365,7 @@ Data are normalized to the same tube.}
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{GainDist}
+ \includegraphics[width=90mm]{GainDist}
 \caption{Relative gain distribution at 850V measured using light intensity 5.
 Data are normalized to the tube of the smallest gain.}
 \label{fig:gain_dist}
@@ -368,7 +376,7 @@ Data are normalized to the tube of the smallest gain.}
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{dy58_example}
+ \includegraphics[width=90mm]{dy58_example}
 \caption{Example of the measurement of dynode8/dynode5 ratio.
 Correlation between dynode5 and dynode8 at 1000V, 850V and 700V is presented for a typical tube and the saturation of dynode8 signal is clearly seen.
 Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is shown in the inset graph.
@@ -385,7 +393,7 @@ It can be seen that the variance is much smaller than that of gain.
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{dy58_dist}
+ \includegraphics[width=90mm]{dy58_dist}
 \caption{Distribution of the dynode8/dynode5 ratio at \SI{820}{\volt} calculated based on the fitted power law function.}
 \label{fig:dy58_dist}
 \end{figure} 
@@ -395,7 +403,7 @@ It can be seen that the variance is much smaller than that of gain.
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{cathode_uniformity}
+ \includegraphics[width=90mm]{cathode_uniformity}
 \caption{A typical cathode uniformity of R4443.
 Relative gain at each position is normalized to the center of the input window.}
 \label{fig:cathode_uniformity}
@@ -430,7 +438,7 @@ After the correction, stability of the light source is controlled within \textpm
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{led_stability}
+ \includegraphics[width=90mm]{led_stability}
 \caption{Stability of the light source monitored by reference PMT2 at 900V(other voltage values give the same results).
 The data corresponds to a period of about one month and is all normalized to the first test run.
 Red line: mean value of raw ADC counts recorded with the same light source setting before light intensity correction.
@@ -446,7 +454,7 @@ In the same way, the uncertainty in the measurement of relative gain is estimate
 
 \begin{figure}
  \centering
- \includegraphics[width=80mm]{RefDy58Dist}
+ \includegraphics[width=90mm]{RefDy58Dist}
 \caption{Distribution of the ration between dynode8 and dynode5 of the reference PMTs measured by the test bench.
 Results from all voltage steps are normalized to their respective mean value of all test runs.}
 \label{fig:dy58_stabiltiy}
@@ -457,6 +465,7 @@ Considering the flexible and open platform it possesses, the test bench is usefu
 
 %%%%%%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgement}
+\label{sec:acknowledgement}
 
 This work was supported by the Strategic Priority Research Program of the Chinese Academy of Science under Grant No. XDA04040202-3.
 
@@ -470,6 +479,7 @@ This work was supported by the Strategic Priority Research Program of the Chines
 %%%%%%%%%%%%%%%%   Bibliography  %%%%%%%%%%%%%%%%%%%%%%%
 %% bibliography style
 \section*{References}
+\label{sec:reference}
 \bibliographystyle{elsarticle-num}
 
 %% From BibTex file
