@@ -1,4 +1,4 @@
-\documentclass[review, times]{elsarticle}
+\documentclass[preprint, times]{elsarticle}
 
 %%%%%%%%%%%%%%   Preample  %%%%%%%%%%%%%%%%%%
 
@@ -206,17 +206,6 @@ Central \SI{12}{\milli\meter} is scanned both in the horizontal and verical dire
 \label{fig:FIG3}
 \end{figure} 
 
-\subsection{Fiber Bundle}
-\label{sec:fiber_bundle}
-
-A bundle of 35 plastic clad silica fibers~\cite{optical_fibre}(25 for test channels, 2 for reference channels and 8 spares) is utilized to distribute light to every PMT.
-Each fiber is \SI{1.5}{\meter} long and has a \SI{400}{\micro\meter} diameter core with a \SI{75}{\micro\meter} thick cladding, and the numerical aperture(NA) is 0.37.
-The relatively large core and NA make the fiber an efficient light extractor of integrating sphere output. 
-
-For easier manipulation and to protect the fibers from mechanical damage, both ends of the fiber bundle are coated with stainless steel ferrules.
-The bundle end is coupled to the center of the output port of integrating sphere using a stable fiber alignment stage.
-On the other end, each fiber is fixed using a customized fiber holder, which allows two-dimensional position adjustment, and is aligned to the center of the corresponding PMT window with a precision of \SI{0.5}{\milli\meter}.
-
 \begin{figure}
  \centering
  \includegraphics[width=90mm]{FIG4}
@@ -233,12 +222,40 @@ Bottom: Ratio between the two measurements of each fiber, the results are consis
 \label{fig:FIG5}
 \end{figure} 
 
+\begin{figure*}
+  \centering
+ \includegraphics[width=125mm]{FIG6}
+\caption{General PMT testing framework}
+\label{fig:FIG6}
+\end{figure*}
+
+\subsection{Fiber Bundle}
+\label{sec:fiber_bundle}
+
+A bundle of 35 plastic clad silica fibers~\cite{optical_fibre}(25 for test channels, 2 for reference channels and 8 spares) is utilized to distribute light to every PMT.
+Each fiber is \SI{1.5}{\meter} long and has a \SI{400}{\micro\meter} diameter core with a \SI{75}{\micro\meter} thick cladding, and the numerical aperture(NA) is 0.37.
+The relatively large core and NA make the fiber an efficient light extractor of integrating sphere output. 
+
+For easier manipulation and to protect the fibers from mechanical damage, both ends of the fiber bundle are coated with stainless steel ferrules.
+The bundle end is coupled to the center of the output port of integrating sphere using a stable fiber alignment stage.
+On the other end, each fiber is fixed using a customized fiber holder, which allows two-dimensional position adjustment, and is aligned to the center of the corresponding PMT window with a precision of \SI{0.5}{\milli\meter}.
+
 The light output of each fiber was calibrated after coupling the bundle to the integrating sphere(see Fig.\ref{fig:FIG4}).
 For this calibration, the same PMT was used to scan all the fibers successively, while the light intensity fluctuation of the light source was monitored by another PMT.
 After the light intensity correction, a variance of \SI{10}{\percent} is observed among the fibers, and this result is a direct reflection of the light transmission difference among the fibers because the contribution from light source non-uniformity is negligible.
 Moreover, different light intensities were used in the calibration process, and the result shows that the transmission has no dependency on the light intensity as shown in Fig.\ref{fig:FIG5}. 
 This is within the expectation, as the transmission coefficient is an intrinsic characteristic of the fiber itself.
 The transmission difference of the fibers from this calibration will be used as correction constants in the future measurements using this test bench.
+
+\begin{figure*}
+ \centering
+ \includegraphics[width=125mm]{FIG7}
+\caption{Integration of all components of the test bench for R4443 characterization.
+Voltage dividers, which are based on the same design as those used in the final assembly, are utilized. 
+20 rare tubes are mounted for test and 2 reference tubes can be seen in the bottom left corner of the picture. 
+}
+\label{fig:FIG7}
+\end{figure*}
 
 \subsection{Software}
 \label{sec:software}
@@ -254,13 +271,6 @@ Instead of developing a dedicated program each time a hardware changes, an abstr
 Abstract classes are defined for the four essential types of controlling device as shown in the rounded boxes in Fig.\ref{fig:FIG1}.
 New hardware only needs to inherit from the corresponding abstract class and implement its interface methods and then registered in the singleton class \textit{PTDeviceManager}, leaving all other part of the software unchanged.
 Currently, concrete device classes for the hardware described in this section have all been implemented and fully tested.
-
-\begin{figure*}
-  \centering
- \includegraphics[width=125mm]{FIG6}
-\caption{General PMT testing framework}
-\label{fig:FIG6}
-\end{figure*}
 
 Built upon the abstract device interface, a general testing framework is defined as shown in Fig.\ref{fig:FIG6}.
 \textit{PTVProgram} represents the measurement for a specific characteristic of PMT, such as cathode uniformity, gain and so on.
@@ -280,16 +290,6 @@ However, more detailed analysis are considered project-specific and not included
 
 \section{Application in the construction of DAMPE PSD}
 \label{sec:application}
-
-\begin{figure*}
- \centering
- \includegraphics[width=125mm]{FIG7}
-\caption{Integration of all components of the test bench for R4443 characterization.
-Voltage dividers, which are based on the same design as those used in the final assembly, are utilized. 
-20 rare tubes are mounted for test and 2 reference tubes can be seen in the bottom left corner of the picture. 
-}
-\label{fig:FIG7}
-\end{figure*}
 
 PSD adopts the Hamamastu R4443 PMT, which is a low noise 10 stages tube ruggedized for space usage, for scintillation light detection.
 To satisfy the large dynamic range requirement of PSD, two dynodes, 5 and 8, are readout for each PMT, 
@@ -339,7 +339,7 @@ The results from different light intensities are cross checked and they are cons
 Distribution of the relative gain at 850V is shown in Fig.\ref{fig:FIG9}, where all the tubes are normalized to the one with the smallest gain. 
 A maximum of about 5.5 times difference in the gain has been observed.
 
-\begin{figure}
+\begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{FIG8}
 \caption{Correlation between the parameters given by Hamamastu and the gain measured using the test bench.
@@ -347,7 +347,7 @@ Data are normalized to the same tube.}
 \label{fig:FIG8}
 \end{figure} 
 
-\begin{figure}
+\begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{FIG9}
 \caption{Relative gain distribution at 850V measured using light intensity 5.
@@ -358,7 +358,7 @@ Data are normalized to the tube of the smallest gain.}
 \subsection{Gain ratio between Dynode8 and Dynode5}
 \label{sec:psd_dy58}
 
-\begin{figure}
+\begin{figure}[h!]
  \centering
  \includegraphics[width=90mm]{FIG10}
 \caption{Example of the measurement of dynode8/dynode5 ratio.
@@ -368,19 +368,19 @@ Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is
 \label{fig:FIG10}
 \end{figure} 
 
+\begin{figure}[h!]
+ \centering
+ \includegraphics[width=90mm]{FIG11}
+\caption{Distribution of the dynode8/dynode5 ratio at \SI{820}{\volt} calculated based on the fitted power law function.}
+\label{fig:FIG11}
+\end{figure} 
+
 The gain ratio between dynode8 and dynode5 is measured by varying the light intensity in a large range until saturation of the dynode8 signal is observed, as shown in Fig\ref{fig:FIG10}.
 The same procedure is repeated at 7 different supply voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, to obtain the dynode8/dynode5 dependency on voltage.
 As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.\ref{fig:FIG10}.
 The ratio between the gain of dynode8 and dynode5 can then be calculated at any voltage value based on the fitting result.
 As an example, the distribution of dynode8/dynode5 ratios at a centain supply voltage is shown in Fig.\ref{fig:FIG11}.
 It can be seen that the variance is much smaller than that of gain.
-
-\begin{figure}
- \centering
- \includegraphics[width=90mm]{FIG11}
-\caption{Distribution of the dynode8/dynode5 ratio at \SI{820}{\volt} calculated based on the fitted power law function.}
-\label{fig:FIG11}
-\end{figure} 
 
 \subsection{Cathode Uniformity}
 \label{sec:psd_cathodescan}
