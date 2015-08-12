@@ -1,4 +1,4 @@
-\documentclass[5p, times]{elsarticle}
+\documentclass[review, times]{elsarticle}
 
 %%%%%%%%%%%%%%   Preample  %%%%%%%%%%%%%%%%%%
 %% for comment (texts in between \begin{comment} and \end{comment} will be ignored)
@@ -160,8 +160,8 @@ Both stages are housed in a light-tight container made of aluminum alloy, with a
 The container is painted black inside and the lid can be removed for operations such as tube mounting.
 
 For its proper operation, many auxiliary equipment are considered as the essential parts of the test bench. These equipment are divided into four groups according to the functions they provide: motion controller, pulse generator, high voltage supply and data acquisition system(DAQ).
-The motion controller and the pulse generator are tightly coupled to the test bench itself, and the same hardware can be reused for nearly all the cases the bench may work for.
-On the other hand, DAQ and the high voltage supply system have closer relation to the experiment which need massive PMT characterization, and project-specific hardware may be preferred in some experiments. Originally, we equipped a CAEN SY1527LC~\cite{sy1527lc} power crate as high voltage supply and a universal CAMAC system with CC-USB crate controller~\cite{cc_usb} as DAQ.
+The motion controller and the pulse generator are tightly coupled to the test bench itself, thus the same hardware can be reused for nearly all the cases the bench may work for.
+On the other hand, DAQ and the high voltage supply system have closer relation to the experiment which need massive PMT characterization, and project-specific hardware may be preferred in different experiments. Originally, we equipped a universal CAEN SY1527LC~\cite{sy1527lc} power crate as high voltage supply and a CAMAC system with CC-USB crate controller~\cite{cc_usb} as DAQ.
 
 All these equipment are placed outside the light-tight container, and the cables needed are led out through light-tight feedthroughs.
 The control of all these equipment are integrated into a single software. The changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
