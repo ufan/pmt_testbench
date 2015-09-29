@@ -1,5 +1,6 @@
 
 \documentclass[a4paper,10pt,twoside]{cpc-hepnp}
+% \pdfoutput=1
 %\usepackage{CJK}
 \usepackage{CJKutf8}
 \usepackage{upgreek,fancyhdr}
@@ -11,32 +12,13 @@
 \usepackage{lastpage}
 
 %% additional packages
-%% for celcius symbol
-\usepackage{textcomp}
 
 %% for units
 \usepackage{siunitx}
 
-%% The lineno packages adds line numbers. Start line numbering with
-%% \begin{linenumbers},  end it with \end{linenumbers}. Or switch it on
-%% for the whole article with \linenumbers.
-\usepackage{lineno}
-\modulolinenumbers[5]
-
-\usepackage{hyperref}
-
 %% package for type Greek letters without entering into math-mode
-\usepackage{textgreek}
-
-%% package for large picture in two-colume
-\usepackage{dblfloatfix}
-\usepackage{fixltx2e}
-\usepackage{float}
 \usepackage{comment}
 
-%% only jpg pdf eps are allowed, tiff format are not allowed in latex
-%% eps in principle can't be compiled by pdflatex, pdf not compiled by latex, but Kile can do some intermedate conversion to allow this happen.
-\DeclareGraphicsExtensions{.pdf, .eps, .jpg}
 
 
 \begin{document}
@@ -55,10 +37,10 @@
 \title{A versatile PMT test bench and its application in the DAMPE-PSD\thanks{Supported by the Strategic Priority Research Program of the Chinese Academy of Science under Grant No. XDA04040202-3}}
 
 \author{%
-      Yong Zhou (周勇)$^{1,2,3;1)}$%\email{yong@impcas.ac.cn}%
-\quad Yu-Hong Yu (余玉洪)$^{1;2)}$%\email{yuyuhong@impcas.ac.cn}%
-\quad Zhi-Yu Sun (孙志宇)$^{1;3)}$\email{sunzhy@impcas.ac.cn}
-\quad Yong-Jie Zhang(张永杰) $^{1}$
+      Yong Zhou (周勇)$^{1,2,3}$
+\quad Zhi-Yu Sun (孙志宇)$^{1}$
+\quad Yu-Hong Yu (余玉洪)$^{1;1)}$\email{yuyuhong@impcas.ac.cn}
+\quad Yong-Jie Zhang(张永杰) $^{1}$\\
 \quad Fang Fang (方芳)$^{1}$
 \quad Jun-Ling Chen (陈俊岭)$^{1}$
 \quad Bi-Tao Hu (胡碧涛)$^{2}$
@@ -114,32 +96,12 @@ To accommodate the various requirements of different experiments, the test bench
 This makes the migration from one testing configuration to another light-weight and time-saving.
 
 The first user of this test bench is the Plastic Scintillator Detector (PSD), a sub-detector of the DArk Matter Particle Explorer (DAMPE)~\citep{Chang_Jin_dampe} which is a satellite-borne experiment. 
-The test work for the PMTs of PSD using this test bench is very successful. Summary of the test results are shown in Sec.\ref{sec:application}.
+The test work for the PMTs of PSD using this test bench is very successful. Summary of the test results are shown in Sec.~3.
 
 \section{Description of the test bench}
 \label{sec:description}
 	
-\begin{comment}
-As a massive PMT test bench, some aspects need to be considered in the design:
-\begin{itemize}
-	\item \textit{Large capacity}: This is the primary driving force for developing a test bench dedicated for massive PMT characterization.
-	Testing multiple tubes simultaneously can increase the efficiency and save time tremendously, and this is a critical factor in projects involving large number of PMTs. 
-	On the other hand, testing too many tubes at the same time will make the system very complicated and difficult to operate. 
-	So we need to make a tradeoff between efficiency and complexity.
-	\item \textit{Automation}: A single test run for PMT characterization usually takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity and so on.
-	Manual operations are inefficient and unreliable in such a long period.
-	Computer controllable hardware should be used whenever possible and corresponding software should be developed to automate these trivial operations.
-	Manual intervention is only expected in the beginning when mounting PMTs and configuring the software and in the end when unmounting PMTs and assessing test result. 
-	\item \textit{Versatility}: The test bench is not designed for a specific experiment only. 
-	We should consider as many potential use cases as possible, and the appropriate hardware should be set up in the first place.
-	For example, the photocathode scanning capability is desirable in cases that many scintillators are coupled to a single PMT~\citep{tof_pet}. 
-	\item \textit{Flexibility}: As a by-product of versatility, flexibility is needed both in terms of hardware and software.
-	The hardware platform should be extensible and allow complex testing configurations.
-	The software should accommodate any changes in the hardware easily, while keeping the high level functionality unchanged and portable. 
-\end{itemize}
-\end{comment}
-
-A schematic diagram of the PMT test bench is shown in Fig.\ref{fig:FIG1}, it is designed to test up to 25 PMTs simultaneously.
+A schematic diagram of the PMT test bench is shown in Fig.~\ref{fig:FIG1}, it is designed to test up to 25 PMTs simultaneously.
 Light pulses from a blue LED are distributed to the PMTs through an integrating sphere and a transparent fiber bundle, which are mounted on a three-axes motorized stage.
 PMTs under test will be mounted on a separate fixed stage, thus allowing for photocathode's position scanning of all tubes simultaneously.
 There are also two PMTs fixed on the motorized stage, serving as a reference to monitor the stability of the LED as well as the performance of the whole system.
@@ -164,7 +126,7 @@ Originally, a universal CAEN SY1527LC~\citep{sy1527lc} power crate is adopted as
 Auxiliary equipments are placed outside the light-tight container, and the cables are led out through light-tight feedthroughs.
 The control of all these equipments are integrated into a single software. The changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
 
-The whole test bench is sitting in a cleanroom at IMP, and the room temperature is kept to be 22\textpm~2\textcelsius~all the time. 
+The whole test bench is sitting in a cleanroom at IMP, and the room temperature is kept to be $22\pm2$\si{\celsius}~all the time. 
 In the following sections, some key components of the test bench will be described in detail.
 
 \subsection{Motorized and fixed stages}
@@ -179,7 +141,7 @@ In particular, customized fixtures for fibers, PMTs and integration sphere have 
 	\figcaption{\label{fig:FIG2}Motorized and fixed stages before assembly, with the fixtures for the integrating sphere, fibers and PMTs on the top.}
 \end{center} 
 
-As shown in Fig.\ref{fig:FIG2}, both stages are covered with a $1560mm\times250mm$ optical breadboard. 
+As shown in Fig.~\ref{fig:FIG2}, both stages are covered with a $1560mm\times250mm$ optical breadboard. 
 These breadboards are made of \SI{2.5}{cm} thick stainless steel, providing substantial resistance to deformation in this application. 
 The grid pattern of tapped holes on their surface provide extra flexibility in the testing configuration as well as facilitates mounting/unmounting operations.
 
@@ -200,7 +162,7 @@ The general purpose pulse generator, Tektronix AFG3252~\citep{afg3252}, is adopt
 AFG3252 can adjust all the pulse parameters in a wide range with high precision. This is a critical feature for a test bench with an objective of versatility, as diverse requirements for the light pulses exist in different applications. 
 Besides the LED driving pulse, AFG3252 can also output a synchronized pulse as the trigger signal to the DAQ, which  simplifies the DAQ configuration in most cases. 
 
-The uniformity of the light source has been checked by using the same optical fiber to scan the output port surface of the integrating sphere. The fiber was coupled to a PMT to measure the light intensity, and an uniformity within \textpm\SI{0.5}{\percent} has been reached.
+The uniformity of the light source has been checked by using the same optical fiber to scan the output port surface of the integrating sphere. The fiber was coupled to a PMT to measure the light intensity, and an uniformity within $\pm\SI{0.5}{\percent}$ has been reached.
 
 \subsection{Fiber bundle}
 \label{sec:fiber_bundle}
@@ -218,13 +180,13 @@ The same PMT and light pulser setting was used to measure the light output of ea
 The PMT was fixed and each fiber was aligned to the same position with a precision of \SI{0.5}{\milli\meter} using a fiber alignment stage, and the light intensity fluctuation of the light source was monitored by a separate PMT.
 After the light intensity correction, a variance of \SI{10}{\percent} is observed among the fibers.
 %The result is a direct reflection of the transmission difference among the fibers because the contribution from light source non-uniformity is negligible (see the previous section).
-Different light intensities were used in the calibration process, and the result shows that the light output difference has no dependency on the light intensity as shown in Fig.\ref{fig:FIG3}. 
-Thus, the light output difference can be treated as a constant parameter and the results will be utilized in the measurement of the relative gain of PMT (see Sec.\ref{sec:psd_gain})
+Different light intensities were used in the calibration process, and the result shows that the light output difference has no dependency on the light intensity as shown in Fig.~\ref{fig:FIG3}. 
+Thus, the light output difference can be treated as a constant parameter and the results will be utilized in the measurement of the relative gain of PMT (see Sec.~3.1)
 
 \begin{center}
 	\includegraphics[width=\linewidth]{FIG3}
 	\figcaption{\label{fig:FIG3}Up: Light output of 35 fibers measured at two light intensities with an amplitude difference of about 4 times.
-		Bottom: Ratio between the two measurements of each fiber, the results are consistent within \textpm\SI{0.3}{\percent}.}
+		Bottom: Ratio between the two measurements of each fiber, the results are consistent within $\pm\SI{0.3}{\percent}$.}
 \end{center} 
 
 \subsection{Software}
@@ -238,18 +200,17 @@ The software for the test bench is developed under Windows using C++. It can be 
 \end{enumerate}
 
 Instead of developing a dedicated program each time a hardware changes, an abstraction of the devices is adopted to separate the testing procedure from hardware implementation details. 
-Abstract classes are defined for the four types of essential equipments as shown in the rounded boxes in Fig.\ref{fig:FIG1}.
+Abstract classes are defined for the four types of essential equipments as shown in the rounded boxes in Fig.~\ref{fig:FIG1}.
 New hardware of each type only needs to inherit from the corresponding abstract class and implement its interface methods and then registered in the singleton device management class \textit{PTDeviceManager}, leaving all other part of the software unchanged.
 %Currently, concrete device classes for the hardware described in this section have all been implemented and fully tested.
 	
-Built upon the abstract device interface, a general testing framework is defined as shown in Fig.\ref{fig:FIG4}.
+Built upon the abstract device interface, a general testing framework is defined as shown in Fig.~\ref{fig:FIG4}.
 \textit{PTVProgram} represents the measurement for a specific characteristic of PMT, such as cathode uniformity, gain and so on.
 \textit{PTVTest} is a subunit of \textit{PTVProgram}, which encapsulates the real device operations performed under a specific condition.
 A \textit{PTVProgram} may consist of a series of \textit{PTVTest}s, which are invoked sequentially in a test loop.
 For example, in cathode uniformity measurement, the stepping motor will move to a series of positions and the PMT response will be recorded by the DAQ at each position.
 Here, device operations performed at each position constitute a \textit{PTVTest} and tests at all positions constitute a \textit{PTVProgram}.
 Additional operations may be added in the \textit{PreTest} and \textit{PostTest} methods of \textit{PTVProgram}, which will be invoked before and after the test loop respectively.
-%Typically, PMT warming can be performed in \textit{PreTest} and analysis can be done in \textit{PostTest}.
 \textit{PTVProgram}s of various testing objectives are finally chained together to constitute a complete characterization of PMT.
 
 \end{multicols}
@@ -291,8 +252,8 @@ Here, only the major results are presented with a focus on the demonstration of 
 \subsection{Relative gain of dynode8}
 \label{sec:psd_gain}
 
-Due to the low gain of the dynode8 of R4443, the single photon electron spectrum can not be utilized for absolute gain measurement.
-Instead, a relative measurement of the gain is adopted by comparing the responses of the PMTs at the same input light intensity.
+PSD requires a \SI{25}{\percent} uniformity in all detection units. 
+Therefore, a relative measurement of the gain is adopted by comparing the responses of the PMTs at the same input light intensity.
 A light source setting with an intermediate light intensity is selected for this measurement so that the responses of all the tested PMTs are within the linear range.    
 To get the real response to the same light intensity, two corrections are applied to the measured data:
 \begin{equation}
@@ -302,12 +263,12 @@ where $A_{raw}$ is the mean value of the raw ADC spectrum measured at the specif
 $k_{runid}$ is the light intensity fluctuation of the light source between different test runs,
 $\tau_{fiberid}$ is the light output difference between fibers.
 $k_{runid}$ can be calculated at each test run using one of the reference PMTs.
-$\tau_{runid}$ is a calibration constant which has been measured in Sec.~\ref{sec:fiber_bundle}.
+$\tau_{runid}$ is a calibration constant which has been measured in Sec.~2.3.
 The relative gain $G_{relative}$ can then be obtained by directly dividing the $A_{corr}$ of the tested PMT by that of a standard PMT.   
 
 7 different high voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, are scanned to obtain the gain variation as a function of supply voltage for each PMT, and the results are fitted using the power law function~\citep{hamamatsu}.
 Based on the fitting result, the relative gain at any supply voltage can be calculated.
-Distribution of the relative gain at 850V is shown in Fig.\ref{fig:FIG5}, where the $A_{corr}$ of all tubes are divided by that of the tube with the smallest gain. 
+Distribution of the relative gain at 850V is shown in Fig.~\ref{fig:FIG5}, where the $A_{corr}$ of all tubes are divided by that of the tube with the smallest gain. 
 A maximum of about 5.5 times difference in the gain has been observed.
 
 \begin{center}
@@ -320,9 +281,9 @@ A maximum of about 5.5 times difference in the gain has been observed.
 
 The gain ratio between dynode8 and dynode5 is measured by varying the light intensity in a large range until saturation of the dynode8 signal is observed.
 The same procedure is repeated at 7 different supply voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, to obtain the dynode8/dynode5 dependency on voltage.
-As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.\ref{fig:FIG6} (a).
+As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.~\ref{fig:FIG6} (a).
 The ratio between the gain of dynode8 and dynode5 can then be calculated at any voltage value based on the fitting result.
-As an example, the distribution of dynode8/dynode5 ratios at a certain supply voltage is shown in Fig.\ref{fig:FIG6} (b).
+As an example, the distribution of dynode8/dynode5 ratios at a certain supply voltage is shown in Fig.~\ref{fig:FIG6} (b).
 It can be seen that the variance is much smaller than that of gain.
 
 \begin{center}
@@ -337,7 +298,7 @@ It can be seen that the variance is much smaller than that of gain.
 
 The cathode uniformity of R4443 is also checked using the test bench, which has a minimum effective area of about \SI{10}{\milli\meter} in diameter.
 The measurement is performed by scanning the input window of R4443 in two perpendicular directions with a step of \SI{1}{\milli\meter}.
-At each position, the relative gain is measured at a fixed light source setting according to the method described in Sec.\ref{sec:psd_gain}, and a typical result is shown in Fig.\ref{fig:FIG7}.
+At each position, the relative gain is measured at a fixed light source setting according to the method described in Sec.~3.1, and a typical result is shown in Fig.~\ref{fig:FIG7}.
 
 \begin{center}
 	\includegraphics[width=\linewidth]{FIG7}
@@ -350,15 +311,15 @@ A rapid drop of this efficiency is observed at the edge of the cathode surface.
 Defining the uniform region as a region with the efficiency fluctuation less than \SI{10}{\percent}, it is found that only \SI{75}{\percent} of the tested PMTs can have a uniform region larger than \SI{9}{\milli\meter} in diameter. 
 
 
-\section{Performance}
-\label{performance}
+\subsection{Stability of the test bench}
+\label{sec:stability}
 
-The performance of the test bench during the PMT characterization for DAMPE-PSD can be extracted using the two fixed reference PMTs.
+The stability of the test bench during the PMT characterization for DAMPE-PSD can be extracted using the two fixed reference PMTs.
 
 By checking the response of the reference PMTs with the same light pulser setting at different test runs, a maximum variation of \SI{4}{\percent} in the light intensity of the LED is observed during a period of about one month.
-Light intensity fluctuation can be corrected using the method described in Sec.~\ref{sec:psd_gain}.
+Light intensity fluctuation can be corrected using the method described in Sec.~3.1.
 As two reference PMTs exists, this method can be validated by using one of them for correction and then checking the relative gain of the other. 
-After the correction, stability of the light source is controlled within \textpm\SI{0.5}{\percent} as shown in Fig.\ref{fig:FIG8}.
+After the correction, stability of the light source is controlled within $\pm\SI{0.5}{\percent}$ as shown in Fig.~\ref{fig:FIG8}.
 
 \begin{center}
 	\includegraphics[width=\linewidth]{FIG8}
@@ -367,7 +328,6 @@ After the correction, stability of the light source is controlled within \textpm
 
 Reference PMTs underwent the same testing procedures as the tubes under test.
 Measurement results of the parameters of the reference PMTs in different test runs can be filled together, and the spread of the distribution is an indication of the uncertainty of the testing method.
-%As an example, distribution of the ratio between dynode8 and dynode5 of the reference PMTs is shown in Fig.\ref{fig:FIG14}, where the results from different voltage steps are normalized to their respective mean value of all test runs and filled together.
 In this way, the uncertainty of the dynode8/dynode5 measurement is found to be \SI{1.59}{\percent}, and the uncertainty of relative gain measurement is \SI{0.53}{\percent}. 
 
 \section{Summary}
