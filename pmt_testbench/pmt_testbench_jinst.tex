@@ -61,13 +61,13 @@ The characteristics of the test bench can be summarized as follows:
 	Testing multiple tubes simultaneously can increase the efficiency tremendously, and this is a critical factor in projects involving large number of PMTs. 
 	\item \textit{Automation}: A single test run for PMT characterization usually takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity and so on.
 	Manual operations are inefficient and unreliable in such a long period.
-	Computer controllable hardware is chosen in building the test bench whenever possible, and corresponding software has been developed to automate these trivial operations.
+	Computer controllable hardware is preferred in building the test bench, and corresponding software has been developed to automate these trivial operations.
 	Manual intervention is only expected at the beginning of the test run when mounting the PMTs and configuring the software, and at the end of the run when unmounting the PMTs and assessing the test results.
-	\item \textit{Versatility}: Various potential use cases have been considered in the design of the test bench.
-	ossible, and the appropriate hardware should be set up in the first place.
+	\item \textit{Versatility}: Various potential use cases have been considered in the design of the test bench, specifically the cathode scanning capability is incorporated as an intrinsic characteristics of the test bench.
+	Appropriate hardware has been set up in the first place, and general-purpose devices are adopted whenever possible.
 	\item \textit{Flexibility}: %Flexibility is realized both in terms of hardware and software based on the modularity principle.
-	The hardware platform is extensible and the components are loosely coupled, thus allowing complex testing configurations and convenient replacement of the hardware components.
-	The software abstracts the hardware control operations to separate the changes of hardware from the testing procedure, keeping the high level functionality unchanged and portable. 
+	The hardware platform is extensible and the components are loosely coupled, thus allowing complex testing configurations and convenient replacement or upgrade of the hardware.
+	The software abstracts the device control operations and the changes of hardware are handled smoothly in the software design, keeping the high level functionality unchanged and portable. 
 \end{itemize}
 
 A schematic diagram of the PMT test bench is shown in figure~\ref{fig:FIG1}.
