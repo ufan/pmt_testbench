@@ -38,15 +38,14 @@
 
 
 \begin{abstract}
- A versatile test bench system for massive PMT characterization is developed at the Institute of Modern Physics, Chinese Academy of Sciences.
- Up to 25 PMTs, with the diameter smaller than two inches, can be tested simultaneously. 
- The two-dimensional photocathode position scanning function is an intrinsic characteristics of the test bench and the parameters of the light source pulses can be adjusted in a wide range, making it suitable for various applications.
- The system is highly automated and the controlling operations are all integrated into a single software.
- %The test bench is designed to be reused in different experiments. 
- The hardware platform is extensible and the modularity in the software design makes the migration from one testing configuration to another light-weight and efficient.
- These features make the test bench reusable in different experiments.
- It has been first used in the construction of the Plastic Scintillator Detector of DArk Matter Particle Explorer, and a total of 570 Hamamatsu R4443 tubes were tested successfully.
- The test procedure and results are also reported in this aritcle.
+ Performance characterization for massive photomultiplier tubes (PMT) is a frequently encountered procedure in large nuclear and particle experiments. To facilitate the testing work, a dedicated test bench system has been developed at the Institute of Modern Physics, Chinese Academy of Sciences.
+ The two-dimensional photocathode position scanning function is an intrinsic characteristics of the test bench and up to 25 PMTs, with the diameter smaller than two inches, can be tested simultaneously.
+ Additionally, the parameters of the light source pulses can be adjusted in a wide range, thus making it suitable for various characteristics measurements.
+ The test bench system is highly automated with all the controlling operations integrated into a single software. 
+ The hardware platform is extensible which allows complex testing schemes, and the modularity in the software design make the migration from one testing configuration to another light-weight and efficient.
+ All these features make the test bench versatile and reusable in different experiments.
+ It has been first used in the construction of the Plastic Scintillator Detector (PSD) of DArk Matter Particle Explorer (DAMPE) and the performance was verified.
+ A total of 570 Hamamatsu R4443 tubes were tested successfully and the results are also reported in this aritcle.
 \end{abstract}
 
 
@@ -62,17 +61,17 @@ Since invented about 80 years ago, Photomultiplier tubes (PMTs) have been widely
 Today, large experiments may contain thousands or even more PMTs. To make the detectors work well and get optimized performance, it's important to study the characteristics of each PMT before they are put into usage. 
 Manufacturers provide datasheets with typical values of certain parameters that are normally used in the industry, but may not be useful or applicable to a particular science experiment.
 On the other hand, the experiments may have special requirements for some characteristics of the PMTs, which the manufacturers may not provide. 
-Therefore, characterization of PMTs in the laboratory is mandatory in large physics experiments.
+Therefore, the characterization of PMTs in the laboratory is mandatory in large physics experiments.
 
 Testing a large number of PMTs in limited time is a tough job, and usually a dedicated test bench is constructed to facilitate this work~\cite{barnhill_testing_2008,akgun_complete_2005,adragna_pmt-block_2006}.
 Setting up a system like this is not a trivial work, which demands considerable investment of time and effort.
 On the other hand, testing of PMTs is a commonly encountered procedure and many components of the testing configuration can be shared among different applications.
 
 In this paper, a versatile test bench dedicated for massive PMT characterization is reported.
-The test bench is designed to be a standard laboratory equipment for the PMT testing tasks of several experiments prepared and planned at the Institute of Modern Physics (IMP), Chinese Academy of Sciences (CAS).
-To accommodate the various requirements of different experiments and make the migration from one testing configuration to another light-weight and efficient, a large amount of attention has been paid to the selection of the hardware components and the design of the software framework.
+The test bench is designed to be a standard laboratory equipment for the PMT characterization tasks of several experiments prepared and planned at the Institute of Modern Physics (IMP), Chinese Academy of Sciences (CAS).
+To accommodate the various requirements of different experiments and make the test bench reusable in different applications, a large amount of attention has been paid to the selection of the hardware components and the design of the software framework (see Section~\ref{sec:description}).
 The first user of this test bench is the Plastic Scintillator Detector (PSD), a sub-detector of the DArk Matter Particle Explorer (DAMPE)~\cite{Chang_Jin_dampe} which is a satellite-borne experiment. 
-The test work for the PMTs of PSD using this test bench is very successful and summary of the test results will be presented in Section~\ref{sec:application}.
+The testing work for the PMTs of PSD using this test bench is very successful and summary of the test results will be presented in Section~\ref{sec:application}.
 
 \section{Description of the test bench}
 \label{sec:description}
@@ -162,7 +161,7 @@ All the stepping motors are controlled by one motion controller card MPC07SP fro
 \subsection{Light source}
 \label{sec:light_source}
 
-A high-power blue LED~\cite{z-light} (\SI{3}{\watt},  \SIrange{465}{485}{\nano\meter}) is adopted as the light source of the test bench.
+A high-power blue LED~\cite{yuyuhong_led} (\SI{3}{\watt},  \SIrange{465}{485}{\nano\meter}) is adopted as the light source of the test bench.
 The LED is fixed on a special designed base using thermally conductive silicone rubber, and then coupled to a  \SI{5}{\centi\meter} diameter integrating sphere~\cite{integrating_sphere} directly.
 A uniform light source can be achieved in this way, and the uniformity could make the coupling between the light source and the fiber bundle much more flexible.
 
@@ -260,11 +259,11 @@ However, more detailed analysis based on the ROOT file are considered project-sp
 The PSD detector of the DAMPE project is a large-area plastic scintillator array and adopts the Hamamatsu R4443 PMT for the scintillation light detection.
 It aims for high energy e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the deposited energy, and the timing information is not needed.
 To cover the large dynamic range, two dynodes, 5 and 8, are readout for each R4443 tube, 
-and the signals are processed by a highly-sensitive ASIC chip (VA160~\cite{va160}, \SI{-3}{\pico\coulomb}$\sim$\SI{13}{\pico\coulomb}) following with an ADC of 14~bits resolution~\cite{fee}. 
+and the signals are processed by a highly-sensitive ASIC chip (VA160~\cite{va160}, \SI{-3}{\pico\coulomb}$\sim$\SI{13}{\pico\coulomb}) following with an ADC of 14~bits resolution~\cite{yanghaibo_fee}. 
 Both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be  measured before the installation.
 
 Concrete \textit{PTVProgram}s for gain, dynode8/dynode5 ratio and cathode uniformity measurements have been implemented.
-To accommodate the low input range and obtain more realistic results, the ground-test electronics system of PSD~\cite{fee} are utilized instead of the conventional CAMAC system. 
+To accommodate the low input range and obtain more realistic results, the ground-test electronics system of PSD~\cite{yanghaibo_fee} are utilized instead of the conventional CAMAC system. 
 The ground-test system is mainly a copy of the real ones used in space, and a dedicated \textit{PTVDaq} class based on the NI-VISA library~\cite{ni_visa} has been implemented for it.
 %\begin{comment}
 \begin{figure*}[!htb]
@@ -386,8 +385,8 @@ After the correction, stability of the light source is controlled within $\pm\SI
 \begin{figure}[!htb]
 	\centering
 	\includegraphics[width=\linewidth]{FIG8}
-	\captionsetup{justification=raggedright,singlelinecheck=false}
-	\caption{Stability of the LED monitored by reference PMT2 at 900V (other voltage values give the same results). Red line: $A_{raw}$ before light intensity correction. Blue line: $A_{corr}$ using reference PMT1 for light intensity correction. All the data points are all normalized to the first test run.}
+	%\captionsetup{justification=raggedright,singlelinecheck=false}
+	\caption{Stability of the LED monitored by reference PMT2 at 900V (other voltage values give the same results) . Red line : $A_{raw}$ before light intensity correction. Blue line : $A_{corr}$ using reference PMT1 for light intensity correction. All the data points are all normalized to the first test run.}
 	\label{fig:FIG8}
 \end{figure} 
 
@@ -407,6 +406,7 @@ Considering the flexible and open platform it possesses, the test bench is usefu
 This work was supported by the Strategic Priority Research Program of the Chinese Academy of Science under Grant No. XDA04040202-3.
 \end{comment}
 
+\begin{comment}
 \begin{thebibliography}{99}
 \bibitem{bib:1} Baran V, Cabibbo M, Colonna M, \emph{et al}. The dynamical dipole mode in dissipative heavy-ion collisions.  Nucl Phys A, 2001, {\bf 679}: 373--392. \href{http://dx.doi.org/10.1016/S0375-9474(00)00365-1}{DOI: 10.1016/S0375-9474(00)00365-1}
 \bibitem{bib:2} Tao C, Ma Y G, Zhang G Q, \emph{et al}. Pygmy and giant dipole resonances by Coulomb excitation using a quantummolecular dynamics model. Phys Rev C, 2013, {\bf 87}: 014621. \href{http://dx.doi.org/10.1103/PhysRevC.87.014621}{DOI: 10.1103/PhysRevC.87.014621}
@@ -414,7 +414,34 @@ This work was supported by the Strategic Priority Research Program of the Chines
 \bibitem{bib:4} Mettam G R, Adams L B. How to prepare an electronic version of your article. In: Jones B S, Smith R Z, editors. Introduction to the electronic age. New York (USA): E-Publishing Inc, 1999, 281--304.
 \bibitem{bib:5} Zhang B, Harada T, Hirahara D. N6P1042: Experimental Study of Self-Leveling Behavior in Debris Bed, the Sixth Japan-Korea Symposium on Nuclear Thermal Hydraulics and Safety (NTHAS6), Okinawa, Japan, Nov.~24--27, 2008.
 \end{thebibliography}
+\end{comment}
+
+\begin{thebibliography}{99}
+	\bibitem{barnhill_testing_2008} Barnhill D, Suarez F, Arisaka K, \emph{et al}. Testing of photomultiplier tubes for use in the surface detector of the {Pierre} {Auger} observatory. Nucl Instrum Meth A, 2008, {\bf 591}: 453--466.
+	\href{http://dx.doi.org/10.1016/j.nima.2008.01.088}{DOI: 10.1016/j.nima.2008.01.088}
+	\bibitem{akgun_complete_2005} Akgun U, Ayan A S, Bruecken P, \emph{et al}. Complete tests of 2000 {Hamamatsu} {R}7525HA phototubes for the {CMS}-{HF} {Forward} {Calorimeter}. Nucl Instrum Meth A, 2005, {\bf 550}: 145--156.
+	\href{http://dx.doi.org/10.1016/j.nima.2005.03.171}{DOI: 10.1016/j.nima.2005.03.171}
+	\bibitem{adragna_pmt-block_2006} Adragna P, Antonaki A, Boudagov I, \emph{et al}. A {PMT}-{Block} test bench. Nucl Instrum Meth A, 2006, {\bf 564}: 597--607.
+	\href{http://dx.doi.org/10.1016/j.nima.2006.03.045}{DOI: 10.1016/j.nima.2006.03.045}
+	\bibitem{Chang_Jin_dampe} Chang J. Dark Matter Particle Explorer: The First Chinese Cosmic Ray and Hard $\gamma$-ray Detector in Space. Chinese Journal of Space Science, 2014, {\bf 34}: 550-556.
+	\href{http://dx.doi.org/10.11728/cjss2014.05.550}{DOI: 10.11728/cjss2014.05.550}
+	\bibitem{yuyuhong_led} Yu Y H, Xu H G, Zhan W L, \emph{et al}. Study of the LED based light calibration system for neutron wall detector. High Energ Phys Nuc, 2007, {\bf 31}: 581-585.
+	\bibitem{sy1527lc} {CAEN S.p.A.}, Low Cost Universal Multichannel Power Supply System. \href{http://www.caen.it/csite/CaenProd.jsp?idmod=491&parent=20}{http://www.caen.it/.}
+	\bibitem{cc_usb} {W-IE-NE-R Plein \& Baus GmbH.} {CC-USB CAMAC Controller with USB interface}. \href{http://www.wiener-d.com/sc/modules/camac--modules/cc-usb.html}{http://www.wiener-d.com/.}
+	\bibitem{leetro} {Leetro Automation Co. Ltd.} {MPC07SP Motion Control Board}. \href{http://www.leetro.com/english/}{http://www.leetro.com/.}
+	\bibitem{integrating_sphere} {Mulansphere Co. Ltd.} {Customized 5CM Aluminum-alloy Integrating Sphere}. \href{http://mulansphere.com/e-index.html/}{http://mulansphere.com/.}
+	\bibitem{afg3252} {Tektronix Company}. {AFG3000 Series Arbitrary/Function Generators Quick Start User Manual}. \href{http://www.tek.com/signal-generator/afg3000-function-generator/}{http://www.tek.com/.}
+	\bibitem{optical_fibre} Nanjing Chunhui Science and Technology Industrial Co. Ltd. Customized Plastic-clad Silica Fiber-bundle.  \href{http://www.china-light-guides.com/}{http://www.china-light-guides.com/.}
+	\bibitem{pdcurses} PDCurses.  Public Domain Curses Library for DOS, OS/2, Win32, X11 and SDL. \href{http://pdcurses.sourceforge.net/}{http://pdcurses.sourceforge.net/.}
+	\bibitem{root} ROOT.  ROOT Data Analysis Framework. \href{https://root.cern.ch/}{https://root.cern.ch/.}
+	\bibitem{va160} Integrated Detector Electronics AS.  A 32-channel ASIC chip for PMT Spectrometer Readout with Trigger. \href{http://www.ideas.no/products/ide3160-2/}{http://www.ideas.no/.}
+	\bibitem{ni_visa} National Instruments Corporation.  National Instruments {VISA} Library. \href{http://www.ni.com/visa/}{http://www.ni.com/visa/.}
+	\bibitem{yanghaibo_fee} Yang Hai Bo. Signals Reading Method and Circuit Design for Multiple Detection Unit Based on the Advanced {ASIC} Chips. Ph.D. Thesis, The University of Chinese Academy of Sciences, 2014.
+	\bibitem{hamamatsu} Hamamatsu Photonics K. K., Photomultiplier tubes: basics and applications, 3rd ed.
+	\href{http://www.hamamatsu.com/resources/pdf/etd/PMT_handbook_v3aE.pdf}{http://www.hamamatsu.com/resources/.}
+\end{thebibliography}
 
 
+%\bibliography{mybib}
 
 \end{document}
