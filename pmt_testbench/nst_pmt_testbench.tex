@@ -104,7 +104,7 @@ Light pulses from a blue light emitting diode (LED) are distributed to the PMTs 
 PMTs under test will be mounted on a separate fixed stage, thus allowing for the photocathode's position scanning of all tubes simultaneously.
 There are also two extra PMTs fixed on the motorized stage.
 Their positions are permanent relative to the input fiber in all operations and they will be used to monitor the stability of the LED as well as the performance of the test bench system.
-Both stages are housed in a black light-tight container made of aluminum alloy (see Fig.~\ref{fig:FIG2} (a)), with a dimension of $176cm\times100cm\times78cm$.
+Both stages are housed in a black light-tight container made of aluminum alloy (see Fig.~\ref{fig:FIG2_a}), with a dimension of $176cm\times100cm\times78cm$.
 %The container is painted black inside and the lid can be removed for operations such as tube mounting.
 
 For the proper operation of the test bench, a variety of auxiliary equipments are needed. 
@@ -140,18 +140,18 @@ In the following sections, the key components of the test bench are described in
 \begin{figure}[!htb]
 	
 	\begin{subfigure}[t]{80mm}
-		\includegraphics[width=80mm]{fibre_led_insphere_crop.jpg}
+		\includegraphics[width=80mm]{FIG3_a.jpg}
 		\caption{1) LED; 2) Integrating sphere; 3) Fiber bundle}
 		\label{fig:FIG3_a}
 	\end{subfigure}
 	\begin{subfigure}[t]{80mm}
-		\includegraphics[width=80mm]{light_source1_crop.jpg}
+		\includegraphics[width=80mm]{FIG3_b.jpg}
 		\caption{Integration of the components.}
 		\label{fig:FIG3_b}
 	\end{subfigure}
 	
 	\caption{The light distribution system.}
-	\label{fig:FIG_tmp}
+	\label{fig:FIG3}
 \end{figure}
 
 The motorized and fixed stages form the main body of the test bench.
@@ -166,7 +166,7 @@ In particular, customized fixtures for the fibers, PMTs and the integration sphe
 \end{figure} 
 \end{comment}
 
-As shown in Fig.~\ref{fig:FIG2} (b), both stages are covered with a $1560mm\times250mm$ optical breadboard. 
+As shown in Fig.~\ref{fig:FIG2_a}, both stages are covered with a $1560mm\times250mm$ optical breadboard. 
 These breadboards are made of \SI{2.5}{cm} thick stainless steel, providing substantial resistance to deformation in this application. 
 The grid pattern of tapped holes on their surface provide extra flexibility in the testing configuration as well as facilitates mounting/unmounting operations.
 
@@ -188,16 +188,16 @@ This makes the coupling between the light source and the fiber bundle much more 
 For PMT characterization, light pulses of short duration are needed.
 %%%%%ADD 
 The general purpose pulse generator, Tektronix AFG3252~\cite{afg3252}, is adopted to drive the LED directly.
-Although it is not designed to be a dedicated LED driver, the performance of AFG3252 is quite satisfactory (an example is shown in Fig.~\ref{fig:light_pulse}).
+Although it is not designed to be a dedicated LED driver, the performance of AFG3252 is quite satisfactory (an example is shown in Fig.~\ref{fig:FIG4}).
 AFG3252 can adjust all the pulse parameters in a wide range with high precision. This is a critical feature for a test bench with an objective of versatility, as diverse requirements for the light pulses exist in different applications. 
 Besides the LED driving pulse, AFG3252 can also output a synchronized pulse as the trigger signal to the DAQ, which will simplify the DAQ configuration in most cases. 
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=85mm]{light_pulse.jpg}
+	\includegraphics[width=85mm]{FIG4.jpg}
 	%\captionsetup{justification=raggedright,singlelinecheck=false}
 	\caption{An example of the PMT output waveform (extracted from dynode 8) in response to the light pulse drived by a square pulse of AFG3252 with \SI{30}{\nano\second} width and \SI{5}{\nano\second} leading/trailing time.}
-	\label{fig:light_pulse}
+	\label{fig:FIG4}
 \end{figure} 
 
 The uniformity of the light source has been verified by using the same optical fiber to scan the output port surface of the integrating sphere using a three-axes alignment stage. The other end of the fiber was then coupled to a fixed PMT to measure the light output intensity.
@@ -222,18 +222,18 @@ A fixed pulse generator setting was used to drive the LED, and the same PMT was 
 The PMT (called testing PMT) was fixed and each fiber was aligned to the same photocathode position with a precision of \SI{0.1}{\milli\meter} using a fiber alignment stage.
 Additionally, a separate PMT (called monitoring PMT) was used to monitor the light output fluctuation of the LED.
 Thus ,the light output intensity of the fibers can be represented by the raw ADC counts of the testing PMT's signal after correcting the LED output fluctuation.
-The result is shown in Fig.~\ref{fig:FIG3}, and a variance of \SI{10}{\percent} is observed among the fibers.
+The result is shown in Fig.~\ref{fig:FIG5}, and a variance of \SI{10}{\percent} is observed among the fibers.
 The same calibration procedure was performed at two LED output intensities, and the results are compatible with each other. 
 Due to the non-uniformity of the integrating sphere is negligible, the light output difference is a direct reflection of the transmission difference among the fibers themselves and shall be stable in a long period.
 Thus, $t_{fiberid}$ is treated as a constant parameter and was used to normalize the light output intensity between different fiber channels in the measurement of the relative gain of PMT (see Section~\ref{sec:psd_gain})
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=85mm]{FIG3}
+	\includegraphics[width=85mm]{FIG5}
 	%\captionsetup{justification=raggedright,singlelinecheck=false}
-	\caption{Up: Light output of 35 fibers measured at two light intensities with an amplitude difference of about 4 times.
+	\caption{Up: Light output of 35 fibers measured at two light intensities with an amplitude difference of about 4 times (the error bars are too small to be seen).
 		Bottom: Ratio between the two measurements of each fiber, the results are consistent within $\pm\SI{0.3}{\percent}$.}
-	\label{fig:FIG3}
+	\label{fig:FIG5}
 \end{figure} 
 
 \subsection{Software framework}
@@ -253,12 +253,12 @@ New hardware of each type only needs to inherit from the corresponding abstract 
 
 \begin{figure*}[!htb]
 	\centering
-	\includegraphics[width=120mm]{FIG4}
+	\includegraphics[width=120mm]{FIG6}
 	\caption{General PMT testing framework. Fake code for a typical \textit{PTVTest} implementation is presented as an example.}
-	\label{fig:FIG4}
+	\label{fig:FIG6}
 \end{figure*}
 
-Built upon the abstract device interface, a general testing framework is defined as shown in Fig.~\ref{fig:FIG4}.
+Built upon the abstract device interface, a general testing framework is defined as shown in Fig.~\ref{fig:FIG6}.
 \textit{PTVProgram} (\textit{V} in the class name indicates that it's an abstract class) represents the measurement for a specific characteristic of PMT, such as cathode uniformity, gain and so on.
 \textit{PTVTest} is a subunit of \textit{PTVProgram}, which encapsulates the real device operations performed under a specific condition.
 A \textit{PTVProgram} may consist of a series of \textit{PTVTest}s, which are invoked sequentially in a test loop.
@@ -309,7 +309,7 @@ Therefore, a relative measurement of the gain is adopted by comparing the respon
 A pusle generator setting with an intermediate light intensity is selected for this measurement, so that the responses of all the tested PMTs are within the linear range.
 
 
-Due to the light output fluctuation of the LED between different test runs and the light output difference between different fiber channels, two corrections were applied to the measured raw data of each tested PMT to normalize the input light intensity and get the real response to the same light intensity: 
+Due to the light output fluctuation of the LED between different test runs and the light output difference between different fiber channels, two corrections were applied to the measured raw data of each tested PMT to normalize the input light intensity and get the real response as follows: 
 \begin{equation}
 	A_{corr} = \frac{A_{raw}}{k_{runid}\tau_{fiberid}}
 \end{equation} 
@@ -322,15 +322,15 @@ The relative gain $G_{relative}$ can then be obtained by directly dividing the $
 
 Seven different high voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, are scanned to obtain the gain variation as a function of supply voltage for each PMT, and the results are fitted using the power law function~\cite{hamamatsu}.
 Based on the fitting result, the relative gain at any supply voltage can be calculated.
-Distribution of the relative gain at 850V is shown in Fig.~\ref{fig:FIG5}, where the $A_{corr}$ of all tubes are divided by that of the tube with the smallest gain. 
+Distribution of the relative gain at 850V is shown in Fig.~\ref{fig:FIG7}, where the $A_{corr}$ of all tubes are divided by that of the tube with the smallest gain. 
 A maximum of about 5.5 times difference in the gain has been observed.
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=85mm]{FIG5}
+	\includegraphics[width=85mm]{FIG7}
 	%\captionsetup{justification=raggedright,singlelinecheck=false}
 	\caption{Relative gain distribution measured at 850V (against the tube with the smallest gain).}
-	\label{fig:FIG5}
+	\label{fig:FIG7}
 \end{figure}
 
 \subsection{Gain ratio between dynode8 and dynode5}
@@ -338,9 +338,9 @@ A maximum of about 5.5 times difference in the gain has been observed.
 
 The gain ratio between dynode8 and dynode5 is measured by varying the light intensity in a large range until saturation of the dynode8 signal is observed.
 The same procedure is repeated at 7 different supply voltages, from \SIrange{700}{1000}{\volt} with a \SI{50}{\volt} step, to obtain the dynode8/dynode5 dependency on voltage.
-As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.~\ref{fig:FIG6} (a).
+As with the gain of dynode8, the dependency can be fitted accurately with a power law function, as shown in the inset graph of Fig.~\ref{fig:FIG8_a}.
 The ratio between the gain of dynode8 and dynode5 can then be calculated at any voltage value based on the fitting result.
-As an example, the distribution of dynode8/dynode5 ratios at a certain supply voltage is shown in Fig.~\ref{fig:FIG6} (b).
+As an example, the distribution of dynode8/dynode5 ratios at a certain supply voltage is shown in Fig.~\ref{fig:FIG8_b}.
 %It can be seen that the variance is much smaller than that of gain.
 
 \begin{comment}
@@ -357,20 +357,20 @@ Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is
 \begin{figure}[!tb]
 	
 	\begin{subfigure}[t]{85mm}
-		\includegraphics[width=85mm]{FIG10}
+		\includegraphics[width=85mm]{FIG8_a}
 		%\captionsetup{justification=raggedright,singlelinecheck=false}
-		\caption{An example of the measurement of dynode8/dynode5 ratio. Correlation between dynode5 and dynode8 at 1000V, 850V and 700V is presented, the saturation of dynode8 signal is clearly seen. Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is shown in the inset graph.}
-		%\label{fig:FIG2_a}
+		\caption{An example of the measurement of dynode8/dynode5 ratio (the error bars are to small to be seen). Correlation between dynode5 and dynode8 at 1000V, 850V and 700V is presented, the saturation of dynode8 signal is clearly seen. Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is shown in the inset graph.}
+		\label{fig:FIG8_a}
 	\end{subfigure}
 	\begin{subfigure}[t]{85mm}
-		\includegraphics[width=85mm]{dy58_dist_850V}
+		\includegraphics[width=85mm]{FIG8_b}
 		\caption{Distribution of the dynode8/dynode5 ratio measured at \SI{850}{\volt}.}
-		%\label{fig:FIG2_b}
+		\label{fig:FIG8_b}
 	\end{subfigure}
 	
 	\caption{Result of dynode8/dynode5 measurement.}
 	%\caption{Left: An example of the measurement of dynode8/dynode5 ratio. Correlation between dynode5 and dynode8 at 1000V, 850V and 700V is presented, the saturation of dynode8 signal is clearly seen. Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is shown in the inset graph. Right: Distribution of the dynode8/dynode5 ratio measured at \SI{850}{\volt}.}
-	\label{fig:FIG6}
+	\label{fig:FIG8}
 \end{figure}
 
 \subsection{Cathode uniformity}
@@ -378,16 +378,16 @@ Power law fit to the measured dynode8/dynode5 of this tube at 7 voltage steps is
 
 \begin{figure}[!tb]
 	\centering
-	\includegraphics[width=85mm]{FIG7}
+	\includegraphics[width=85mm]{FIG9}
 	%\captionsetup{justification=raggedright,singlelinecheck=false}
 	\caption{A typical cathode uniformity of R4443.
 		Relative gain at each position is normalized to the center of the input window.}
-	\label{fig:FIG7}
+	\label{fig:FIG9}
 \end{figure} 
 
 The cathode uniformity of R4443 is also checked using the test bench, which has a minimum effective area of about \SI{10}{\milli\meter} in diameter.
 The measurement is performed by scanning the input window of R4443 in two perpendicular directions with a step of \SI{1}{\milli\meter}.
-At each position, the relative gain is measured at a fixed light source setting according to the method described in Section~\ref{sec:psd_gain}, and a typical result is shown in Fig.~\ref{fig:FIG7}.
+At each position, the relative gain is measured at a fixed light source setting according to the method described in Section~\ref{sec:psd_gain}, and a typical result is shown in Fig.~\ref{fig:FIG9}.
 
 The relative gain at each position is proportional to the total efficiency of light transmission, photoelectric conversion and electron collection at this point.
 A rapid drop of this efficiency is observed at the edge of the cathode surface. 
@@ -400,16 +400,16 @@ The stability of the test bench during the PMT characterization for DAMPE-PSD ca
 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=85mm]{FIG8}
+	\includegraphics[width=85mm]{FIG10}
 	%\captionsetup{justification=raggedright,singlelinecheck=false}
 	\caption{Stability of the LED monitored by reference PMT2 at 900V (other voltage values give the same results) . Red line : $A_{raw}$ before light intensity correction. Blue line : $A_{corr}$ using reference PMT1 for light intensity correction. All the data points are all normalized to the first test run.}
-	\label{fig:FIG8}
+	\label{fig:FIG10}
 \end{figure} 
 
 By checking the response of the monitoring PMTs with the same pulse generator setting at different test runs, a maximum variation of \SI{4}{\percent} in the output light intensity of the LED is observed during a period of about one month.
 Light output fluctuation of the LED can be corrected using the method described in Section~\ref{sec:psd_gain} where $\tau_{fibreid}$ correction is not needed because the same fiber channel is utilized.
 As two reference PMTs exists, this method can be validated by using one of them for output light correction and then checking the relative gain of the other. 
-After the correction, the stability of the LED can be controlled within $\pm\SI{0.5}{\percent}$ as shown in Fig.~\ref{fig:FIG8}.
+After the correction, the stability of the LED can be controlled within $\pm\SI{0.5}{\percent}$ as shown in Fig.~\ref{fig:FIG10}.
 
 Monitoring PMTs underwent the same testing procedures as the tubes under test.
 Measurement results of the parameters of the monitoring PMTs in different test runs can be filled together, and the spread of the distribution is an indication of the uncertainty of the testing method.
