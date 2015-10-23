@@ -8,7 +8,7 @@
   [aps%
   ,prc%
   ,10pt%
-  ,twocolumn%
+  ,onecolumn%
   ,twoside%
   ,superscriptaddress%
   ,nofootinbib%
