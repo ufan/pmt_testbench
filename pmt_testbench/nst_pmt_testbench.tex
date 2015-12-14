@@ -56,22 +56,23 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Since invented about 80 years ago, photomultiplier tubes (PMTs) have been widely used as photosensors in nuclear and particle physics experiments due to the high sensitivity, fast time response and other benefits they have. 
-Today, large experiments may contain thousands or even more PMTs. To make the detectors work well and get optimized performance, it's important to study the characteristics of each PMT before they are put into usage. 
+Since their invention about 80 years ago, photomultiplier tubes (PMTs) have been widely used as photosensors in nuclear and particle physics experiments due to the high sensitivity, fast time response and other inherent benefits. 
+Today, large-scale experiments may contain thousands of PMTs or more. To achieve optimal detector performance, it's important to study the characteristics of each PMT before they are put into usage. 
 Manufacturers provide datasheets with typical values of certain parameters that are normally used in the industry, but may not be useful or applicable to a particular science experiment.
 On the other hand, the experiments may have special requirements for some characteristics of the PMTs, which the manufacturers may not provide. 
 Therefore, the characterization of PMTs in the laboratory is mandatory in large physics experiments.
 
-Characterizing a large number of PMTs in limited time is a tough job, and usually a dedicated test bench is constructed to facilitate this work~\cite{barnhill_testing_2008,akgun_complete_2005,adragna_pmt-block_2006}.
-Setting up a system like this is not a trivial work, which demands considerable investment of time and effort.
-On the other hand, testing of PMTs is a commonly encountered procedure and many components of the testing configuration can be shared among different applications.
+Characterizing a large number of PMTs in limited time is a challenging job. Usually a dedicated test bench is constructed to facilitate this work~\cite{barnhill_testing_2008,akgun_complete_2005,adragna_pmt-block_2006}.
+Setting up a system like this is not trivial work. It requires investment of considerable amount of time and effort.
+On the other hand, testing of PMTs is a common task and many components of the testing configuration can be shared among different applications.
+Thus, it is beneficial to build a single modular PMT test system that could be easily reconfigured for various experiments.
 
-In this paper, a versatile test bench dedicated for massive PMT characterization is reported.
+In this paper, a versatile test bench dedicated for characterization of large amount of PMTs is described.
 The test bench is designed to be a standard laboratory equipment for the PMT characterization tasks of several experiments prepared and planned at the Institute of Modern Physics (IMP), Chinese Academy of Sciences (CAS).
-To accommodate the various requirements of different experiments and make the test bench reusable in different applications, a large amount of attention has been paid to the selection of the hardware components and the design of the software framework (see Section~\ref{sec:description}).
+To accommodate various requirements of different experiments and make the test bench reusable in different applications, great attention has been paid to the selection of  hardware components and the design of the software framework (see Section~\ref{sec:description}).
 The first user of this test bench is the Plastic Scintillator Detector (PSD), a sub-detector of the DArk Matter Particle Explorer (DAMPE)~\cite{Chang_Jin_dampe} which is a satellite-borne experiment. 
-The testing work for the PMTs of PSD using this test bench is very successful, and the performance of the test bench has been verified.
-Summary of the test results will be presented in Section~\ref{sec:application}.
+Characterization of PMTs for PSD using this test bench was very successful. The performance of the test bench has been demonstrated.
+Summary of the test results are presented in Section~\ref{sec:application}.
 
 \section{Description of the test bench}
 \label{sec:description}
@@ -86,34 +87,35 @@ Summary of the test results will be presented in Section~\ref{sec:application}.
 The characteristics of the test bench can be summarized as follows:
 \begin{itemize}
 	\item \textit{Large capacity}: This is the primary driving force for developing a test bench dedicated for PMT characterization.
-	Testing multiple tubes simultaneously can increase the efficiency tremendously, and this is a critical factor in projects involving large number of PMTs. 
-	\item \textit{Automation}: A single test run for PMT characterization usually takes several hours, during which most operations are trivial jobs like changing voltage, changing light intensity and so on.
+	Testing multiple tubes simultaneously can increase the efficiency tremendously, and this is a critical factor in projects involving a large number of PMTs. 
+	\item \textit{Automation}: A single test run for PMT characterization usually takes several hours. Most steps of this process are routine operations such as changing voltage, sweeping light intensity and so on.
 	Manual operations are inefficient and unreliable in such a long period.
-	Computer controllable hardware is preferred in building the test bench, and corresponding software has been developed to automate these trivial operations.
-	Manual intervention is only expected at the beginning of the test run when mounting the PMTs and configuring the software, and at the end of the run when unmounting the PMTs and assessing the test results.
-	\item \textit{Versatility}: Various potential use cases have been considered in the design of the test bench, specifically the cathode scanning capability is incorporated as an intrinsic function of the test bench.
-	Appropriate hardware has been set up in the first place, and general-purpose devices are adopted whenever possible.
+	Computer controllable hardware is preferred in building the test bench, and corresponding software has been developed to automate common routine operations.
+	Human intervention is only expected at the beginning of the test run when mounting the PMTs and configuring the software, and at the end of the run when unmounting the PMTs and assessing the test results.
+	\item \textit{Versatility}: Various potential use cases have been considered in the design of the test bench, specifically the cathode scanning capability was incorporated as an intrinsic function of the test bench.
+	Appropriate hardware has been set up in the first place, and general-purpose devices were adopted whenever possible.
 	\item \textit{Flexibility}: %Flexibility is realized both in terms of hardware and software based on the modularity principle.
-	The hardware platform is extensible and the components are loosely coupled, thus allowing complex testing configurations and convenient replacement or upgrade of the hardware.
-	The software abstracts the device control operations and the changing of hardware is handled smoothly in the software design, keeping the high level functionality unchanged and portable. 
+	The hardware platform is expandable and the components are loosely coupled, thus allowing complex testing configurations and convenient replacement or upgrade of the hardware.
+	The software was carefully designed to provide abstract interfaces for device control. Thus, swapping hardware components has little impact on the high level functionality. This makes the software compatible across platforms.
+	%The software abstracts the device control operations and the changing of hardware is handled smoothly in the software design, keeping the high level functionality unchanged and portable. 
 \end{itemize}
 
 A schematic diagram of the PMT test bench is shown in Fig.~\ref{fig:FIG1}.
-Up to 25 PMTs can be tested at the same time.
+Up to 25 PMTs can be characterized at the same time.
 Light pulses from a blue light emitting diode (LED) are distributed to the PMTs through an integrating sphere and a transparent fiber bundle, which are mounted on a three-axes motorized stage.
-PMTs under test will be mounted on a separate fixed stage, thus allowing for the photocathode's position scanning of all tubes simultaneously.
-There are also two extra PMTs fixed on the motorized stage.
-Their positions are permanent relative to the input fiber in all operations and they will be used to monitor the stability of the LED as well as the performance of the test bench system.
+PMTs under test are mounted on a separate fixed stage. This allows one to scan the photocathodes of all PMTs simultaneously.
+There are also two monitoring PMTs fixed on the motorized stage.
+Their positions remained unchanged relative to the input fiber in all operations and they were used to monitor the stability of the LED as well as the performance of the test bench system.
 Both stages are housed in a black light-tight container made of aluminum alloy (see Fig.~\ref{fig:FIG2_a}), with a dimension of $176cm\times100cm\times78cm$.
 %The container is painted black inside and the lid can be removed for operations such as tube mounting.
 
-For the proper operation of the test bench, a variety of auxiliary equipments are needed. 
-They are divided into four groups according to the functions they provide: motion control (including the stepper driver), pulse generation (including the LED driver), high voltage supply and data acquisition (DAQ).
-The equipments for the motion control and the pulse generation are tightly coupled to the test bench itself, thus the same hardware can be reused for nearly all the cases the bench may work for.
-On the other hand, the equipments for the DAQ and the high voltage supply system have closer relation to the underlying experiment which need PMT characterization, and normally project-specific hardware is preferred in different experiments.
+For the proper operation of the test bench, a variety of auxiliary devices are needed. 
+They are divided into four functional groups according to the functions they provide: motion control (including the stepper driver), pulse generation (including the LED driver), high voltage supply and data acquisition (DAQ).
+The devices for motion control and pulse generation are tightly coupled to the test bench itself, thus the same hardware can be reused for nearly all the use cases.
+On the other hand, the devices for DAQ and high voltage supply are closely related to the intended large-scale experiment which needs PMT characterization, and project-specific hardware is often chosen in different experiments.
 %The changing of hardware is handled smoothly in the software design, which will be discussed in more detail in Section~\ref{sec:software}.
-Originally, a universal CAEN SY1527LC~\cite{sy1527lc} power crate is adopted as the high voltage supply system and a CAMAC crate with the CC-USB crate controller~\cite{cc_usb} as the DAQ.
-All the auxiliary equipments are placed outside the light-tight container, and the cables are led out through light-tight feedthroughs.
+Originally, a universal CAEN SY1527LC~\cite{sy1527lc} power crate was adopted as the high voltage supply system and a CAMAC crate with the CC-USB crate controller~\cite{cc_usb} was used for the DAQ.
+All the auxiliary devices were placed outside the light-tight container, and the cables were led out through light-tight feedthroughs.
 %The control of all these equipments are integrated into a single software. The changing of hardware is handled smoothly in the software design and automation is realized in every aspect of the test bench.
 
 The whole test bench sits in an ISO class 8 cleanroom at IMP, and the room temperature is kept to be $22\pm2$\si{\celsius}~all the time. 
@@ -155,7 +157,7 @@ In the following sections, the key components of the test bench are described in
 \end{figure}
 
 The motorized and fixed stages form the main body of the test bench.
-All other objects inside the light-tight container are mounted on the top of them.
+All other objects inside the light-tight container are mounted on the top of these two stages.
 In particular, customized fixtures for the fibers, PMTs and the integration sphere have been designed for convenient and accurate positioning.
 \begin{comment}
 \begin{figure}[tbp]
@@ -166,12 +168,12 @@ In particular, customized fixtures for the fibers, PMTs and the integration sphe
 \end{figure} 
 \end{comment}
 
-As shown in Fig.~\ref{fig:FIG2_a}, both stages are covered with a $1560mm\times250mm$ optical breadboard. 
+As shown in Fig.~\ref{fig:FIG2_b}, both stages are covered with a $1560mm\times250mm$ optical breadboard. 
 These breadboards are made of \SI{2.5}{cm} thick stainless steel, providing substantial resistance to deformation in this application. 
 The grid pattern of tapped holes on their surface provide extra flexibility in the testing configuration as well as facilitates mounting/unmounting operations.
 
-The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it can do a three-dimensional motion with the help of three stepping motors, which have a minimum step of \SI{1.56}{\micro\meter}.
-The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically, and this is enough to cover any PMTs smaller than two inches which are mostly used.
+The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it can perform a three-dimensional motion driven by three stepping motors. The minimum step size is \SI{1.56}{\micro\meter}.
+The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically. This range is large enough to cover commonly used PMTs with diameters smaller than two inches.
 The stage can also move along the third direction for $15mm$, which is to control the gap between the fiber and the input window of PMT and to protect the fibers while mounting/unmounting the tubes.
 All the stepping motors are controlled by a motion controller board MPC07SP from Leetro~\cite{leetro}, which possesses a PCI (Peripheral Component Interconnect bus) interface for remote control.
 
@@ -179,8 +181,9 @@ All the stepping motors are controlled by a motion controller board MPC07SP from
 \label{sec:light_source}
 
 A high-power blue LED (\SI{3}{\watt}, \SIrange{465}{485}{\nano\meter}) is adopted as the light source of the test bench.
-The spectrum range of the LED is compatible with the spectral response of the most common photocathode, and it has been used before in the monitoring and calibration system of Neutron Wall Detector at IMP~\cite{yuyuhong_led} and proved to be suitable for massive light distribution.
-The LED is fixed on a special designed base using thermally conductive silicone rubber (see Fig.~\ref{fig:FIG3_a}), and then coupled to a \SI{5}{\centi\meter} diameter integrating sphere~\cite{integrating_sphere} directly.
+The spectrum range of the LED is compatible with the spectral response of the most common photocathode.
+It has been used before in the monitoring and calibration system of Neutron Wall Detector at IMP~\cite{yuyuhong_led} and proved to be suitable for massive light distribution.
+The LED is fixed on a specially designed base using thermally conductive silicone rubber (see Fig.~\ref{fig:FIG3_a}), and then coupled to a \SI{5}{\centi\meter} diameter integrating sphere~\cite{integrating_sphere} directly.
 The integrating sphere is a perfect light integrator and transforms the light output of LED into a uniform distribution.
 Thus, the amount of photons reaching each fiber, which is a fixed fraction of the total output of the LED, is independent of position.
 This makes the coupling between the light source and the fiber bundle much more easier and flexible, and stable light output difference between all the fiber channels can be achieved (see next section).
@@ -206,7 +209,7 @@ An uniformity within $\pm\SI{0.5}{\percent}$ has been reached, and this is suffi
 \subsection{Fiber bundle}
 \label{sec:fiber_bundle}
 
-A bundle of 35 plastic clad silica fibers~\cite{optical_fibre} (25 for test channels, 2 for monitoring channels and 8 spares) is utilized to distribute light pulses to each PMT.	Each fiber is \SI{1.5}{\meter} long and has a \SI{400}{\micro\meter} diameter core with a \SI{75}{\micro\meter} thick cladding, and the numerical aperture (NA) is 0.37.
+A bundle of 35 plastic clad silica fibers~\cite{optical_fibre} (25 for test channels, 2 for monitoring channels and 8 spares) is utilized to guide light pulses to each PMT.	Each fiber is \SI{1.5}{\meter} long and has a \SI{400}{\micro\meter} diameter core with a \SI{75}{\micro\meter} thick cladding, and the numerical aperture (NA) is 0.37.
 The relatively large core and NA make the fiber an efficient light extractor of integrating sphere output. 
 
 To protect the fibers from mechanical damage, both ends of the fiber bundle are coated with stainless steel ferrules (see Fig.~\ref{fig:FIG3_a}).
@@ -224,8 +227,8 @@ Additionally, a separate PMT (called monitoring PMT) was used to monitor the lig
 Thus ,the light output intensity of the fibers can be represented by the raw ADC counts of the testing PMT's signal after correcting the LED output fluctuation.
 The result is shown in Fig.~\ref{fig:FIG5}, and a variance of \SI{10}{\percent} is observed among the fibers.
 The same calibration procedure was performed at two LED output intensities, and the results are compatible with each other. 
-Due to the non-uniformity of the integrating sphere is negligible, the light output difference is a direct reflection of the transmission difference among the fibers themselves and shall be stable in a long period.
-Thus, $t_{fiberid}$ is treated as a constant parameter and was used to normalize the light output intensity between different fiber channels in the measurement of the relative gain of PMT (see Section~\ref{sec:psd_gain})
+Since the non-uniformity of the integrating sphere is negligible, the light output difference is a direct reflection of the transmission difference among the fibers themselves and shall be stable in a long period.
+Thus, $\tau_{fiberid}$ is treated as a constant parameter and was used to normalize the light output intensity between different fiber channels in the measurement of the relative gain of PMT (see Section~\ref{sec:psd_gain})
 
 \begin{figure}[!htb]
 	\centering
@@ -279,8 +282,8 @@ However, more detailed analysis based on the ROOT file are considered project-sp
 The PSD detector of the DAMPE project is a large-area plastic scintillator array and adopts the Hamamatsu R4443 PMT for the scintillation light detection.
 It aims for high energy e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the deposited energy, and the timing information is not needed.
 To cover the large dynamic range, two dynodes, 5 and 8, are readout for each R4443 tube, 
-and the signals are processed by a highly-sensitive ASIC chip (VA160~\cite{va160}, \SI{-3}{\pico\coulomb}$\sim$\SI{13}{\pico\coulomb}) following with an ADC of 14~bits resolution~\cite{yanghaibo_fee}. 
-Both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be  measured before the installation.
+and the signals are processed by a highly-sensitive ASIC chip (VA160~\cite{va160}, \SI{-3}{\pico\coulomb}$\sim$\SI{13}{\pico\coulomb}) followed by an ADC of 14~bits resolution~\cite{yanghaibo_fee}. 
+Both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be  measured during the characterization.
 
 Concrete \textit{PTVProgram}s for gain, dynode8/dynode5 ratio and cathode uniformity measurements have been implemented.
 To accommodate the low input range and obtain more realistic results, the ground-test electronics system of PSD~\cite{yanghaibo_fee} are utilized instead of the conventional CAMAC system. 
