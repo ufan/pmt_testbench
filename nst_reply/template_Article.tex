@@ -18,9 +18,9 @@
 \textit{Original statements: P.7 - Fig.7: I believe it would be preferable to show th plot of $G_{relative}$ with respect one of the reference PMT, which remain untouched during the full set of measurements (if I understand well the procedure).} \newline
 \textbf{Answer:}
 \begin{enumerate}
-	\item Although the two fixed PMTs can be used to calculate the $G_{relative}$ of all tested PMTs, they are not necessarily to be adopted as reference PMTs.  Acctually, they are called monitoring PMT  in our test bench system. As pointed out in the general description of the test bench in Sec. 2 of the article, these two PMTs are mainly used to monitor the LED stability and overall performance of the test bench system. 
-	\item Since a relative method is adopted, any one PMT can be used to get a specific $G_{relative}$ distribution. In other words, the $G_{relative}$ is dependent on the selection of reference PMT. The selection of reference PMT is mainly determined by the purpose of the test bench user. In PSD PMT characterization, the reference  PMT is the one which has been coupled to a prototype detector unit and then underwent a cosmic ray calibration. The optimal working voltage of the reference PMT has been determined through the cosmic ray calibration. Since we can calculate $G_relative$ of all other PMTs with respect to this reference PMT and its variation against supplying voltage, the optimal working voltages for all PMTs can be determined in this way.  
-	\item The above procedure for  PSD PMT voltage adjustment is not the subject of this article, thus not described in the article. In this article, the PMT with the smallest gain has been chosen as the reference PMT to calculate the $G_{relative}$ because this gives the reader a clear implication of the variation of the gain of the R4443 tubes.
+	\item Although the two fixed PMTs can be used to calculate the $G_{relative}$ of all tested PMTs, they are not necessarily to be adopted as reference PMTs.  Acctually, they are called monitoring PMT  within our test bench system. As pointed out in the general description of the test bench in Sec. 2 of this article, these two PMTs are mainly used to monitor the LED stability and the overall performance of the test bench system. 
+	\item Since a relative method is adopted, any PMT can be used to get a $G_{relative}$ distribution using the same set of testing data. In other words, the $G_{relative}$ is dependent on the selection of reference PMT. However, the selection of reference PMT is mainly determined by the purpose of the test bench user. For the PSD PMT selection, the reference  PMT is the one which has underwent a cosmic ray calibration. The calibration works as follows: 1) the reference PMT was coupled to a prototype detector unit and the MIPs spectrum was recorded at a specific initial voltage 2) then adjust the supply voltage of the reference PMT  to move the MIPs peak to the desired value. In this way, the optimal working voltage of the reference PMT can be determined. Since we can calculate $G_{relative}$ of all other PMTs with respect to this reference PMT and its variation against supplying voltage, the optimal working voltages for all other PMTs can then be determined indirectly. Based on these results, we can select the tubes within a specific gain range.
+	\item The above procedure for  PSD PMT selection is actually the application of the testing data obtained using our test bench, which is not the subject of this article, thus it is not described in the article. In this article, the tube with the smallest gain has been chosen as the reference PMT to calculate the $G_{relative}$ distribution because this gives the reader a clearer implication of the variation of the gain of the R4443 tubes.
 \end{enumerate}
 
 \subsection{Question: More detalis about the integrating sphere and how it works as a perfect integrator for short light pulses}
@@ -62,50 +62,24 @@ diffuse white reflective coating
 \textit{Original statements: The paper refers to the Hamamatsu R4443 photomultiplier that however is not listed in the Hamamatsu catalogue and surfing the web I did not find a data sheet for it. If, as I believe to understand, the R4443 is a modified version of the R647 it should be clearly stated and the differences highlighted.}\newline
 
 \textbf{Answer:}\newline
-The complete version number of the PMT used in DAMPE-PSD is R4443 Mod2. It is a modified version of R4443 tube, which has been used before in the GLAST-FERMI project.But I'm not sure whether it's a modified version of R647 or not. R4443 Mod2 has been specifically customized for the DAMPE-PSD project, thus it is not listed in the Hamamatsu catalogue. There are two major improvements of R4443 Mod2 against its previous versions, i.e. its structure has been ruggedized for space usage and a low-noise cathode material has been adopted to eliminate the dark current. Table~\ref{tab:r4443} gives the major characteristics of R4443 Mod2. 
-\begin{longtabu} to 0.8\linewidth{lX}
-	\caption{Major Characteristics of R4443 Mod2\label{tab:r4443}}\\
-	\toprule[1.5pt]
-	\textbf{Characteristics} & \textbf{Typical Value} \\ 
-	\midrule
-	\endfirsthead
-	
-	%\toprule[1.5pt]
-	\multicolumn{2}{ c }{continuing Table~\ref{tab:r4443}}\\
-	%性能参数 & 典型值 \\ 
-	\midrule
-	\endhead
-	
-	%\bottomrule[1.5pt]
-	\endfoot
-	
-	\bottomrule[1.5pt]
-	\endlastfoot
-	
-	Spectrum response & 300$\sim$650 \si{\nano\meter} \\
-	Peak of spectrum response  & \SI{375}{\nano\meter} \\
-	Photocathode material & low-noise Bialkali \\
-	Minimum effective cathode area & \SI{10}{\milli\meter} \\
-	Working temperature  & \SI{-30}{\celsius}$\sim$\SI{50}{\celsius} \\
-	Rising time  & \SI{2.5}{\nano\second} \\
-	Transit time  & \SI{24}{\nano\second} \\
-	Dynode number & 10 \\
-	Typical gain & \SI{1.0E6}{} \\
-	Maximum working voltage & \SI{1250}{\volt}\\
-	weight & \SI{11}{\g}\\
-	Diameter  & \num[separate-uncertainty]{14.5(7)} \si{\milli\meter} \\
-	Typical dark current & \SI{0.5}{\nano\ampere}\\
-	Maximum dark current & \SI{4.0}{\nano\ampere} \\
-\end{longtabu}
+The R4443 tube is actually a ruggedized version of the R647 tube. It has been designed specifically for space usage and is not listed in the general Hamamatsu catalogue. The PSD project adopts the R4443 tube because of its successful usage in the GLAST/FERMI project. You can find the specifications of the R4443 tube used in the PSD detector in the attached datasheet. The datasheet is provided by  Hamamatsu and can't be found in the Internet. 
 
 \section{Reviewer 2}
+\subsection{Question: About the bending of the fibers and its effects?}
 \textit{Original statement: Do the fiber transmission difference have something to do with the bending of fibers?
 Will this degree of bending change during a certain characterization?}\newline
 
 \textbf{Answer:}\newline
+It's true that the bending of fiber affects the fiber's light transmission coefficiency. However, the key point for our testing method is the stability of the fiber configuration so that the relative transmission difference between any two fiber channels remain unchanged in a long time. This concern has been taken care of in the design stage and several measures have been taken to keep the fibers stable over time:
+\begin{itemize}
+	\item The routing of the fibers was carefully chosen so that the bending in any segment of the fibers not exceeding the curvature safety limit provided by the manufacture. This ensures that all fibers were in good working states.
+	\item The ends of the fibers were fixed using stable optical holder made of stainless steel. And customized fiber fixtures were placed at the key points of the fiber routes to confine the fibers' position. In this way, the fibers can't be moved from its confined position without large external force.
+	\item The velocity of the stepping motors are limited to a small value so that the disturbance will not affect the fiber position.
+\end{itemize}
 
+\subsection{Question: More explanation about PSD's working mechanism}
+\textbf{Answer:}\newline
 
-More explanation about PSD detector mechanism.
 
 \section{Reviewer3}
 Original statements:
