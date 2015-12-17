@@ -280,7 +280,7 @@ However, more detailed analysis based on the ROOT file are considered project-sp
 \section{Application in the construction of DAMPE-PSD}
 \label{sec:application}
 
-The PSD detector of the DAMPE project is a large-area plastic scintillator array. Based on the principle that the energy deposit in thin plastic scintillator is approximately proportional to $Z^2$, PSD aims for heavy ion charge measurement up to $Z=20$ as well as high energy e/$\gamma$ discrimination. It adopts the Hamamatsu R4443 PMT, which is a ruggedized version of the R647 tube, for the scintillation light detection. To cover the large dynamic range, two dynodes, 5 and 8, are readout for each R4443 tube, 
+The PSD detector of the DAMPE project is a large-area plastic scintillator array. It aims for heavy ion charge measurement up to $Z=20$ as well as high energy e/$\gamma$ discrimination by measuring the deposited energy. PSD adopts the Hamamatsu R4443 PMT for the scintillation light detection, which is a ruggedized version of the previous R647~\cite{r4443}. The timing information from R4443 is not needed. To cover the large dynamic range, two dynodes, 5 and 8, are readout for each R4443 tube, 
 and the signals are processed by a highly-sensitive ASIC chip (VA160~\cite{va160}, \SI{-3}{\pico\coulomb}$\sim$\SI{13}{\pico\coulomb}) followed by an ADC of 14~bits resolution~\cite{yanghaibo_fee}. 
 Both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be  measured during the characterization.
 
@@ -456,9 +456,11 @@ This work was supported by the Strategic Priority Research Program of the Chines
 	\bibitem{optical_fibre} Nanjing Chunhui Science and Technology Industrial Co. Ltd., Customized plastic-clad silica fiber-bundle.  \href{http://www.china-light-guides.com/}{http://www.china-light-guides.com}
 	\bibitem{pdcurses} PDCurses,  Public domain curses library for DOS, OS/2, Win32, X11 and SDL. \href{http://pdcurses.sourceforge.net/}{http://pdcurses.sourceforge.net}
 	\bibitem{root} CERN,  ROOT data analysis framework. \href{https://root.cern.ch/}{https://root.cern.ch}
+	\bibitem{r4443} Hamamatsu Photonics K. K., R647 data sheet.
+	\href{http://www.hamamatsu.com/us/en/R647.html}{http://www.hamamatsu.com/us/en/R647.html}
 	\bibitem{va160} Integrated Detector Electronics AS., A 32-channel ASIC chip for PMT spectrometer readout with trigger. \href{http://www.ideas.no/products/ide3160-2/}{http://www.ideas.no}
-	\bibitem{ni_visa} National Instruments Co.,  National Instruments {VISA} library. \href{http://www.ni.com/visa/}{http://www.ni.com/visa}
 	\bibitem{yanghaibo_fee} Yang H B, Signals reading method and circuit design for multiple detection unit based on the advanced {ASIC} chips, Ph.D. Thesis, The University of Chinese Academy of Sciences, 2014.
+	\bibitem{ni_visa} National Instruments Co.,  National Instruments {VISA} library. \href{http://www.ni.com/visa/}{http://www.ni.com/visa}
 	\bibitem{hamamatsu} Hamamatsu Photonics K. K., Photomultiplier tubes: basics and applications, 3rd edition.
 	\href{http://www.hamamatsu.com/resources/pdf/etd/PMT_handbook_v3aE.pdf}{http://www.hamamatsu.com/resources}
 \end{thebibliography}

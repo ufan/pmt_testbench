@@ -71,11 +71,14 @@ The result is shown in Fig.~\ref{fig:uniformity_integrationsphere} and the unifo
 The R4443 tube is actually a ruggedized version of the R647 tube. It has been designed specifically for space usage and is not listed in the general Hamamatsu catalogue. The PSD project adopts the R4443 tube because of its successful usage in the GLAST/FERMI project. You can find the specifications of the R4443 tube used in the PSD detector in the attached datasheet. The datasheet is provided by  Hamamatsu and can't be found in the Internet. 
 
 \section{Reviewer 2}
-\subsection{Question: About the bending of the fibers and its effects?}
-\textit{Original statement: Do the fiber transmission difference have something to do with the bending of fibers?
-Will this degree of bending change during a certain characterization?}\newline
 
-\textbf{Answer:}\newline
+Most of the comments are about the grammar and the sentence improving, so these corrections are applied directly in the text.
+Two topics are extracted from all the comments and replied separately in the following.
+
+\subsection{Do the fiber transmission difference have something to do with the bending of fibers?
+Will this degree of bending change during a certain characterization?}
+
+\textbf{Reply:}\newline
 It's true that the bending of fiber affects the fiber's light transmission coefficiency. However, the key point for our testing method is the stability of the fiber configuration so that the relative transmission difference between any two fiber channels remain unchanged in a long time. This concern has been taken care of in the design stage and several measures have been taken to keep the fibers stable over time:
 \begin{itemize}
 	\item The routing of the fibers was carefully chosen so that the bending in any segment of the fibers not exceeding the curvature safety limit proposed by the manufacture. This ensures that all fibers were in good working states.
@@ -83,6 +86,10 @@ It's true that the bending of fiber affects the fiber's light transmission coeff
 	\item The velocity of the stepping motors are limited to a small value so that the mechanical disturbance will not affect the fibers' position.
 \end{itemize}
 
+\subsection{About the PSD working mechanism}
+PSD uses \SI{10}{\centi\meter} thick EJ-200 from Eljen as the detection material. For high-energy (5 GeV to 10 TeV) charged particle, the energy loss in thin plastic scintillator is approximately proportional to $Z^2$. Although the number of scintillation photons is not proportional to the deposit energy for high-Z ions due to the quenching effect, it can still be used to determine the proton number Z of the incident cosmic ions. We call this 'charge measurement'. On the other hand, pair production is the primary interaction for high-energy $\gamma$ and thus has almost no energy-loss in thin plastic scintillator. Based on this fact, PSD can also be used for e/$\gamma$ discrimination. 
+
+However, the article is mainly about the test bench itself, so I don't think a detailed description about the PSD working mechanism is necessary in the article. 
 
 \section{Reviewer3}
 \subsection{Check the references, some mistakes here and there}
