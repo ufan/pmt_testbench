@@ -39,7 +39,7 @@
 
 \begin{abstract}
  Performance characterization for massive photomultiplier tubes (PMT) is a frequently encountered procedure in large nuclear and particle experiments. To facilitate this work, a dedicated test bench system has been developed at the Institute of Modern Physics, Chinese Academy of Sciences.
- The two-dimensional photocathode position scanning capability is an intrinsic function of the test bench and up to 25 PMTs, with the diameter smaller than two inches, can be tested simultaneously.
+ The two-dimensional photocathode position scanning capability is an intrinsic function of the test bench and up to 25 PMTs, with the diameter smaller than 2", can be tested simultaneously.
  The parameters of the light source pulses can be adjusted in a wide range, thus making it suitable for various characteristics measurements.
  The test bench system is highly automated with all the controlling operations integrated into a single software. 
  Additionally, the hardware platform is extensible which allows complex testing schemes, and the modularity in the software design make the migration from one testing configuration to another light-weight and efficient.
@@ -174,7 +174,7 @@ These breadboards are made of \SI{2.5}{cm} thick stainless steel, providing subs
 The grid pattern of tapped holes on their surface provide extra flexibility in the testing configuration as well as facilitates mounting/unmounting operations.
 
 The load capacity of the motorized stage is \SI{30}{\kilo\gram} and it can perform a three-dimensional motion driven by three stepping motors. The minimum step size is \SI{1.56}{\micro\meter}.
-The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically. This range is large enough to cover commonly used PMTs with diameters smaller than two inches.
+The stage can move up to \SI{60}{\milli\meter} horizontally and \SI{70}{\milli\meter} vertically. This range is large enough to cover commonly used PMTs with diameters smaller than 2".
 The stage can also move along the third direction for $15mm$, which is to control the gap between the fiber and the input window of PMT and to protect the fibers while mounting/unmounting the tubes.
 All the stepping motors are controlled by a motion controller board MPC07SP from Leetro~\cite{leetro}, which possesses a PCI (Peripheral Component Interconnect bus) interface for remote control.
 
@@ -280,9 +280,7 @@ However, more detailed analysis based on the ROOT file are considered project-sp
 \section{Application in the construction of DAMPE-PSD}
 \label{sec:application}
 
-The PSD detector of the DAMPE project is a large-area plastic scintillator array and adopts the Hamamatsu R4443 PMT for the scintillation light detection.
-It aims for high energy e/$\gamma$ discrimination as well as charge measurement up to Z=20 by measuring the deposited energy, and the timing information is not needed.
-To cover the large dynamic range, two dynodes, 5 and 8, are readout for each R4443 tube, 
+The PSD detector of the DAMPE project is a large-area plastic scintillator array. Based on the principle that the energy deposit in thin plastic scintillator is approximately proportional to $Z^2$, PSD aims for heavy ion charge measurement up to $Z=20$ as well as high energy e/$\gamma$ discrimination. It adopts the Hamamatsu R4443 PMT, which is a ruggedized version of the R647 tube, for the scintillation light detection. To cover the large dynamic range, two dynodes, 5 and 8, are readout for each R4443 tube, 
 and the signals are processed by a highly-sensitive ASIC chip (VA160~\cite{va160}, \SI{-3}{\pico\coulomb}$\sim$\SI{13}{\pico\coulomb}) followed by an ADC of 14~bits resolution~\cite{yanghaibo_fee}. 
 Both the gain of dynode8 and the gain between dynode8 and dynode5 of each PMT need to be  measured during the characterization.
 
@@ -421,9 +419,9 @@ In this way, the uncertainty of the dynode8/dynode5 measurement is found to be \
 	
 \section{Summary}
 \label{sec:summary}
-A versatile PMT test bench system has been developed at IMP, CAS.
-It has been used in the construction of DAMPE PSD already, and the results have proved the high reliability of the system.
-Considering the flexible and open platform it possesses, the test bench is useful for any other projects that need massive PMT characterization. 
+A PMT test bench system based on the modular design pattern has been developed at IMP, CAS.
+It can characterize 25 PMTs simultaneously and features in two-dimensional photocathode position scanning, configurable light pulse setting and highly automatic software control. A total of 570 R4443 PMT for the DAMPE-PSD detector have been characterized successfully using the test bench and the stability of the test bench was proven to be within $\pm\SI{0.5}{\percent}$.
+Considering the flexible and open platform it possesses, the test bench shall be useful for any other experiments that need massive PMT characterization. 
 
 \begin{comment}
 \acknowledgments
@@ -447,20 +445,20 @@ This work was supported by the Strategic Priority Research Program of the Chines
 	\href{http://dx.doi.org/10.1016/j.nima.2005.03.171}{DOI: 10.1016/j.nima.2005.03.171}
 	\bibitem{adragna_pmt-block_2006} Adragna P, Antonaki A, Boudagov I, \emph{et al}. A {PMT}-{Block} test bench. Nucl. Instrum. Meth. A, 2006, {\bf 564}: 597--607.
 	\href{http://dx.doi.org/10.1016/j.nima.2006.03.045}{DOI: 10.1016/j.nima.2006.03.045}
-	\bibitem{Chang_Jin_dampe} Chang J. Dark Matter Particle Explorer: The First Chinese Cosmic Ray and Hard $\gamma$-ray Detector in Space. Chinese Journal of Space Science, 2014, {\bf 34}: 550-556.
+	\bibitem{Chang_Jin_dampe} Chang J, Dark matter particle explorer: the first chinese cosmic ray and hard $\gamma$-ray detector in space. Chinese Journal of Space Science, 2014, {\bf 34}: 550-556.
 	\href{http://dx.doi.org/10.11728/cjss2014.05.550}{DOI: 10.11728/cjss2014.05.550}
 	\bibitem{yuyuhong_led} Yu Y H, Xu H G, Zhan W L, \emph{et al}. Study of the LED based light calibration system for neutron wall detector. High Energ Phys. Nuc., 2007, {\bf 31}: 581-585.
-	\bibitem{sy1527lc} {CAEN S.p.A.}, Low Cost Universal Multichannel Power Supply System. \href{http://www.caen.it/csite/CaenProd.jsp?idmod=491&parent=20}{http://www.caen.it}
-	\bibitem{cc_usb} {W-IE-NE-R Plein \& Baus GmbH.}, {CC-USB CAMAC Controller with USB interface}. \href{http://www.wiener-d.com/sc/modules/camac--modules/cc-usb.html}{http://www.wiener-d.com}
-	\bibitem{leetro} {Leetro Automation Co. Ltd.}, {MPC07SP Motion Control Board}. \href{http://www.leetro.com/english/}{http://www.leetro.com}
-	\bibitem{integrating_sphere} {Mulansphere Co. Ltd.}, {Customized 5CM Aluminum-alloy Integrating Sphere}. \href{http://mulansphere.com/e-index.html/}{http://mulansphere.com}
-	\bibitem{afg3252} {Tektronix Company}, {AFG3000 Series Arbitrary/Function Generators Quick Start User Manual}. \href{http://www.tek.com/signal-generator/afg3000-function-generator/}{http://www.tek.com}
-	\bibitem{optical_fibre} Nanjing Chunhui Science and Technology Industrial Co. Ltd., Customized Plastic-clad Silica Fiber-bundle.  \href{http://www.china-light-guides.com/}{http://www.china-light-guides.com}
-	\bibitem{pdcurses} PDCurses,  Public Domain Curses Library for DOS, OS/2, Win32, X11 and SDL. \href{http://pdcurses.sourceforge.net/}{http://pdcurses.sourceforge.net}
-	\bibitem{root} CERN,  ROOT Data Analysis Framework. \href{https://root.cern.ch/}{https://root.cern.ch}
-	\bibitem{va160} Integrated Detector Electronics AS., A 32-channel ASIC chip for PMT Spectrometer Readout with Trigger. \href{http://www.ideas.no/products/ide3160-2/}{http://www.ideas.no}
-	\bibitem{ni_visa} National Instruments Co.,  National Instruments {VISA} Library. \href{http://www.ni.com/visa/}{http://www.ni.com/visa}
-	\bibitem{yanghaibo_fee} Yang H B, Signals Reading Method and Circuit Design for Multiple Detection Unit Based on the Advanced {ASIC} Chips, Ph.D. Thesis, The University of Chinese Academy of Sciences, 2014.
+	\bibitem{sy1527lc} {CAEN S.p.A.}, Low cost universal multichannel power supply system. \href{http://www.caen.it/csite/CaenProd.jsp?idmod=491&parent=20}{http://www.caen.it}
+	\bibitem{cc_usb} {W-IE-NE-R Plein \& Baus GmbH.}, {CC-USB CAMAC controller with USB interface}. \href{http://www.wiener-d.com/sc/modules/camac--modules/cc-usb.html}{http://www.wiener-d.com}
+	\bibitem{leetro} {Leetro Automation Co. Ltd.}, {MPC07SP motion control board}. \href{http://www.leetro.com/english/}{http://www.leetro.com}
+	\bibitem{integrating_sphere} {Mulansphere Co. Ltd.}, {Customized \SI{5}{cm} aluminum-alloy integrating sphere}. \href{http://mulansphere.com/e-index.html/}{http://mulansphere.com}
+	\bibitem{afg3252} {Tektronix Company}, {AFG3000 series arbitrary/function generators quick start user manual}. \href{http://www.tek.com/signal-generator/afg3000-function-generator/}{http://www.tek.com}
+	\bibitem{optical_fibre} Nanjing Chunhui Science and Technology Industrial Co. Ltd., Customized plastic-clad silica fiber-bundle.  \href{http://www.china-light-guides.com/}{http://www.china-light-guides.com}
+	\bibitem{pdcurses} PDCurses,  Public domain curses library for DOS, OS/2, Win32, X11 and SDL. \href{http://pdcurses.sourceforge.net/}{http://pdcurses.sourceforge.net}
+	\bibitem{root} CERN,  ROOT data analysis framework. \href{https://root.cern.ch/}{https://root.cern.ch}
+	\bibitem{va160} Integrated Detector Electronics AS., A 32-channel ASIC chip for PMT spectrometer readout with trigger. \href{http://www.ideas.no/products/ide3160-2/}{http://www.ideas.no}
+	\bibitem{ni_visa} National Instruments Co.,  National Instruments {VISA} library. \href{http://www.ni.com/visa/}{http://www.ni.com/visa}
+	\bibitem{yanghaibo_fee} Yang H B, Signals reading method and circuit design for multiple detection unit based on the advanced {ASIC} chips, Ph.D. Thesis, The University of Chinese Academy of Sciences, 2014.
 	\bibitem{hamamatsu} Hamamatsu Photonics K. K., Photomultiplier tubes: basics and applications, 3rd edition.
 	\href{http://www.hamamatsu.com/resources/pdf/etd/PMT_handbook_v3aE.pdf}{http://www.hamamatsu.com/resources}
 \end{thebibliography}
