@@ -18,7 +18,7 @@
 %DIF CTRADITIONAL PREAMBLE %DIF PREAMBLE
 \RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{yellow}{rgb}{1,0.6,0} %DIF PREAMBLE
 \RequirePackage[stable]{footmisc} %DIF PREAMBLE
-\providecommand{\DIFadd}[1]{{\protect\color{yellow} \sf #1}} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{yellow} #1}} %DIF PREAMBLE
 \providecommand{\DIFdel}[1]{{\protect\color{red} [..\footnote{removed: #1} ]}} %DIF PREAMBLE
 %DIF SAFE PREAMBLE %DIF PREAMBLE
 \providecommand{\DIFaddbegin}{} %DIF PREAMBLE
@@ -87,7 +87,7 @@ Therefore, \DIFdelbegin \DIFdelend characterization of PMTs \DIFdelbegin \DIFdel
 Characterizing a large number of PMTs in limited time is a \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{challenging job. Usually }\DIFaddend a dedicated test bench is constructed to facilitate this work~\cite{barnhill_testing_2008,akgun_complete_2005,adragna_pmt-block_2006}.
 Setting up a system like this is not \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{trivial work. It requires investment of considerable amount of }\DIFaddend time and effort.
 On the other hand, testing of PMTs is a \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{common task }\DIFaddend and many components of the testing configuration can be shared among different applications.
-\DIFaddbegin \DIFadd{Thus, it is beneficial to build a single modular PMT test system that could be easily reconfigured for various experiments.
+\DIFaddbegin \DIFadd{Thus, it is beneficial to build a single PMT test system that could be easily reconfigured for various experiments.
 }\DIFaddend 
 
 In this paper, a versatile test bench dedicated for \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{characterization of large amount of PMTs is described}\DIFaddend .
@@ -442,7 +442,7 @@ In this way, the uncertainty of the dynode8/dynode5 measurement is found to be \
 \section{Summary}
 \label{sec:summary}
 A \DIFdelbegin \DIFdelend PMT test bench system \DIFaddbegin \DIFadd{based on the modular design pattern }\DIFaddend has been developed at IMP, CAS.
-It \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{can characterize 25 PMTs simultaneously and features in two-dimensional photocathode position scanning, configurable light pulse setting and highly automatic software control. A total of 570 R4443 PMT for the DAMPE-PSD detector have been characterized successfully using the test bench and the stability of the test bench was proven to be within $\pm\SI{0.5}{\percent}$}\DIFaddend .
+It \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{can characterize 25 PMTs simultaneously and features in two-dimensional photocathode position scanning, configurable light pulse setting and highly automatic software control. A total of 570 R4443 PMT for the DAMPE-PSD detector have been characterized successfully using the test bench and the stability of the test bench was demonstrated to be within $\pm\SI{0.5}{\percent}$}\DIFaddend .
 Considering the flexible and open platform it possesses, the test bench \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{shall be }\DIFaddend useful for any other \DIFdelbegin \DIFdelend \DIFaddbegin \DIFadd{experiments }\DIFaddend that need massive PMT characterization. 
 
 \begin{comment}
