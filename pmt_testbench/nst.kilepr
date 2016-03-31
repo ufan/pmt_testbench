@@ -171,7 +171,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=10
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:nst.kilepr]
@@ -191,7 +191,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=35
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:nst.cls]
